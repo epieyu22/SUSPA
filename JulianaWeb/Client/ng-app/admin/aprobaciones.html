@@ -1,0 +1,84 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item"><a ui-sref="dashboard"><i class="material-icons">home</i></a></li>
+  <li class="breadcrumb-item"><a ui-sref="admin">Configuración</a></li>
+  <li class="breadcrumb-item active">Aprobaciones</li>
+</ol>
+
+<div class="card primary-theme shadow">
+  <div class="card-header"> Seleccione la Empresa:
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="">Empresa:</label>
+        <select class="form-control"
+                ng-model="vm.viewmodel.DBName"
+                ng-change="vm.Get_Aprobadores_Empresa()"
+                ng-options="i.BaseDatos as i.Nombre_Empresa for i in vm.data.empresas"></select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-if="vm.viewmodel.DBName && vm.loading" >
+  <div class="spinner blue">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</div>
+<div class="card primary-theme shadow" ng-if="vm.viewmodel.DBName && !vm.loading">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <span>Configuración Aprobaciones</span>
+    <button class="btn btn-sm btn-success" ng-click="vm.Reporte_Aprobadores_Excel()">
+      <i class="material-icons">get_app</i>
+      Exportar a Excel
+    </button>
+  </div>
+  <div>
+    <table ng-table="vm.aprobadoresGrid" class="not-transform table table-sm table-bordered table-striped text-center">
+      <tbody>
+        <tr ng-repeat="i in vm.data.aprobadores">
+          <td data-title="'Filtro'" style="width: 2%;">{{i.Cod_Filtro}}</td>
+          <td data-title="'Doc'" filter="{DocEmpleado: 'text'}" style="width: 10%;">
+            {{ i.Documento_Empleado }}
+          </td>
+          <td data-title="'Car ID'" filter="{CarIdEmpleado: 'text'}" style="width: 10%;">
+            {{ i.Cod_Colaborador_Empleado }}
+          </td>
+          <td data-title="'Empleado'" filter="{Empleado: 'text'}" style="width: 19%;">
+            {{ i.Detalle_Filtro }}
+          </td>
+          <td data-title="'Doc'" filter="{DocAprobador: 'text'}" style="width: 10%;">
+            {{ i.Documento_Aprobador }}
+          </td>
+          <td data-title="'Car ID'" filter="{CarIdAprobador: 'text'}" style="width: 10%;">
+            {{ i.CareerID_Aprobador }}
+          </td>
+          <td data-title="'Aprobador'" filter="{Aprobador: 'text'}" style="width: 19%;">
+            {{ i.Aprobador }}
+          </td>
+          <td data-title="'Tipo Aprobacion'" class="text-left" style="width: 10%;">{{ i.Detalle_Tipo_Aprobacion }}</td>
+          <td data-title="'Acciones'" class="text-xs-center" style="width: 10%;">
+            <button type="button" class="btn btn-success btn-sm m-r-1" ng-click="vm.Open_Edit_Aprobacion_Dialog(i)">
+              <i class="material-icons">edit</i>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" ng-click="vm.Confirm_Del_Solicitud(i)">
+              <i class="material-icons">close</i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-success float-right" ng-click="vm.Open_New_Aprobacion_Dialog()">
+          <i class="material-icons">add_box</i>
+          Crear Nueva
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

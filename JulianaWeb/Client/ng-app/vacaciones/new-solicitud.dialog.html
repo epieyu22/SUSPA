@@ -1,0 +1,128 @@
+<form name="SolicitudVacacionesForm">
+  <div class="ngdialog-header"><h5 class="modal-title">Nueva solicitud de vacaciones</h5></div>
+  <div class="row ngdialog-body">
+    <div class="col-md-12" ng-if="isHoliday">
+      <div class="alert alert-danger">El día seleccionado es un festivo</div>
+    </div>
+
+    <div class="col-md-12" ng-if="Cierre_Novedades">
+      <div class="alert alert-danger">
+        Ya ha pasado el <b>día de Cierre de Novedades ({{ data.Dia_Cierre_Novedades }})</b>, no se aceptan nuevas
+        solicitides para este mes. Aún puede Ingresar solicitudes para meses futuros.
+      </div>
+    </div>
+    <div class="col-md-12" ng-if="MinBlockLeave && mostrarDiasBNP">
+      <div class="alert alert-danger">
+        No ha realizado una solicitud de vacaciones para este periodo que cumpla con las politicas de Block Leave. El
+        número de días disponibles no puede ser menor a 10 luego de realizar un solicitud.
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label>Modo Vacaciones:</label>
+      <select class="form-control custom-select" ng-model="viewmodel.Modo_Vacaciones" required>
+        <option value="T" selected>Tiempo</option>
+        <!--<option value="D">Dinero</option>-->
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <i class="material-icons"
+         data-toggle="tooltip"
+         data-placement="top"
+         title="Dias Disponibles para solicitar según la fecha seleccionada.">
+        help
+      </i>
+      <label>Días Disponibles:</label>
+      <input type="number"
+             ng-model="DiasDisponibles"
+             class="form-control"
+             min="1"
+             readonly />
+    </div>
+    <div class="form-group col-md-4">
+      <i class="material-icons"
+         data-toggle="tooltip"
+         data-placement="top"
+         title="El día de inicio de las vacaciones">
+        help
+      </i>
+      <label>Fecha Salida:</label>
+      <input type="date"
+             class="form-control d-md-none"
+             ng-model="viewmodel.Fec_Salida"
+             ng-change="checkDate()"
+             required />
+      <jqx-date-time-input class="d-none d-md-block"
+                           jqx-ng-model
+                           ng-model="viewmodel.Fec_Salida"
+                           ng-change="checkDate()"
+                           jqx-settings="datetimeInput"></jqx-date-time-input>
+    </div>
+    <div class="form-group col-md-4">
+      <i class="material-icons"
+         data-toggle="tooltip"
+         data-placement="top"
+         title="Dias Hábiles que desea solicitar.">
+        help
+      </i>
+      <label>Días Hábiles:</label>
+      <input type="number"
+             ng-model="viewmodel.Cantidad"
+             class="form-control"
+             min="1"
+             ng-change="checkCantidadDiasSolisitados()"
+             required />
+    </div>
+
+    <div class="form-group col-md-4" ng-if="viewmodel.Modo_Vacaciones == 'T'">
+      <i class="material-icons"
+         data-toggle="tooltip"
+         data-placement="top"
+         title="El día final de las vacaciones. Cuando regresa a laborar">
+        help
+      </i>
+      <label>Fecha Llegada:</label>
+      <input type="date"
+             class="form-control d-md-none"
+             ng-model="viewmodel.Fec_Llegada"
+             ng-change="checkDate()"
+             readonly
+             required />
+      <jqx-date-time-input class="d-none d-md-block"
+                           jqx-ng-model
+                           ng-model="viewmodel.Fec_Llegada"
+                           jqx-settings="datetimeInput"
+                           jqx-disabled="true"></jqx-date-time-input>
+    </div>
+
+    <div class="form-group col-md-12">
+      <label>Aprobador:</label>
+      <select class="form-control custom-select"
+              ng-model="viewmodel.Cod_Aprobador"
+              required
+              ng-options="i.Cod_Tercero as i.Tercero for i in data.aprobadores">
+      </select>
+    </div>
+    <div class="col-md-12">
+      <div class="alert alert-danger" ng-if="!data.aprobadores.length">
+        No se ha configurado un empleado como aprobador de para las solicitudes de <b>vacaciones</b>. Comuníquese con el
+        administrador para generar esta configuración
+      </div>
+    </div>
+    <div class="col-md-12 mt-3" ng-if="!sending">
+      <button type="button" class="btn btn-outline-secondary" ng-click="closeDialog()">Cancelar</button>
+      <button type="button"
+              class="btn btn-success float-right"
+              ng-disabled="SolicitudVacacionesForm.$invalid || error"
+              ng-click="sendSolicitudVacaciones()">
+        Enviar Solicitud
+      </button>
+    </div>
+    <div class="col-md-12 text-right mt-3" ng-if="sending">
+      <div class="spinner blue">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>220</title>
+  <base href="@baseURL">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      /* font-family: "MS Reference Sans Serif"; */
+      font-family: "Arial Narrow";
+      padding: 0 10px;
+      margin: 0;
+      font-size: 10px;
+      letter-spacing: normal;
+      text-rendering: geometricPrecision;
+    }
+
+    .bubble {
+      border: 2px solid #00618a;
+      border-radius: 3px;
+    }
+
+    .row {
+      display: table;
+      width: 100%;
+    }
+
+    .row div {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .logo-dian {
+      width: 150px;
+      text-align: center;
+    }
+
+    .logo-muisca {
+      width: 125px;
+      text-align: center;
+    }
+
+    .logo-dian img,
+    .logo-muisca img {
+      height: 40px;
+    }
+
+    .title {
+      width: 350px;
+      text-align: center;
+      font-family: "Arial Narrow";
+      font-size: 14px;
+      font-weight: bold;
+      padding: 0 60px;
+    }
+
+    .numero {
+      padding: 2px;
+      width: 150px;
+    }
+
+    .numero span {
+      font-family: "Arial Narrow";
+      border-radius: 3px;
+      background-color: #00618a;
+      font-size: 42px;
+      font-weight: bold;
+      color: white;
+      width: 100%;
+      text-align: center;
+      display: block;
+    }
+
+    .pre {
+      color: #00618a;
+      width: 50%;
+      text-align: center;
+    }
+
+    .form-field {
+      height: 35px;
+    }
+
+    .form-field .linea {
+      /*font-weight: bold;*/
+    }
+
+    .form-field span {
+      display: block;
+    }
+
+    .form-field span span {
+      display: inline-table;
+    }
+
+    #linea4 {
+      width: 50%;
+      border-left: 1px solid #00618a;
+    }
+
+    .retenedor {
+      width: 25px;
+      border-right: 1px solid #00618a;
+      text-align: center;
+    }
+
+    .retenedor img {
+      max-height: 70px;
+    }
+
+    #empleado {
+      width: 25px;
+      text-align: center;
+    }
+
+    #empleado img {
+      height: 35px;
+    }
+
+    .azul {
+      background-color: #F2F9F4;
+    }
+
+    .bottom-border {
+      border-bottom: 1px solid #00618a;
+    }
+
+    .left-border {
+      border-left: 1px solid #00618a;
+    }
+
+    .row .row {
+      display: table;
+    }
+
+    .verde {
+      background-color: #CCE8D4;
+    }
+
+    .text-verde {
+      color: #00618a;
+    }
+
+    .verde-fuerte {
+      background-color: #00618a;
+      color: white;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    #linea5 {
+      width: 25%;
+    }
+
+    #linea6 {
+      width: 50px;
+    }
+
+
+    .block {
+      border: 1px solid #00618a;
+      border-bottom: none;
+      vertical-align: bottom;
+      color: #00618a;
+      text-align: center;
+      padding: 5px 10px !important;
+    }
+
+    .no-padding {
+      padding: 0;
+    }
+
+    .padding {
+      padding: 0 5px;
+    }
+
+    .padding-x {
+      padding: 0 5px;
+    }
+
+    .padding-a {
+      padding: 2px 5px;
+    }
+
+    .width-25 {
+      width: 22%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="row" style="page-break-before: always;">
+    <div class="bubble logo-dian">
+      <img src="@dian" alt="">
+    </div>
+    <div class="bubble title">
+      Certificado de Ingresos y Retenciones
+      <br> por Rentas de Trabajo y de Pensiones
+      <br> Año Gravable 2019</div>
+    <div class="bubble numero">
+      <span>220</span>
+    </div>
+  </div>
+  <div class="row bubble">
+    <div class="form-field pre">&nbsp;</div>
+    <div class="form-field" id="linea4">
+      <span class="linea padding-x">4. Número de formulario</span>
+      <span class="padding-a">&nbsp;</span>
+    </div>
+  </div>
+  <div class="row bubble">
+    <div class="span retenedor">
+      <img src="@retenedor" alt="">
+    </div>
+    <div>
+      <div class="row bottom-border">
+        <div class="form-field" id="linea5">
+          <span class="linea padding">5. Número de Identificación Tributaria (NIT) </span>
+          <span class="padding-a">@linea5</span>
+        </div>
+        <div class="form-field" id="linea6">
+          <span class="linea padding">6. DV</span>
+          <span class="left-border padding-a">@6</span>
+        </div>
+        <div class="form-field left-border">
+          <span class="linea padding">7. Primer apellido</span>
+          <span class="padding-a">&nbsp;</span>
+        </div>
+        <div class="form-field left-border">
+          <span class="linea padding">8. Segundo apellido</span>
+          <span class="padding-a">&nbsp;</span>
+        </div>
+        <div class="form-field left-border">
+          <span class="linea padding">9. Primer nombre</span>
+          <span class="padding-a">&nbsp;</span>
+        </div>
+        <div class="form-field left-border">
+          <span class="linea padding">10. Otros nombres</span>
+          <span class="padding-a">&nbsp;</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-field">
+          <span class="linea fit padding-a">11. Razón social</span>
+          <span style="padding:2px 5px">@linea11</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row bubble">
+    <div class="row bottom-border">
+      <div id="empleado">
+        <img src="@empleado" alt="">
+      </div>
+      <div class="form-field left-border">
+        <span class="padding linea">24. Tipo de
+          <br> documento</span>
+        <span class="padding">@linea24</span>
+      </div>
+      <div class="form-field left-border">
+        <span class="padding linea">25. Número de identificación</span>
+        <span>&nbsp;</span>
+        <span class="padding">@linea25</span>
+      </div>
+      <div class="form-field left-border">
+        <span class="padding linea">Apellidos y nombres</span>
+        <span>
+          <span class="padding-a width-25">@linea26</span>
+          <span class="padding-a width-25">@linea27</span>
+          <span class="padding-a width-25">@linea28</span>
+          <span class="padding-a width-25">@linea29</span>
+        </span>
+        <span>
+          <span class="text-verde padding width-25">26. Primer apellido</span>
+          <span class="text-verde padding width-25 left-border">27. Segundo apellido</span>
+          <span class="text-verde padding width-25 left-border">28. Primer nombre</span>
+          <span class="text-verde padding width-25 left-border">29. Otros nombres</span>
+        </span>
+      </div>
+    </div>
+    <div class="row bottom-border">
+      <div class="form-field" style="vertical-align: bottom;">
+        <span class="linea center padding-a">Período de la Certificación</span>
+        <div class="row">
+          <span style="display: inline-block;">
+            <span class="padding">30. DE: </span>
+            <span style="vertical-align: bottom;">
+              <span class="block padding" >
+                <div style="display: block;color: #000;">@30dd</div>
+
+              </span>
+              <span class="block padding" >
+                <div style="display: block;color: #000;">@30mm</div>
+
+              </span>
+              <span class="block padding">
+                <div style="display: block;color: #000;">@30aaaa</div>
+
+              </span>
+            </span>
+          </span>
+          <span style="display: inline-block;">
+            <span class="padding">31. A: </span>
+            <span style="vertical-align: bottom;">
+              <span class="block padding">
+                <div style="display: block;color: #000;">@31dd</div>
+
+              </span>
+              <span class="block padding" style="border-left: none;">
+                <div style="display: block;color: #000;">@31mm</div>
+
+              </span>
+              <span class="block padding">
+                <div style="display: block;color: #000;">@31aaaa</div>
+
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="form-field left-border" style="vertical-align: bottom;">
+        <span class="padding linea center padding-a">32. Fecha expedición</span>
+        <span style="display: inline-block;" class="padding-x">
+          <span style="vertical-align: bottom;">
+            <span class="block padding" >
+              <div style="display: block;color: #000;">@32dd</div>
+            </span>
+            <span class="block padding" >
+              <div style="display: block;color: #000;">@32mm</div>  
+
+            </span>
+            <span class="block padding">
+              <div style="display: block;color: #000;">@32aaaa</div>
+
+            </span>
+          </span>
+        </span>
+      </div>
+      <div class="form-field left-border" style="vertical-align: bottom;">
+        <span class="padding linea">33. Lugar donde se practicó la retención</span>
+        <span>&nbsp;</span>
+        <span class="padding-a">@linea33</span>
+      </div>
+      <div class="form-field left-border" style="vertical-align: bottom;">
+        <span class="padding linea">34. Cód.
+          <br>Dpto</span>
+        <span class="padding-a">@34</span>
+      </div>
+      <div class="form-field left-border" style="vertical-align: bottom;">
+        <span class="padding linea">35. Cód. Cuidad/
+          <br>Municipio</span>
+        <span class="padding-a">@linea35</span>
+      </div>
+    </div>
+    <div class="row bottom-border">
+      <div class="padding-a">36. Número de agencias, sucursales, filiales o subsidiarias de la empresa retenedora cuyos montos de retención se consolidan</div>
+      <div class="padding-a left-border">
+        &nbsp;
+      </div>
+      <div class="left-border width-25"></div>
+    </div>
+    <div class="row">
+      <div class="padding-a verde center bold">
+        <span>Concepto de los Ingresos</span>
+      </div>
+      <div class="padding-a verde center bold left-border width-25">
+        <span>Valor</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-a">Pagos por salarios o emolumentos eclesiásticos</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">37</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@37</span>
+      </div>
+    </div>
+    <div class="row azul">
+      <div class="padding-a">Pagos por honorarios</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">38</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@38</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-a">Pagos por servicios</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">39</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@39</span>
+      </div>
+    </div>
+    <div class="row azul">
+      <div class="padding-a">Pagos por comisiones</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">40</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@40</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-a">Pagos por presataciones sociales</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">41</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@41</span>
+      </div>
+    </div>
+    <div class="row azul">
+      <div class="padding-a">Pagos por viáticos</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">42</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@42</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-a">Pagos por gastos de represantación</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">43</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@43</span>
+      </div>
+    </div>
+    <div class="row azul">
+      <div class="padding-a">Pagos por compensaciones por el trabajo asociado cooperativo</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">44</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@44</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-a">Otros pagos</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">45</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@45</span>
+      </div>
+    </div>
+    <div class="row azul">
+      <div class="padding-a">Cesantias e intereses de cesantias efectivamente pagadas en el periodo</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">46</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@46</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-a">Pensiones de jubilación, vejez o invalidez</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">47</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@47</span>
+      </div>
+    </div>
+    <div class="row azul border-bottom">
+      <div class="padding-a bold"><b></b>Total de ingresos brutos (Sume 37 a 47)</b></div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">48</span>
+        <span class="left-border padding-a bold" style="display:inline-block;width:80%;text-align: right;">@48</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-a verde center bold">
+        <span>Concepto de los aportes</span>
+      </div>
+      <div class="padding-a verde center bold left-border width-25">
+        <span>Valor</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-a">Aportes obligatorios por salud</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">49</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@49</span>
+      </div>
+    </div>
+    <div class="row azul">
+      <div class="padding-a">
+        Aportes obligatorios a fondos de pensiones, solidaridad pensional y aportes voluntarios al - RAIS
+      </div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">50</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@50</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-a">
+        Aportes voluntarios, a fondos de pensiones.
+      </div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">51</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@51</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-a">
+        Aportes a cuentas AFC.
+      </div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">52</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@52</span>
+      </div>
+    </div>
+    <div class="row bottom-border">
+      <div class="padding-a verde-fuerte bold">Valor de la retención en la fuente por rentas de trabajo y pensiones</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">53</span>
+        <span class="left-border padding-a" style="display:inline-block;width:80%;text-align: right;">@53</span>
+      </div>
+    </div>
+    <div class="row padding-a bottom-border">
+      <div class="form-field">
+        <span class="linea">Nombre del pagador o agente retenedor</span>
+        <span>&nbsp;</span>
+        <span>&nbsp;</span>
+      </div>
+    </div>
+    <div class="row verde center bold padding-a bottom-border">Datos a cargo del trabajador o pensionado</div>
+    <div class="row bottom-border">
+      <div class="padding-a">Conceptos de otros ingresos</div>
+      <div class="padding-a width-25">Valor recibido</div>
+      <div class="padding-a width-25">Valor retenido</div>
+    </div>
+    <div class="row">
+      <div class="padding-a">Arrendamientos</div>
+      <div class="left-border width-25">
+        <span class="padding-a ">54</span>
+        <span class="left-border padding-a">&nbsp;</span>
+      </div>
+      <div class="left-border width-25">
+        <span class="padding-a ">61</span>
+        <span class="left-border padding-a">&nbsp;</span>
+      </div>
+    </div>
+    <div class="row azul">
+      <div class="padding-a">Honorarios, comisiones y servicios</div>
+      <div class="left-border width-25">
+        <span class="padding-a ">55</span>
+        <span class="left-border padding-a">&nbsp;</span>
+      </div>
+      <div class="left-border width-25">
+        <span class="padding-a ">62</span>
+        <span class="left-border padding-a">&nbsp;</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-a">Intereses y rendimientos financieros</div>
+      <div class="left-border width-25">
+        <span class="padding-a ">56</span>
+        <span class="left-border padding-a">&nbsp;</span>
+      </div>
+      <div class="left-border width-25">
+        <span class="padding-a ">63</span>
+        <span class="left-border padding-a">&nbsp;</span>
+      </div>
+    </div>
+    <div class="row azul">
+      <div class="padding-a">Enajenación de activos fijos</div>
+      <div class="left-border width-25">
+        <span class="padding-a ">57</span>
+        <span class="left-border padding-a">&nbsp;</span>
+      </div>
+      <div class="left-border width-25">
+        <span class="padding-a ">64</span>
+        <span class="left-border padding-a">&nbsp;</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-a">Loterías, rifas, apuestas y similares</div>
+      <div class="left-border width-25">
+        <span class="padding-a ">58</span>
+        <span class="left-border padding-a">&nbsp;</span>
+      </div>
+      <div class="left-border width-25">
+        <span class="padding-a ">65</span>
+        <span class="left-border padding-a">&nbsp;</span>
+      </div>
+    </div>
+    <div class="row azul">
+      <div class="padding-a">Otros</div>
+      <div class="left-border width-25">
+        <span class="padding-a ">59</span>
+        <span class="left-border padding-a">&nbsp;</span>
+      </div>
+      <div class="left-border width-25">
+        <span class="padding-a ">66</span>
+        <span class="left-border padding-a">&nbsp;</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-a">
+        <b>Totales</b>: (
+        <b>Valor recibido</b>: Sume 54 a 59), (
+        <b>Valor retenido</b>: Sume 61 a 66)</div>
+      <div class="left-border width-25">
+        <span class="padding-a ">60</span>
+        <span class="left-border padding-a bold">&nbsp;</span>
+      </div>
+      <div class="left-border width-25">
+        <span class="padding-a ">67</span>
+        <span class="left-border padding-a bold">&nbsp;</span>
+      </div>
+    </div>
+    <div class="row azul bottom-border">
+      <div class="padding-a">
+        <b>Total retenciones año gravable 2019</b> (Sume 53 + 67)</div>
+      <div class="left-border width-25">
+        <span class="padding-a " style="display: inline-block;">68</span>
+        <span class="left-border padding-a bold" style="display:inline-block;width:80%;text-align: right;">&nbsp;</span>
+      </div>
+    </div>
+    <div class="row verde bottom-border">
+      <div class="padding-a bold center" style="width: 4%">item</div>
+      <div class="padding-a left-border bold center">69. Identificación de los bienes y derechos poseídos</div>
+      <div class="padding-a left-border bold width-25 center">70. Valor patrimonial</div>
+    </div>
+    <div class="row">
+      <div class="padding-a center" style="width: 4%">1</div>
+      <div class="padding-a left-border">&nbsp;</div>
+      <div class="padding-a left-border width-25">&nbsp;</div>
+    </div>
+    <div class="row azul">
+      <div class="padding-a center" style="width: 4%">2</div>
+      <div class="padding-a left-border">&nbsp;</div>
+      <div class="padding-a left-border width-25">&nbsp;</div>
+    </div>
+    <div class="row">
+      <div class="padding-a center" style="width: 4%">3</div>
+      <div class="padding-a left-border">&nbsp;</div>
+      <div class="padding-a left-border width-25">&nbsp;</div>
+    </div>
+    <div class="row azul">
+      <div class="padding-a center" style="width: 4%">4</div>
+      <div class="padding-a left-border">&nbsp;</div>
+      <div class="padding-a left-border width-25">&nbsp;</div>
+    </div>
+    <div class="row">
+      <div class="padding-a center" style="width: 4%">5</div>
+      <div class="padding-a left-border">&nbsp;</div>
+      <div class="padding-a left-border width-25">&nbsp;</div>
+    </div>
+    <div class="row azul">
+      <div class="padding-a center" style="width: 4%">6</div>
+      <div class="padding-a left-border">&nbsp;</div>
+      <div class="padding-a left-border width-25">&nbsp;</div>
+    </div>
+    <div class="row">
+      <div class="padding-a center" style="width: 4%">7</div>
+      <div class="padding-a left-border">&nbsp;</div>
+      <div class="padding-a left-border width-25">&nbsp;</div>
+    </div>
+    <div class="row bottom-border">
+      <div class="padding-a verde-fuerte">Deudas vigentes a 31 de Diciembre de 2019</div>
+      <div class="padding-a left-border center" style="width: 10px">71</div>
+      <div class="padding-a left-border width-25">&nbsp;</div>
+    </div>
+    <div class="row verde center bold padding-a">
+      Identificación de las personas dependientes de acuerdo al parágrafo 2 del artículo 387 del Estatuto Tributario
+    </div>
+    <div class="row">
+      <div class="padding-a  width-25">72. C.C. o NIT</div>
+      <div class="padding-a left-border">73. Nombres y apellidos</div>
+      <div class="padding-a left-border" style="width: 15%">74. Parentesco</div>
+    </div>
+    <div class="row">
+      <div class="padding-a width-25">&nbsp;</div>
+      <div class="padding-a left-border">&nbsp;</div>
+      <div class="padding-a left-border" style="width: 15%">&nbsp;</div>
+    </div>
+
+  </div>
+  <div class="row bubble">
+    <div class="row">
+      <div class="padding-a">
+        <span style="display: block; margin-top: 2px">Certifico que durante el año gravable de 2019:</span>
+        <span style="display: block; margin-top: 2px">1. Mi patrimonio bruto era igual o inferior a 4.500 UVT ($154.215.000).</span>
+        <span style="display: block; margin-top: 2px">2. No fui responsable del impuesto sobre las ventas, ni del impuesto nacional de consumo.</span>
+        <span style="display: block; margin-top: 2px">3. Mis ingresos brutos fueron inferiores a 1.400 UVT ($47.978.000).</span>
+        <span style="display: block; margin-top: 2px">4. Mis consumos mediante tarjeta de crédito no excedieron la suma de 1.400 UVT ($47.978.000).</span>
+        <span style="display: block; margin-top: 2px">5. Que el total de mis compras y consumos no superaron la suma de de 1.400 UVT ($47.978.000).</span>
+        <span style="display: block; margin-top: 2px">6. Que el valor total de mis consignaciones bancarias, depósitos o inversiones financieras no excedieron los 1.400 UVT ($47.978.000).</span>
+        <span style="display: block; margin-top: 2px">Por lo tanto, manifiesto que no estoy obligado a presentar declaración de renta y complementarios por el año gravable 2019.</span>
+        <span style="display: block; margin-top: 2px">NOTA: Este certificado sustituye para todos los efectos legales la declaración de Renta y Complementario para el trabajador o pensionado que lo firme</span>
+      </div>
+      <div class="width-25 left-border" style="vertical-align: top">
+        <div class="linea padding-a">Firma del Trabajador o Pensionado</div>
+      </div>
+    </div>
+  </div>
+  <p style="text-align:center">NOTA: Este certificado sustituye para todos los efectos legales la declaración de Renta y Complementarios para el trabajador
+    o pensionado que lo firme</p>
+  <p></p>
+</body>
+
+</html>

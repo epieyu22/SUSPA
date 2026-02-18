@@ -1,0 +1,147 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item"><a ui-sref="dashboard">Consultas y Solicitudes</a></li>
+  <li class="breadcrumb-item active">
+    <a ui-sref="bioseguridad">Bioseguridad</a>
+  </li>
+</ol>
+
+
+<div class="card shadow primary-theme">
+  <div class="cd-tabs">
+    
+  </div>
+  <div class="tab-content">
+
+    <div class="cd-tabs">
+      <nav class="cd-tabs-navigation ">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="active" data-toggle="tab" role="tab" href="#" data-target="#Bioseguridad">
+              <i class="far fa-address-card"></i>
+              <span class="tab-text">Reporte de Bioseguridad</span>
+            </a>
+          </li>
+        </ul>
+
+      </nav>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="tab-content" style="">
+      <div class="tab-pane active" id="Basico" role="tabpanel">
+
+        <div class="card shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 50rem;">
+          <div class="card-body">
+
+            <div class="card-text"> ¿Ha estado en otras ciudades, en encuentros multitudinarios o cuidando enfermos?</div>
+            <br><input type="radio" name="decide1" ng-model="vm.bioseguirdad.respuesta1" value="1"> Si<br>
+            <br><input type="radio" name="decide1" ng-model="vm.bioseguirdad.respuesta1" value="0"> No<br>
+
+          </div>
+        </div>
+
+        <div class="card shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 50rem;">
+          <div class="card-body">
+
+            <div class="card-text"> ¿Ha tenido dolores de cabeza, escalosfrios, fiebre, malestar general?</div>
+            <br><input type="radio" name="decide2" ng-model="vm.bioseguirdad.respuesta2" value="1"> Si<br>
+            <br><input type="radio" name="decide2" ng-model="vm.bioseguirdad.respuesta2" value="0"> No<br>
+
+          </div>
+        </div>
+
+        <div class="card shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 50rem;">
+          <div class="card-body">
+
+            <div class="card-text"> ¿Tiene dolor para deglutir (tragar)?</div>
+            <br><input type="radio" name="decide3" ng-model="vm.bioseguirdad.respuesta3" value="1"> Si<br>
+            <br><input type="radio" name="decide3" ng-model="vm.bioseguirdad.respuesta3" value="0"> No<br>
+
+          </div>
+        </div>
+
+        <div class="card shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 50rem;">
+          <div class="card-body">
+
+            <div class="card-text"> ¿Ha tenido dificultad para identificar olores?</div>
+            <br><input type="radio" name="decide4" ng-model="vm.bioseguirdad.respuesta4" value="1"> Si<br>
+            <br><input type="radio" name="decide4" ng-model="vm.bioseguirdad.respuesta4" value="0"> No<br>
+
+          </div>
+        </div>
+
+        <div class="card shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 50rem;">
+          <div class="card-body">
+
+            <div class="card-text"> ¿Ha estado al cuidado de algun familiar con sintomas de gripa durante los ultimos meses?</div>
+            <br><input type="radio" name="decide5" ng-model="vm.bioseguirdad.respuesta5" value="1"> Si<br>
+            <br><input type="radio" name="decide5" ng-model="vm.bioseguirdad.respuesta5" value="0"> No<br>
+
+          </div>
+        </div>
+
+        <div class="card shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 50rem;">
+          <div class="card-body">
+
+            <div class="card-text"> ¿Ha respetado la cuarenteno obligatoria sin salir de su casa?</div>
+            <br><input type="radio" name="decide6" ng-model="vm.bioseguirdad.respuesta6" value="1"> Si<br>
+            <br><input type="radio" name="decide6" ng-model="vm.bioseguirdad.respuesta6" value="0"> No<br>
+
+          </div>
+        </div>
+
+        <div class="card shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 50rem;">
+          <div class="card-body">
+
+            <div class="card-text"> ¿sufre de presion alta o alguna enfermedad del corazón?</div>
+            <br><input type="radio" name="decide7" ng-model="vm.bioseguirdad.respuesta7" value="1"> Si<br>
+            <br><input type="radio" name="decide7" ng-model="vm.bioseguirdad.respuesta7" value="0"> No<br>
+
+          </div>
+        </div>
+
+        <div class="card shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 50rem;">
+          <div class="card-body">
+
+            <div class="card-text"> ¿Toma algun medicamento?</div>
+            <br><input type="radio" name="decide8" ng-model="vm.bioseguirdad.respuesta8" value="1"> Si<br>
+            <br><input type="radio" name="decide8" ng-model="vm.bioseguirdad.respuesta8" value="0"> No<br>
+
+          </div>
+        </div>
+
+        <div class="card shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 50rem;">
+          <div class="card-body">
+
+            <div class="card-text"> ¿Ha estado festejando con amigos?</div>
+            <br><input type="radio" name="decide9" ng-model="vm.bioseguirdad.respuesta9" value="1"> Si<br>
+            <br><input type="radio" name="decide9" ng-model="vm.bioseguirdad.respuesta9" value="0"> No<br>
+
+          </div>
+        </div>
+
+        <div class="card shadow p-3 mb-5 bg-white rounded mx-auto" style="width: 50rem;">
+          <div class="card-body">
+
+            <div class="card-text"> ¿Ha tenido reuniones familiares o han llegado familiares de visita?</div>
+            <br><input type="radio" name="decide10" ng-model="vm.bioseguirdad.respuesta10" value="1"> Si<br>
+            <br><input type="radio" name="decide10" ng-model="vm.bioseguirdad.respuesta10" value="0"> No<br>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-success mx-auto" style="width: 50rem;" ng-click="vm.Guardar_reporte()">
+    Enviar respuestas
+  </button>
+</div>
+ 

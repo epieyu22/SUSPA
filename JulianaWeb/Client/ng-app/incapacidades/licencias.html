@@ -1,0 +1,230 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">Consultas y Solicitudes</a>
+  </li>
+  <li class="breadcrumb-item active">Licencias</li>
+</ol>
+
+<div class="row mb-1">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-success" ng-click="LicenciasCtrl.Solicitar_Nueva_Licencia()">
+      <i class="material-icons">add_box</i>
+      Reportar Licencias
+    </button>
+    <div class="float-right">
+      <button class="m-r-1 btn btn-info" type="button" ng-if="hasPermission(['aprobar'])" ui-sref="solicitudes.aprobador">
+        <i class="material-icons">done_all</i>
+        <span class="d-none d-md-inline">Aprobar Solicitudes</span>
+      </button>
+      <button class="btn btn-light" type="button" ui-sref="solicitudes">
+        <i class="material-icons">list</i>
+        <span class="d-none d-md-inline">Registro de Solicitudes</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="card primary-theme shadow">
+
+  <div class="cd-tabs">
+    <nav>
+      <ul class="cd-tabs-navigation nav">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" role="tab" href="#" data-target="#Historico">
+            <i class="material-icons tab-icon">history</i>
+            <span class="tab-text">Historico</span>
+          </a>
+        </li>
+        <li class="nav-item" ng-if="LicenciasCtrl.data.solicitudes.length > 0">
+          <a class="nav-link" data-toggle="tab" role="tab" href="#" data-target="#Solicitadas">
+            <i class="material-icons tab-icon icon-fondoriesgo"></i>
+            <span class="tab-text">Solicitudes</span>
+          </a>
+        </li>
+        <li class="nav-item" ng-if="LicenciasCtrl.data.solicitudes.length > 0">
+          <a class="nav-link" data-toggle="tab" role="tab" href="#" data-target="#Pendientes">
+            <i class="material-icons tab-icon">hourglass_empty</i>
+            <span class="tab-text">Solicitudes Pendientes</span>
+          </a>
+        </li>
+        <li class="nav-item" ng-if="LicenciasCtrl.data.solicitudes.length > 0">
+          <a class="nav-link" data-toggle="tab" role="tab" href="#" data-target="#Aprobadas">
+            <i class="material-icons tab-icon">done_all</i>
+            <span class="tab-text">Solicitudes Aprobadas</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="card-body" ng-if="LicenciasCtrl.loading">
+    <div class="col-12">
+      <div class="p-3 mb-3 col-12 animated-background"></div>
+      <div class="p-3 mb-3 col-8 animated-background"></div>
+      <div class="p-3 mb-3 col-8 animated-background"></div>
+    </div>
+  </div>
+
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="Historico">
+      <div class="blank" ng-if="!LicenciasCtrl.data.historicoLicencias">
+        <p>No hay datos para mostrar</p>
+      </div>
+
+      <table class="table table-bordered table-striped table-sm" ng-if="LicenciasCtrl.data.historicoLicencias.length > 0">
+        <thead>
+          <tr>
+            <th>Concepto</th>
+            <th class="text-xs-center text-sm-right">Días</th>
+            <th class="text-xs-center text-sm-right">Desde</th>
+            <th class="text-xs-center text-sm-right">Hasta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="i in LicenciasCtrl.data.historicoLicencias">
+            <td>{{i.Concepto}}</td>
+            <td class="center text-sm-right">{{i.Dias}}</td>
+            <td class="center text-sm-right">{{i.Desde | date: 'fullDate'}}</td>
+            <td class="center text-sm-right">{{i.Hasta | date: 'fullDate'}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="card-body" ng-if="LicenciasCtrl.Loading_Historico">
+        <div class="spinner blue">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="Solicitadas">
+      <table class="table table-bordered table-striped table-sm" ng-if="LicenciasCtrl.data.solicitudes.length > 0">
+        <thead>
+          <tr>
+            <th>Concepto</th>
+            <th class="text-xs-center text-sm-right">Días</th>
+            <th class="text-xs-center text-sm-right">Desde</th>
+            <th class="text-xs-center text-sm-right">Hasta</th>
+            <th class="text-xs-center">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="i in LicenciasCtrl.data.solicitudes">
+            <td>{{i.Concepto}}</td>
+            <td class="center text-sm-right">{{i.Cantidad}}</td>
+            <td class="center text-sm-right">{{i.Desde | date: 'fullDate'}}</td>
+            <td class="center text-sm-right">{{i.Hasta | date: 'fullDate'}}</td>
+            <td class="text-xs-center">
+              <div ng-switch="i.Estado">
+                <div ng-switch-when="A" class="solicitud__estado--Aprobada p0">Aprobada</div>
+                <div ng-switch-when="A0" class="solicitud__estado--Pendiente p0">Pendiente Aprobación
+                  Nivel 2</div>
+                <div ng-switch-when="A1" class="solicitud__estado--Pendiente p0">Pendiente Aprobación
+                  Nivel 3</div>
+                <div ng-switch-when="A2" class="solicitud__estado--Pendiente p0">Pendiente Aprobación
+                  Nivel 4</div>
+                <div ng-switch-when="A3" class="solicitud__estado--Pendiente p0">Pendiente Aprobación
+                  Nivel 5</div>
+                <div ng-switch-when="A4" class="solicitud__estado--Pendiente p0">Pendiente Aprobación
+                  Nivel 6</div>
+                <div ng-switch-when="A5" class="solicitud__estado--Pendiente p0">Pendiente Aprobación
+                  Nivel 6</div>
+                <div ng-switch-when="R" class="solicitud__estado--Rechazada p0">Rechazada</div>
+                <div ng-switch-when="P" class="solicitud__estado--Pendiente p0">Pendiente de Aprobación</div>
+                <div ng-switch-when="PR" class="solicitud__estado--Pendiente p0">Pendiente de
+                  Desaprobación</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card-body" ng-if="LicenciasCtrl.data.solicitudes.length > 0">
+        <div class="alert alert-warning">
+          licencias reportadas aún
+          <b>no pagadas</b> en el Sistema de nómina.
+        </div>
+      </div>
+      <div ng-if="LicenciasCtrl.data.solicitudes.length === 0"> No hay datos para mostrar</div>
+    </div>
+    <div class="tab-pane" id="Pendientes">
+      <table class="table table-bordered table-striped table-sm" ng-if="LicenciasCtrl.data.solicitudes.length > 0">
+        <thead>
+          <tr>
+            <th>Concepto</th>
+            <th class="text-xs-center text-sm-right">Días/Horas</th>
+            <th class="text-xs-center text-sm-right">Desde</th>
+            <th class="text-xs-center text-sm-right">Hasta</th>
+            <th class="text-xs-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="i in LicenciasCtrl.data.solicitudes | filter : { 'Estado': 'P' }">
+            <td>{{i.Concepto}}</td>
+            <td class="center text-sm-right">{{i.Cantidad}}</td>
+            <td class="center text-sm-right">{{i.Desde | date: 'fullDate'}}</td>
+            <td class="center text-sm-right">{{i.Hasta | date: 'fullDate'}}</td>
+            <td>
+              <button class="btn btn-sm btn-danger m-l-2 "
+                      ng-click="LicenciasCtrl.Confirm_Del_Solicitud(i.Cod_Solicitud)"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Eliminar">
+                <i class="material-icons">delete</i> Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card-body" ng-if="LicenciasCtrl.data.solicitudes.length > 0">
+        <div class="alert alert-warning">
+          licencias reportadas aún
+          <b>Pendientes de Aprobación</b> en el Sistema de nómina.
+        </div>
+      </div>
+      <div ng-if="LicenciasCtrl.data.solicitudes.length === 0"> No hay datos para mostrar</div>
+    </div>
+    <div class="tab-pane" id="Aprobadas">
+      <table class="table table-bordered table-striped table-sm" ng-if="LicenciasCtrl.data.solicitudes.length > 0">
+        <thead>
+          <tr>
+            <th>Concepto</th>
+            <th class="text-xs-center text-sm-right">Días/Horas</th>
+            <th class="text-xs-center text-sm-right">Desde</th>
+            <th class="text-xs-center text-sm-right">Hasta</th>
+            <th class="text-xs-center">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="i in LicenciasCtrl.data.solicitudes | filter : { 'Estado': 'A' }">
+            <td>{{i.Concepto}}</td>
+            <td class="center text-sm-right">{{i.Cantidad}}</td>
+            <td class="center text-sm-right">{{i.Desde | date: 'fullDate'}}</td>
+            <td class="center text-sm-right">{{i.Hasta | date: 'fullDate'}}</td>
+            <td>
+              <div class="btn btn-sm btn-danger m-l-2" ng-click="LicenciasCtrl.Confirm_PD_Solicitud(i.Cod_Solicitud)">
+                <i class="material-icons">close</i> Pedir Desaprobación
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card-body" ng-if="LicenciasCtrl.data.solicitudes.length > 0">
+        <div class="alert alert-warning">
+          licencias reportadas aún
+          <b>Aprobadas</b> en el Sistema de nómina.
+        </div>
+      </div>
+      <div ng-if="LicenciasCtrl.data.solicitudes.length === 0"> No hay datos para mostrar</div>
+    </div>
+  </div>
+</div>

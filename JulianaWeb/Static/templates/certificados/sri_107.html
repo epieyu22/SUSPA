@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SRI</title>
+  <style>
+    /* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      vertical-align: baseline;
+    }
+
+    /* HTML5 display-role reset for older browsers */
+
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+      display: block;
+    }
+
+    body {
+      line-height: 1;
+    }
+
+    ol,
+    ul {
+      list-style: none;
+    }
+
+    blockquote,
+    q {
+      quotes: none;
+    }
+
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+      content: '';
+      content: none;
+    }
+
+    table {
+      border-collapse: collapse;
+      /* border-spacing: 0; */
+      width: 100%;
+    }
+
+    table tr {
+      border: 1px solid #000;
+      vertical-align: middle
+    }
+
+    table td {
+      vertical-align: middle;
+      padding: 5px;
+    }
+
+
+
+
+
+    body {
+      font-family: "MS Reference Sans Serif";
+      /*font-family: "Arial Narrow";*/
+      padding: 0;
+      margin: 0;
+      font-size: 10px;
+      letter-spacing: normal;
+      text-rendering: geometricPrecision;
+    }
+
+    table td {
+      border: 1px solid #000;
+    }
+
+    .row {
+      display: table;
+      width: 100%;
+    }
+
+    .row div {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-justify {
+      text-align: justify;
+    }
+
+    .background {
+      background-color: #ccccff;
+    }
+
+    .input {
+      background-color: #fff;
+      padding: 10px;
+      width: 100px;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <table class="table">
+    <tr>
+      <td colspan="8" rowspan="3">
+        <p class="text-center background">
+          FORMULARIO 107
+          <br> RESOLUCIÓN No. NAC-DGERCGC12-00829
+        </p>
+      </td>
+      <td class="text-center background" style="font-weight: bold" colspan="12">
+        COMPROBANTE DE RETENCIONES EN LA FUENTE DEL IMPUESTO A LA
+        <br> RENTA POR INGRESOS DEL TRABAJO EN RELACIÓN DE DEPENDENCIA
+      </td>
+      <td colspan="8" class="background">
+        No.
+        <span class="input"></span>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="5" rowspan="2" style="padding-left: 5px">EJERCICIO FISCAL</td>
+      <td rowspan="2" class="background text-center" style="border-left: 1px solid; border-left: 1px solid">102</td>
+      <td rowspan="2" style="border-left: 1px dashed; padding: 5px; text-align: center"></td>
+      <td rowspan="2" style="border-left: 1px dashed; padding: 5px; text-align: center"></td>
+      <td rowspan="2" style="border-left: 1px dashed; padding: 5px; text-align: center"></td>
+      <td rowspan="2" style="border-left: 1px solid; padding: 5px; text-align: center"></td>
+      <td rowspan="2" style="padding-left: 5px">FECHA DE ENTREGA</td>
+      <td rowspan="2" class="background text-center" style="border-left: 1px solid; border-left: 1px solid">103</td>
+      <td colspan="4" style="border-left: 1px dashed; text-align: center">AÑO</td>
+      <td colspan="2" style="border-left: 1px dashed; text-align: center">MES</td>
+      <td colspan="2" style="border-left: 1px dashed; text-align: center">DIA</td>
+    </tr>
+    <tr>
+      <!--AÑO-->
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center">@a1</td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center">@a2</td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center">@a3</td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center">@a4</td>
+      <!--MES-->
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center">@m1</td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center">@m2</td>
+      <!--DIA-->
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center">@d1</td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center">@d2</td>
+    </tr>
+    <!--linia 100-->
+    <tr>
+      <td class="background" colspan="29">
+        <b>100 Identificación del Empleador (Agente de Retención)</b>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="2" class="background text-center" style="border-left: 1px solid; border-left: 1px solid">105</td>
+      <td colspan="13">RUC</td>
+      <td rowspan="2" class="background text-center" style="border-left: 1px solid; border-left: 1px solid">106</td>
+      <td colspan="13">RAZÓN SOCIAL O APELLIDOS Y NOMBRES COMPLETOS</td>
+    </tr>
+    <tr>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center"></td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center"></td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center"></td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center"></td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center"></td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center"></td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center"></td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center"></td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center"></td>
+      <td style="border-left: 1px dashed; padding: 5px; text-align: center"></td>
+      <td style="border-left: 1px dashed; padding: 0 2px; text-align: center">0</td>
+      <td style="border-left: 1px dashed; padding: 0 2px; text-align: center">0</td>
+      <td style="border-left: 1px dashed; padding: 0 2px; text-align: center">1</td>
+      <td colspan="13">@Empresa</td>
+    </tr>
+    <!--LIEAN 200-->
+    <tr>
+      <td class="background" colspan="29">
+        <b>200 Identificación del Trabajador (Contribuyente)</b>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="2" class="background text-center" style="border-left: 1px solid; border-left: 1px solid">201</td>
+      <td colspan="12">CÉDULA O PASAPORTE</td>
+      <td rowspan="2" class="background text-center" style="border-left: 1px solid; border-left: 1px solid">202</td>
+      <td colspan="14"> RAZÓN SOCIAL O APELLIDOS Y NOMBRES COMPLETOS</td>
+    </tr>
+    <tr style="border: none">
+      <td colspan="12" style="padding: 5px">@Cedula</td>
+      <td colspan="16" style="padding: 5px">@Empleado</td>
+    </tr>
+    <tr>
+      <td colspan="29" style="padding:5px"></td>
+    </tr>
+  </table>
+  <!-- Liquidación del Impuesto -->
+  <table>
+    <tr>
+      <td class="background" colspan="29">
+        <b>Liquidación del Impuesto</b>
+      </td>
+    </tr>
+    <tr>
+      <td>SUELDOS Y SALARIOS</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">301</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">+</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>SOBRESUELDOS, COMISIONES, BONOS Y OTROS INGRESOS GRAVADOS</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">303</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">+</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>PARTICIPACIÓN UTILIDADES</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">305</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">+</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>DÉCIMO TERCER SUELDO</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">307</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">+</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>DÉCIMO CUARTO SUELDO</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">311</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid; padding: 5px"></td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>FONDO DE RESERVA</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">313</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid; padding: 5px"></td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>OTROS INGRESOS EN RELACIÓN DE DEPENDENCIA QUE NO CONSTITUYEN RENTA GRAVADA</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">315</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid; padding: 5px"></td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>SOBRESUELDOS, COMISIONES, BONOS Y OTROS INGRESOS GRAVADOS</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">317</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid; padding: 5px"></td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td colspan="29" style="padding: 0"></td>
+    </tr>
+    <tr>
+      <td>(-) APORTE PERSONAL IESS CON ESTE EMPLEADOR (únicamente pagado por el trabajador)</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">351</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">-</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>(-) APORTE PERSONAL IESS CON OTROS EMPLEADORES (únicamente pagado por el trabajador)</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">353</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">-</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>(-) DEDUCCIÓN GASTOS PERSONALES - VIVIENDA</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">361</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">-</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>(-) DEDUCCIÓN GASTOS PERSONALES - SALUD</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">363</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">-</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>(-) DEDUCCIÓN GASTOS PERSONALES - EDUCACIÓN</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">365</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">-</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>(-) DEDUCCIÓN GASTOS PERSONALES - ALIMENTACIÓN</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">367</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">-</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>(-) DEDUCCIÓN GASTOS PERSONALES - VESTIMENTA</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">369</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">-</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>(-) EXONERACIÓN POR DISCAPACIDAD</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">371</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">-</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>(-) EXONERACIÓN POR TERCERA EDAD</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">373</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">-</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td colspan="29" style="padding: 0"></td>
+    </tr>
+    <tr>
+      <td>IMPUESTO A LA RENTA ASUMIDO POR ESTE EMPLEADOR</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">381</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">+</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td colspan="29" style="padding: 0"></td>
+    </tr>
+    <tr>
+      <td>
+        <b> BASE IMPONIBLE GRAVADA
+          <br> 301+303+305+307-351-353-361-363-365-367-369-371-373+381 ≥ 0 </b>
+      </td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">399</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">=</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td colspan="29" style="padding: 0"></td>
+    </tr>
+    <tr>
+      <td>
+        <b> IMPUESTO A LA RENTA CAUSADO </b>
+      </td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">401</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">=</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td colspan="29" style="padding: 0"></td>
+    </tr>
+    <tr>
+      <td>VALOR DEL IMPUESTO RETENIDO Y ASUMIDO POR OTROS EMPLEADORES DURANTE EL PERÍODO DECLARADO</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">403</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid; padding: 5px"></td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>VALOR DEL IMPUESTO ASUMIDO POR ESTE EMPLEADOR</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">405</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid; padding: 5px"></td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td>VALOR DEL IMPUESTO RETENIDO AL TRABAJADOR POR ESTE EMPLEADOR</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">407</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid; padding: 5px"></td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td colspan="29" style="padding: 0"></td>
+    </tr>
+    <tr>
+      <td>
+        <b>INGRESOS GRAVADOS CON ESTE EMPLEADOR</b> (informativo)
+        <br> 301+303+305+381</td>
+      <td class="background text-center" style="border-left: 1px solid; border-left: 1px solid">349</td>
+      <td class="text-center" style="border-left: 1px solid; border-left: 1px solid">=</td>
+      <td style="width: 300px; text-align: right">@linea</td>
+    </tr>
+    <tr>
+      <td colspan="29" style="padding: 0"></td>
+    </tr>
+  </table>
+
+  <table>
+
+
+
+
+    <tr>
+      <td class="background" colspan="29">
+        <big>
+          <b>IMPORTANTE: Sírvase leer cada una de las siguientes instrucciones.</b>
+        </big>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="29">1.- El trabajador que, en el mismo período fiscal haya reiniciado su actividad con otro empleador, estará en la obligación
+        de entregar el formulario 107 entregado por su </td>
+    </tr>
+    <tr>
+      <td colspan="29">2.- El campo 307 deberá ser llenado con la información registrada en el campo 349 del Formulario 107 entregado por
+        el anterior empleador, y/o con la proyección de ingresos de otros empleadores actuales, en caso de que el empleador
+        que registra y entrega el presente formulario haya efectuado la retención por los ingresos percibidos con éstos últimos.</td>
+    </tr>
+    <tr>
+      <td colspan="29">3.- La deducción total por gastos personales no deberá superar el 50% del total de ingresos gravados, y en ningún caso
+        será mayor al equivalente a 1.3 veces la fracción básica exenta de Impuesto a la Renta de personas naturales.</td>
+    </tr>
+    <tr>
+      <td colspan="29">4.- A partir del año 2011 debe considerarse como cuantía máxima para cada tipo de gasto, el monto equivalente a la
+        fracción básica exenta de Impuesto a la Renta en: vivienda 0.325 veces, educación 0.325 veces, alimentación 0.325
+        veces, vestimenta 0.325, salud 1.3 veces.</td>
+    </tr>
+    <tr>
+      <td colspan="29">5.- El trabajador deberá presentar el Anexo de Gastos Personales que deduzca, de cumplir las condiciones establecidas
+        por el Servicio de Rentas Internas.</td>
+    </tr>
+    <tr>
+      <td colspan="29">6.- De conformidad con la Resolución No. NAC-DGER2008-0566 publicada en el Registro Oficial No. 342 el 21 de mayo del
+        2008, el beneficio de la exoneración por tercera edad se configura a partir del ejercicio en el cual el beneficiario
+        cumpla los 65 años de edad. El monto de la exoneración será el equivalente al doble de la fracción básica exenta
+        de Impuesto a la Renta.</td>
+    </tr>
+    <tr>
+      <td colspan="29">7.- A partir del año 2013, conforme lo dispuesto en la Ley Orgánica de Discapacidades el monto de la exoneración por
+        discapacidad será el equivalente al doble de la fracción básica exenta de Impuesto a la Renta.</td>
+    </tr>
+    <tr>
+      <td colspan="29">8.- El presente formulario constituye la declaración de Impuesto a la Renta del trabajador, siempre que durante el
+        período declarado la persona únicamente haya prestado sus servicios en relación de dependencia con el empleador que
+        entrega este formulario, y no existan valores de gastos personales que deban ser reliquidados. En caso de pérdida
+        de este documento el trabajador deberá solicitar una copia a su empleador. Por el contrario, el trabajador deberá
+        presentar obligatoriamente su declaración de Impuesto a la Renta cuando haya obtenido rentas en relación de dependencia
+        con dos o más empleadores o haya recibido además de su remuneración ingresos de otras fuentes como por ejemplo: rendimientos
+        financieros, arrendamientos, ingresos por el libre ejercicio profesional, u otros ingresos, los cuales en conjunto
+        superen la fracción básica exenta de Impuesto a la Renta de personas naturales, o cuando tenga que reliquidar gastos
+        personales con aquellos efectivamente incurridos, teniendo presente los límites referidos en las notas 3 y 4 de este
+        documento.
+      </td>
+    </tr>
+    <tr>
+      <td colspan="29" style="padding: 0"></td>
+    </tr>
+    <tr class="text-center">
+      <td colspan="29">
+        <b>DECLARO QUE LOS DATOS PROPORCIONADOS EN ESTE DOCUMENTO SON EXACTOS Y VERDADEROS, POR LO QUE ASUMO LA RESPONSABILIDAD
+          LEGAL QUE DE ELLA SE DERIVEN (Art. 101 de la L.R.T.I.)</b>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="8" style="border-left: 1px solid">
+        <b>FIRMA DEL AGENTE DE RETENCIÓN </b>
+      </td>
+      <td colspan="8" style="border-left: 1px solid">
+        <b>FIRMA DEL TRABAJADOR CONTRIBUYENTE </b>
+      </td>
+      <td colspan="13">
+        <b>FIRMA DEL CONTADOR </b>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="8" style="height: 150px;"></td>
+      <td colspan="8" style="height: 150px;"></td>
+      <td colspan="13" style="height: 150px;"></td>
+    </tr>
+  </table>
+</body>
+
+</html>

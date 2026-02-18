@@ -1,0 +1,134 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item"><a ui-sref="dashboard"><i class="material-icons">home</i></a></li>
+  <li class="breadcrumb-item"><a ui-sref="dashboard">Comprobantes y Certificados</a></li>
+  <li class="breadcrumb-item"><a ui-sref="compropago">Comprobante de Pago</a></li>
+  <li class="breadcrumb-item active">Configuración</li>
+</ol>
+
+<div class="card primary-theme shadow">
+  <div class="card-header">        
+      Seleccione la Empresa
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label for="">Empresa:</label>
+      <select class="form-control" 
+        ng-model="vm.viewmodel.DBName"
+        ng-change="vm.loadEmpleados()"
+        ng-options="i.BaseDatos as i.Nombre_Empresa for i in vm.data.empresas"></select>
+    </div>    
+  </div>
+</div>
+
+
+<div class="card shadow primary-theme" ng-if="vm.config">
+  <div class="cd-tabs">
+    <nav class="cd-tabs-navigation " >
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="active" data-toggle="tab"  role="tab" href="#" data-target="#parametros">
+            <i class="material-icons tab-icon">settings</i>
+            Parametros
+          </a>
+        </li>
+        <li class="nav-item">
+          <a  data-toggle="tab"  role="tab" href="#" data-target="#visualizacion">
+            <i class="material-icons tab-icon">remove_red_eye</i>
+            visualización
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane active" id="parametros" role="tabpanel">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" ng-model="vm.config.data.Aprobar_Compropago">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-label">Visualizar Comprobantes de pago bajo Aprobación?</span>
+            </label>
+          </div>
+          <p class="col-md-12 m-y-1">Fecha mínima para generar los comprobantes:</p>
+          <div class="col-md-6">
+            <select class="form-control" ng-model="vm.config.data.Modo_Compropago">
+              <option value="0">Ultimos X Meses</option>
+              <option value="1">Fecha Especifica</option>
+            </select>
+          </div>
+          <div class="col-md-12 m-y-1"></div>
+          <div class="col-md-6" ng-if="vm.config.data.Modo_Compropago == 0">
+            <div class="form-group">
+              <label for="">Cantidad Meses:</label>
+              <input type="number" max="12" min="1" class="form-control" ng-model="vm.config.data.Mes_Compropago">
+            </div>
+          </div>
+          <div ng-if="vm.config.data.Modo_Compropago == 1">
+            <div class="form-group col-md-6">
+              <label for="">Año</label>
+              <select class="form-control" ng-model="vm.config.data.Ano_Compropago" ng-options="i for i in vm.config.anos"></select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="">Mes</label>
+              <select class="form-control" ng-model="vm.config.data.Mes_Compropago" ng-options="i.value as i.name for i in vm.MONTHS"></select>
+            </div>  
+
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-right">
+        <button class="btn btn-success" ng-click="vm.sebo()">Guardar</button>
+      </div>
+      
+    </div>
+    <div class="card-body tab-pane" id="visualizacion" role="tabpanel">
+      <div class="row">
+        <div class="col-md-6" ng-if="vm.config.Fec_Nomnia">
+          <p style="margin:0">
+            <i class="material-icons" ng-click="showFec_NominaHelp = !showFec_NominaHelp">help_outline</i> Fecha Actual:</p>
+          <h3>{{vm.config.Fec_Nomnia | beautydate}}</h3>
+          <div class="alert alert-info" ng-if="showFec_NominaHelp">
+            Esta es la ultima fecha aprobada para los comprobantes de pago desde la plataforma
+          </div>
+        </div>
+        <div class="col-md-6" ng-if="vm.config.Ult_Pago != vm.config.Fec_Nomnia">
+          <p style="margin:0">
+            <i class="material-icons" ng-click="showUlt_PagoHelp = !showUlt_PagoHelp">help_outline</i> Ultima Fecha de Pago:</p>
+          <h3>{{vm.config.Ult_Pago | beautydate}}</h3>
+          <div class="alert alert-info" ng-if="showUlt_PagoHelp">
+            Esta es la ultima fecha de nomina pagada desde el sistema de escritorio de Juliana
+          </div>
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-info float-right" ng-click="vm.SendMailCompropago()">
+            <i class="material-icons">mail_outline</i>
+            Informar via correo electronico
+          </button>
+        </div>
+      </div>
+      <div ng-if="vm.config.Ult_Pago != vm.config.Fec_Nomnia">
+        <div class="row m-y-1">
+          <div class="col-md-12 text-xs-center">
+            <div class="alert alert-warning">
+              <p>La ultima nomina {{vm.config.Ult_Pago | beautydate}} no esta aprobada para ser visualizada desde la plataforma web.</p>
+              <button class="btn btn-success" ng-click="vm.SetLatsFecNomina()">Aprobar Visualización de Comprobantes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-if="vm.config.Ult_Pago == vm.config.Fec_Nomnia">
+        <div class="row m-y-1">
+          <div class="col-md-12 text-xs-center">
+            <div class="alert alert-danger">
+              <p>La ultima nomina aprobada para ser visualizada desde la plataforma es: {{vm.config.Fec_Nomnia | beautydate}}</p>
+              <button class="btn btn-danger" ng-click="vm.sebo()">Reversar Aprobación</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

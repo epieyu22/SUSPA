@@ -1,0 +1,85 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item active">Consultas y Solicitudes</li>
+  <li class="breadcrumb-item active">Historico De Salarios</li>
+</ol>
+
+<div class="tile-container tile-row tile-sm-col" ng-init="vm.initHistosalarioGrid()">
+  <div class="tile-child">
+    <div class="tile tile-big" flex>
+      <div class="tile__title">Total Salario</div>
+      <div class="tile__info">{{vm.data.salarioActual + vm.data.totalBeneficios | currency:"$":2 }}</div>
+    </div>
+  </div>
+  <div class="tile-child tile-col" ng-if="vm.data.totalBeneficios > 0">
+    <div class="tile-child">
+      <div class="tile">
+        <div class="tile__title">Salario Actual</div>
+        <div class="tile__info">{{vm.data.salarioActual | currency:"$":2 }}</div>
+      </div>
+    </div>
+    <div class="tile-child">
+      <div class="tile">
+        <div class="tile__title">Beneficios</div>
+        <div class="tile__info">{{vm.data.totalBeneficios | currency:"$":2 }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tile-child">
+    <div class="tile">
+      <div class="tile__title">Ultima Fecha De Modificación</div>
+      <div class="tile__info">{{vm.data.ultimaModificacion | beautydate }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="card primary-theme shadow clearfix">
+  <div class="cd-tabs">
+    <nav class="cd-tabs-navigation ">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="active" data-toggle="tab" role="tab" href="#" data-target="#Historico">
+            <span class="tab-text">Historico De Salarios</span>
+          </a>
+        </li>
+        <li class="nav-item" ng-if="vm.data.totalBeneficios > 0">
+          <a data-toggle="tab" role="tab" href="#" data-target="#Beneficios">
+            <span class="tab-text">Beneficios</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane active" id="Historico" role="tabpanel">
+      <table ng-table="vm.configTable" class="table table-sm table-bordered table-striped" table-morphe>
+        <tr ng-repeat="row in $data">
+          <td class="text-sm-center" data-title="'Salario'" sortable="'Salario'">{{row.Salario | currency:"$":2}}</td>
+          <td class="text-sm-center" data-title="'Tipo Modificación'" sortable="'Mot_Cambio_Sal'">{{row.Mot_Cambio_Sal}}</td>
+          <td class="text-sm-center" data-title="'% Aumento'" sortable="'Por_Aumento'">{{row.Por_Aumento | number:2 }}</td>
+          <td class="text-sm-center" data-title="'Aumento Propuesto'" sortable="'Aum_Propuesto'">{{row.Aum_Propuesto | currency:"$":2}}</td>
+          <td class="text-sm-center" data-title="'Fecha Aplicación'" sortable="'Fec_Salario'">{{row.Fec_Salario | beautydate}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="tab-pane" id="Beneficios" role="tabpanel">
+      <table class="table table-bordered table-striped table-sm">
+        <thead>
+          <th>Concepto</th>
+          <th class="text-right">Valor</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="b in vm.data.beneficios">
+            <td>{{b.Concepto}}</td>
+            <td class="text-right">{{b.Valor | currency:"$":2}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

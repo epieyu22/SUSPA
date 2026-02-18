@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es-co">
+<head >
+  <base href="@Url.Content("~/")" />
+  <meta name="viewport" content="width=device-width" />
+  <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0">
+  <title>Juliana Web</title>
+
+  <meta charset="UTF-8">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="Static/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="Static/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="Static/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="Static/favicons/manifest.json">
+  <link rel="mask-icon" href="Static/favicons/safari-pinned-tab.svg" color="#0073cc">
+  <link rel="shortcut icon" href="Static/favicons/favicon.ico">
+  <meta name="msapplication-config" content="Static/favicons/browserconfig.xml">
+  <meta name="theme-color" content="#2c3136">
+
+
+  <link rel="stylesheet" href="~/Client/vendor/iconfont/material-icons.css">
+  <link rel="stylesheet" href="~/Client/vendor/jqx.base.css">
+  <link rel="stylesheet" href="~/Client/vendor/jqx.metro.css">
+  <link rel="stylesheet" href="~/Client/vendor/ng-notify.min.css">
+  <link rel="stylesheet" href="~/Client/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="~/Client/vendor/froala_editor.min.css">
+  <link rel="stylesheet" href="~/Client/vendor/froala_style.min.css">
+  <!--<link rel="stylesheet" href="~/Client/vendor/fonts/icons.data.svg.css">-->
+  <link rel="stylesheet" href="~/Client/vendor/Glyphter.css">
+  
+  <link rel="stylesheet" href="~/Client/vendor/jasny-bootstrap.min.css?version=4">
+  <link rel="stylesheet" href="~/Client/vendor/ngDialog.min.css?version=4">
+  <link rel="stylesheet" href="~/Client/vendor/ngDialog-theme-plain.css?version=4">
+  <link rel="stylesheet" href="~/Client/vendor/ng-table.min.css?version=4">
+  <link rel="stylesheet" href="~/Client/vendor/select.min.css">
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+  
+
+
+
+  @Styles.Render("~/Client/ng-app/css")
+  @Styles.Render("~/VendorStyles")
+</head>
+<body ng-app="JWeb" class="timeout-test">
+  <div class="NotSupported" id="NotSupported">
+    <p>Esta usando un navegador web no soportado por nuestra aplicación.</p>
+    <p> Por favor actualice a una versión superior o utilice cualquiera de los siguiente navegadores:</p>
+    <p>
+      <ul>
+        <li><a href="https://www.google.com/chrome/">Chrome</a></li>
+        <li><a href="https://www.microsoft.com/en-us/windows/microsoft-edge">Edge</a> </li>
+        <li><a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a> </li>
+        <li><a href="https://support.apple.com/downloads/safari">Safari</a></li>
+      </ul>
+    </p>
+  </div>
+
+  @if (TempData.ContainsKey("sso-auth-info"))
+  {
+    <script>
+      window.sessionStorage.setItem("sso-auth-info", `@Html.Raw(TempData["sso-auth-info"] ?? "{}")`);
+    </script>
+  }
+
+  @RenderBody()
+
+  <script src="~/Client/rAF.js"></script>
+  @Scripts.Render("~/Client/vendor/main")
+  <script src="~/Client/bootstrap.min.js?version=4"></script>
+  <script src="~/Client/globalize.js"></script>
+  <script src="~/Client/globalize.culture.es-Co.js"></script>
+
+  <!-- Add calendar files -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/locale/es.js"></script>
+
+
+  <script>
+    if (!window.Promise) {
+      var id = document.getElementById("NotSupported");
+      id.style.display = "block";
+    }
+  </script>
+
+  <script src="~/JavascriptResourceHandler.axd"></script>
+  <script>
+      var ROOTURL = '@Url.Content("~/")';
+      ROOTURL = ROOTURL == "/" ? "" : ROOTURL;
+  </script>
+  @Scripts.Render("~/Client/ng-app/main")
+  @Scripts.Render("~/templates")
+</body>
+</html>

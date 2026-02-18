@@ -1,0 +1,16 @@
+.punch-event {
+    border: none;
+    border-radius: 0;
+}
+
+.punch-event .card-body {
+    padding: 5px;
+}
+
+.punch-event .badge {
+    font-size: 14px;
+}
+
+.punch-event p {
+    margin-bottom: 0;
+}

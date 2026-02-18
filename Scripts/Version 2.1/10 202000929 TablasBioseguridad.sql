@@ -1,0 +1,15 @@
+CREATE TABLE BIOSEGURIDAD_PREGUNTAS(
+    id_bioseguirdad int not null primary key identity,
+    Cod_Empleado varchar(20) not null,
+    pregunta_1 int not null,
+    pregunta_2 int not null,
+    pregunta_3 int not null,
+    pregunta_4 int not null,
+    pregunta_5 int not null,
+    pregunta_6 int not null,
+    pregunta_7 int not null,
+    pregunta_8 int not null,
+    pregunta_9 int not null,
+    pregunta_10 int not null,
+    fecha varchar(8) not null,
+)

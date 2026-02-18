@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Certificado laboral</title>
+  <style>
+
+    body{
+      font-family: "Arial";
+      margin: 0;
+      padding: 50px;
+      font-size: 16px;
+      padding-bottom: 0;
+      text-rendering: geometricPrecision;
+    }
+    .row .row{
+      display: table;
+    }
+
+    .row {
+      display: table;
+      width: 100%;
+    }
+    .row div{
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .row.padding{
+      padding: 10px 0;
+    }
+    .text-center{
+      text-align: center;
+    }
+    .text-left{
+      text-align: left;
+    }
+    .text-right{
+      text-align: right;
+    }
+    .text-justify{
+      text-align: justify;
+    }
+
+  </style>
+</head>
+<body>
+    <div class="row">
+    <div style="width: 25%;text-align: center;">
+      <img src="@Model.logo" style="width:100%">
+    </div>
+    <div style="vertical-align: top;">
+      <hgruop class="text-right">
+        <h3 style="margin-bottom: 5px; margin-top: 0;">@Model.empresa.Nombre_Empresa</h3>
+        <h5 style="margin-top: 5px;font-weight: normal;">Nit: @Model.empresa.Num_Documento</h5>
+      </hgruop>
+    </div>
+  </div>
+  <div class="row">
+    <div class="text-right">
+      <p>@Model.ciudad @Model.fecha.ToString("D")</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="text-left">
+      <p><b>Señores:</b></p>
+      <p>@Model.dirigido</p>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 100px">
+    <div class="text-center">
+      <h3>CERTIFICA QUE:</h3>
+    </div>
+  </div>
+  <div class="row" style="width: 98%">
+    <div class="text-justify">
+      <p>Que el (la) señor(a), @(Model.empleado.PNombre.Trim()) @(Model.empleado.SNombre.Trim()) @(Model.empleado.PApellido.Trim())@if(Model.empleado.SApellido.Trim() != ""){@(" " + Model.empleado.SApellido.Trim())}, Identificado(a) con Cédula No. @(Model.empleado.Cedula.Trim()), presta sus servicios a @(Model.empresa.Nombre_Empresa.Trim()) desde el día @Model.fechaIngreso.ToString("D"), con un contrato @Model.tipoContrato. Actualmente ocupa el cargo de @(Model.cargo.Trim()), devengando una asignación básica mensual de @(Model.salario) ($@Model.empleado.Salario.ToString("N0")) Pesos.</p>
+    </div>
+  </div>
+
+  @if (Model.ShowotrosDevengos  == true){
+    <div class="row">
+      <p>Con unos ingresos adicionales promediados a los ultimos @Model.mesesPromedio meses, descritos en los siguientes conceptos:</p>
+      <p>
+        @if (Model.ShowHorasExtras == true){
+          <span>Horas Extras: $@Model.promedioHorasExtras.ToString("N0")</span> <br>
+        }
+        @if (Model.showBeneficios == true){
+          <span>Benficios salario: $@Model.promedioBeneficios.ToString("N0")</span> <br>
+        }
+        @if (Model.showOtrosIngresos == true){
+          <span>Otros ingresos: $@Model.promedioOtroIngresos.ToString("N0")</span> <br>
+        }
+      </p>
+      @if (Model.conceptosEspecificos.Count > 0){
+        foreach(var concepto in Model.conceptosEspecificos){
+          <span>@(concepto.Key): $@(concepto.Value.ToString("N0"))</span><br>
+        }
+      }
+      <p>Devengando en total un promedio de $@Model.netoAPagar.ToString("N0") Pesos mensuales.</p>
+    </div>
+  }
+
+  @if(Model.dirigidoEmbajada == true){
+    <div class="row">
+      @if(Model.viajeLaboral == true){
+        <p>@Model.textViajeLaboral</p>
+      }else{
+        <p>@Model.textEmbajada</p>
+      }
+    </div>
+  }
+
+  <div class="row" style="margin-top: 100px;">
+    <div class="text-center">
+      <p>Se expide en la ciudad de @Model.ciudad el @Model.fecha.ToString("D")</p>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 150px;">
+    <div style="width: 45%;">
+      @if (Model.Firmar_Certlab  == true){
+        <img src="@Model.firma" width="250px">
+      }
+      <div style="padding-top: 5px; border-top: 1px solid #000">
+        <p>@Model.autoriza <br>
+        <small>@Model.autorizaCargo</small></p>
+      </div>
+    </div>
+    <div class="text-right">
+      @Model.empresa.Nombre_Empresa <br>
+      @Model.empresa.Direccion - @Model.ciudad <br>
+      @Model.empresa.Tel <br>
+      <small>Código de verificación: @Model.token</small>
+    </div>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,174 @@
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    Reporte de Ausentismos
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="">Empresa:</label>
+          <select class="custom-select custom-select-sm" ng-model="vm.report.Empresa" ng-change="vm.Load_Config_Compropago()" ng-options="i.BaseDatos.trim() as i.Nombre_Empresa for i in vm.data.Empresas"></select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 form-group form-group-sm">
+        <label>Filtro:</label>
+        <select ng-model="vm.report.Filtro" class="custom-select custom-select-sm">
+          <option value="Proyeccion">Reporte Mes</option>
+          <option value="Fec_Salida">Proyección Fecha de Salida</option>
+          <option value="Fec_Llegada">Proyección Fecha de Llegada</option>
+          <option value="Fec_Solicitud">Proyección Fecha de Solicitud</option>
+        </select>
+      </div>
+      <div class="col-md-4  form-group" ng-if="vm.report.Filtro !== 'None'">
+        <label ng-if="vm.report.Filtro !== 'Proyeccion'">Desde:</label>
+        <label ng-if="vm.report.Filtro === 'Proyeccion'">Mes:</label>
+        <jqx-date-time-input class="d-none d-md-block" jqx-ng-model ng-model="vm.report.Desde" jqx-settings="vm.datetimeInput">
+      </div>
+      <div class="col-md-4  form-group" ng-if="vm.report.Filtro !== 'None' && vm.report.Filtro !== 'Proyeccion'">
+        <label>Hasta:</label>
+        <jqx-date-time-input class="d-none d-md-block" jqx-ng-model ng-model="vm.report.Hasta" jqx-settings="vm.datetimeInput">
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="button" class="btn btn-sm btn-primary float-right" ng-disabled="certlaboralForm.$invalid || vm.report.Filtro == 'None'" ng-click="vm.Get_Reporte_Vacaciones()">
+      Generar Reporte
+    </button>
+  </div>
+</div>
+
+
+<div class="card primary-theme shadow" ng-if="vm.loading">
+<div class="col-12 mt-3">
+    <div class="p-3 mb-3 col-12 animated-background"></div>
+    <div class="p-3 mb-3 col-8 animated-background"></div>
+    <div class="p-3 mb-3 col-8 animated-background"></div>
+  </div>
+</div>
+
+<div class="card primary-theme shadow" ng-show="vm.data.solicitudes && !vm.loading">
+  <div class="cd-tabs">
+    <nav>
+      <ul class="cd-tabs-navigation nav">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" role="tab" href="#" data-target="#resumen">
+            <i class="material-icons tab-icon">restore</i>
+            <span class="tab-text">Resumen</span>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " data-toggle="tab" role="tab" href="#" data-target="#Solicitudes">
+            <i class="material-icons tab-icon">sort</i>
+            <span class="tab-text">Solicitudes</span>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " data-toggle="tab" role="tab" href="#" data-target="#calendartab">
+            <i class="material-icons tab-icon">date_range</i>
+            <span class="tab-text">Calendario</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="tab-content">
+    <div class="mt-1 tab-pane  active table-responsive" id="resumen">
+      <div class="p-1">
+        <button class="btn btn-sm btn-success" ng-click="vm.Reporte_2_Excel()"><i class="material-icons">get_app</i>
+          Exportar a Excel</button>
+      </div>
+      <table ng-table="vm.ResumenGrid" class="table table-sm table-bordered table-striped scroll" table-morphe>
+        <tr ng-repeat="v in $data">
+          <td class="text-xs-center" data-title="'Cod'" sortable="'Cod_Empleado'">{{v.Cod_Empleado}}</td>
+          <td class="text-xs-center" data-title="'Doc Identificación'" sortable="'Cod_Empleado'">{{v.Cedula}}</td>
+          <td class="text-xs-left" data-title="'Empleado'" sortable="'Empleado'">{{v.Empleado}}</td>
+          <td class="text-xs-center" data-title="'Días Causados'" sortable="'Dias_Causados'">
+            {{v.Dias_Causados |number:2}}
+          </td>
+          <td class="text-xs-center" data-title="'Tomados Tiempo'" sortable="'Dias_Tiempo'">
+            {{v.Dias_Tiempo |number:2}}
+          </td>
+          <td class="text-xs-center" data-title="'Tomados Dinero'" sortable="'Dias_Dinero'">
+            {{v.Dias_Dinero |number:2}}
+          </td>
+          <td class="text-xs-center" data-title="'Total Tomados'" sortable="'Dias_Dinero'">
+            {{v.Dias_Tiempo +v.Dias_Dinero | number:2}}
+          </td>
+          <td class="text-xs-center" data-title="'Pendientes'" sortable="'Dias_Pendientes'">
+            {{v.Dias_Pendientes |number:2}}
+          </td>
+          <td class="text-xs-center" data-title="'Aprobados'" sortable="'Dias_Aprobados'">
+            {{v.Dias_Aprobados |number:2}}
+          </td>
+          <td class="text-xs-center" data-title="'Disponibles'" sortable="'Dias_Disponibles'">
+            {{v.Dias_Disponibles | number:2}}
+          </td>
+          <td class="text-xs-center" data-title="'Solicitados Proyectados'" sortable="'Dias_Anticipados'">
+            {{v.Dias_Anticipados | number:2}}
+          </td>
+          <td class="text-xs-center" data-title="'Causado Proyectado'" sortable="'Dias_Causados_Futuro'">
+            {{v.Dias_Causados_Futuro | number:2}}
+          </td>
+          <td class="text-xs-center" data-title="'Disponibles Proyectado'" sortable="'Dias_Disponibles_Futuro'">
+            {{v.Dias_Disponibles_Futuro | number:2}}
+          </td>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="mt-1 tab-pane fade in " id="calendartab">
+      <div id="calendar"></div>
+    </div>
+    <div class="tab-pane " id="Solicitudes">
+      <div class="blank m-2" ng-if="!vm.data.solicitudes.length > 0">
+        <i class="icon-vacaciones my-1"></i>
+        <p>No existen solicitudes de vacaciones procesadas en el sistema.</p>
+      </div>
+      <div class="table-responsive" ng-if="vm.data.solicitudes.length > 0">
+        <div class="p-1">
+          <button class="btn btn-sm btn-success" ng-click="vm.Solicitudes_2_Excel()"><i class="material-icons">get_app</i>
+            Exportar a Excel</button>
+          <button class="btn btn-sm btn-success" ng-click="vm.Mail_Solicitudes_Pendientes()"><i class="material-icons">mail</i>
+            Recordar Solicitudes Pendientes</button>
+        </div>
+        <table ng-table="vm.solVacacionesGrid" class="table table-sm table-bordered table-striped scroll" table-morphe>
+          <tr ng-repeat="v in $data">
+            <td class="text-xs-center" data-title="'Cod'" sortable="'empleado.Cod_Empleado'">{{v.empleado.Cod_Empleado}}</td>
+            <td class="text-xs-center" data-title="'Doc Identificación'" sortable="'empleado.Cedula'">{{v.empleado.Cedula}}</td>
+            <td class="text-xs-left" data-title="'Empleado'" sortable="'empleado.Empleado'">{{v.empleado.Empleado}}</td>
+            <td class="text-xs-left" data-title="'Tipo de Solicitud'" sortable="'Tipo_Solicitud'" filter="{Tipo_Solicitud: 'select'}" filter-data="vm.getTipoSolicitud()">{{v.Tipo_Solicitud}}</td>
+            <td class="text-xs-left" data-title="'Concepto'" sortable="'Nom_Concepto'">{{v.Nom_Concepto}}</td>
+            <td class="text-xs-left" data-title="'Aprobador'" sortable="'aprobador.Tercero'">{{v.aprobador.Tercero}}</td>
+            <td class="text-xs-center" data-title="'Fecha Sol'" sortable="'Fec_Solicitud'">
+              {{v.Fec_Solicitud | date: 'yyyy/MM/dd'}}
+            </td>
+            <td class="text-xs-center" data-title="'Fecha Salida'" sortable="'Fec_Salida'">
+              {{v.Fec_Salida | date:'yyyy/MM/dd'}}
+            </td>
+            <td class="text-xs-center" data-title="'Fecha LLegada'" sortable="'Fec_Llegada'">
+              {{v.Fec_Llegada | date:'yyyy/MM/dd'}}
+            </td>
+            <td class="solicitud__estado solicitud__estado--{{v.Estado}}" data-title="'Dias'" sortable="'Cantidad'">{{v.Cantidad}}</td>
+            <td class="solicitud__estado solicitud__estado--{{v.Estado}}" data-title="'Estado'" sortable="'Estado'" filter="{Estado: 'select'}"
+                filter-data="vm.getEstado()">
+              {{v.Estado}}
+            </td>
+            <td class="text-sm-center" data-title="'Acciones'">
+              <a class="btn btn-sm btn-success" ui-sref="solicitudEmpresa({Empresa: vm.report.Empresa, Cod_Solicitud: v.Cod_Solicitud})" target="_blank" ng-if="v.Tipo_Solicitud !== 'INCAPACIDAD'">
+                <i class="material-icons">sort</i> Detalles
+              </a>
+              <a class="btn btn-sm btn-primary" ng-if="v.Tipo_Solicitud === 'INCAPACIDAD' && v.Adjunto" ng-href="{{ v.Adjunto }}" target="_blank">
+                <i class="material-icons">camera</i> Ver Adjunto
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

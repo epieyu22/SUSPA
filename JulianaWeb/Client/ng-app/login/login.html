@@ -1,0 +1,50 @@
+<div id="login">
+  <div>
+    <img src="{{ROOTURL + 'Static/images/juliana_logo_white_md.png'}}" alt="">
+  </div>
+  <div class="form-wrapper m-t-1" ui-view="login">
+    <form name="LoginForm" ng-submit="vm.login()">
+      <div class="card shadow">
+        <div class="card-body">
+          <div ng-if="vm.enableSSOLogin">
+            <button type="button" ng-click="vm.redirectSSO()" class="btn btn-dark btn-block mb-1" >Iniciar Sesión por SSO</button>
+            <hr />
+          </div>
+          <div class="alert alert-danger" ng-if="vm.data.error" role="alert">
+            {{vm.data.error}}
+          </div>
+          <div class="form-group">
+            <label>Usuario:</label>
+            <input type="text" class="form-control" name="username" ng-model="vm.viewmodel.username" required>
+          </div>
+          <div class="form-group">
+            <label>Contraseña:</label>
+            <input type="password" class="form-control" name="password" ng-model="vm.viewmodel.password" required>
+          </div>
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" ng-model="vm.viewmodel.remeberme">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-label">Recordarme</span>
+          </label>
+          <p><a ui-sref="login.requestPassword">¿Haz olvidado tu contraseña?</a></p>
+        </div>
+        <div class="card-footer" ng-if="!vm.loading">
+          <input class="btn btn-primary mb-1" type="submit" id="submit" value="Iniciar Sesión" ng-disabled="LoginForm.$invalid" />
+          <button class="btn float-right mb-1" ui-sref="login.requestPassword">
+            <i class="material-icons">launch</i> Solicitar Clave
+          </button>
+        </div>
+        <div class="card-footer" ng-if="vm.loading">
+          <div class="float-left">
+            <div class="spinner blue">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

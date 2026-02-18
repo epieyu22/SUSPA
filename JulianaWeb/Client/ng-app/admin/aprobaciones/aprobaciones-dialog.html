@@ -1,0 +1,108 @@
+<form name="AprobacionesForm">
+  <div class="ngdialog-header">
+    <h5 class="modal-title">Configuración de Aprobaciones</h5>
+  </div>
+
+  <div class="ngdialog-body">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="">Filtro:</label>
+        <select class="form-control" name="" id=""
+                ng-model="viewmodel.Filtro"
+                ng-change="viewmodel.Cod_Filtro = null; Get_Aprobacion_Config()" required>
+          <option value="9">General</option>
+          <option value="6">Zonas</option>
+          <option value="5">Sucursales</option>
+          <option value="4">Centros de Costos</option>
+          <option value="3">Departamentos</option>
+          <option value="2">Cargos</option>
+          <option value="1">Empleados</option>
+        </select>
+      </div>
+      <div ng-if="viewmodel.Filtro == '10'">
+        <input type="hidden" ng-init="viewmodel.Cod_Filtro = 888">
+      </div>
+      <div class="form-group col-md-6" ng-if="viewmodel.Filtro == '6'">
+        <label for="">Zona:</label>
+        <select class="form-control"
+                ng-model="viewmodel.Cod_Filtro"
+                ng-change="Get_Aprobacion_Config()"
+                ng-options="i.Cod_Zona as i.Nom_Zona for i in data.tables.zonas" required></select>
+      </div>
+      <div ng-if="viewmodel.Filtro == '9'">
+        <input type="hidden" ng-init="viewmodel.Cod_Filtro = 999">
+      </div>
+      <div class="form-group col-md-6" ng-if="viewmodel.Filtro == '6'">
+        <label for="">Zona:</label>
+        <select class="form-control"
+                ng-model="viewmodel.Cod_Filtro"
+                ng-change="Get_Aprobacion_Config()"
+                ng-options="i.Cod_Zona as i.Nom_Zona for i in data.tables.zonas" required></select>
+      </div>
+      <div class="form-group col-md-6" ng-if="viewmodel.Filtro == '5'">
+        <label for="">Sucursal:</label>
+        <select class="form-control"
+                ng-model="viewmodel.Cod_Filtro"
+                ng-change="Get_Aprobacion_Config()"
+                ng-options="i.Cod_Sucursal as i.Nom_Sucursal for i in data.tables.sucursales" required></select>
+      </div>
+      <div class="form-group col-md-6" ng-if="viewmodel.Filtro == '4'">
+        <label for="">Centro de costo:</label>
+        <oi-select oi-options="i.Cod_Ccosto as i.Nom_Ccosto for i in data.tables.ccostos track by i.Cod_Ccostos"
+                   ng-model="viewmodel.Cod_Filtro"
+                   placeholder="Buscar Centro de Costo"
+                   ng-change="Get_Aprobacion_Config()"
+                   required></oi-select>
+      </div>
+      <div class="form-group col-md-6" ng-if="viewmodel.Filtro == '3'">
+        <label for="">Departamento:</label>
+        <select class="form-control"
+                ng-model="viewmodel.Cod_Filtro"
+                ng-change="Get_Aprobacion_Config()"
+                ng-options="i.Cod_Depto as i.Nombre_Depto for i in data.tables.deptos" required></select>
+      </div>
+      <div class="form-group col-md-6" ng-if="viewmodel.Filtro == '2'">
+        <label for="">Cargo:</label>
+        <oi-select oi-options="i.Cod_Cargo as i.Nom_Cargo for i in data.tables.cargos track by i.Cod_Cargo"
+                   ng-model="viewmodel.Cod_Filtro"
+                   ng-change="Get_Aprobacion_Config()"
+                   placeholder="Buscar Cargo" required></oi-select>
+      </div>
+      <div class="form-group col-md-6" ng-if="viewmodel.Filtro == '1'">
+        <label for="">Empleado:</label>
+        <oi-select oi-options="i.Cod_Empleado as i.Empleado for i in data.tables.empleados track by i.Cod_Empleado"
+                   ng-model="viewmodel.Cod_Filtro"
+                   ng-change="Get_Aprobacion_Config()"
+                   placeholder="Buscar Empleado" required></oi-select>
+      </div>
+      <div class="form-group col-md-6" ng-if="viewmodel.Cod_Filtro">
+        <label>Tipo de Aprobación</label>
+        <select class="form-control"
+                ng-model="viewmodel.Tipo_Aprobacion"
+                ng-change="Get_Aprobacion_Config()" required>
+          <option value="V">Vacaciones</option>
+          <option value="C">Cesantias</option>
+          <option value="O">Overtime</option>
+        </select>
+      </div>
+
+      <div class="col-md-12 form-group" ng-if="data.aprobadores.length >= 0">
+        <label for="">Aprobadores:</label>
+        <oi-select oi-options="i.Cod_Tercero as i.Tercero for i in data.tables.terceros track by i.Cod_Tercero"
+                   ng-model="viewmodel.Cod_Aprobadores"
+                   placeholder="Buscar Aprobador" multiple required></oi-select>
+      </div>
+    </div>
+    <div class="row m-t-1">
+      <div class="col-md-12 text-right">
+        <button type="button" class="btn btn-outline-secondary" ng-click="closeThisDialog()">Cancelar</button>
+        <button type="button" class="btn btn-success" ng-if="!data.aprobadores.length > 0" ng-disabled="AprobacionesForm.$invalid" ng-click="Add_Aprobadores_Empresa()">
+          Guardar Cambios
+        </button>
+        <button type="button" class="btn btn-success" ng-if="data.aprobadores.length > 0" ng-disabled="AprobacionesForm.$invalid" ng-click="Add_Aprobadores_Empresa()">
+          Guardar Cambios
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

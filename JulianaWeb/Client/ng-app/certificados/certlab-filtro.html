@@ -1,0 +1,38 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item"><a ui-sref="dashboard"><i class="material-icons">home</i></a></li>
+  <li class="breadcrumb-item"><a ui-sref="dashboard">Comprobantes y Certificados</a></li>
+  <li class="breadcrumb-item"><a ui-sref="certlaboral">Certificado Laboral</a></li>
+  <li class="breadcrumb-item active">Busqueda</li>
+</ol>
+
+<div class="card primary-theme shadow">
+  <div class="card-header">Buscar Certificado Laboral</div>
+  <div class="card-body">
+    <div class="form-group">
+      <label for="">Codigo de Verificacion</label>
+      <input type="text" ng-model="vm.search" class="form-control">
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="button" class="btn btn-primary float-right" ng-click="vm.generateCertlab()">Buscar</button>
+  </div>
+</div>
+
+
+<div class="card primary-theme shadow">
+  <div class="card-header">Resultados de la busqueda: {{vm.search}}</div>
+  <table class="table table-sm table-bordered table-striped">
+    <thead>
+      <th>Empleado</th>
+      <th>Fecha Expedición</th>
+      <th>Codigo de Verificación</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,111 @@
+<style>
+  .container-flex {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .container-flex .breadcrumb {
+    margin-bottom: 0;
+    font-size: 0.8em;
+    padding: 5px;
+  }
+
+  .container-flex .breadcrumb .material-icons {
+    font-size: 14px;
+  }
+
+  .grid-container {
+    flex: 1;
+  }
+</style>
+
+<div class="container-flex">
+  <div class="p-1">
+    <form class="row form-inline">
+      <div class="col-auto">
+        <select
+          class="custom-select form-control-sm mr-sm-2 mb-sm-0"
+          ng-model="vm.viewmodel.Empresa"
+          ng-change="vm.Get_Conceptos_OtrasNov()"
+          ng-options="e.BaseDatos as e.Nombre_Empresa for e in vm.data.Empresas"
+        ></select>
+      </div>
+      <div class="input-group input-group-sm col">
+        <div class="input-group-prepend"><span class="input-group-text" id="basic-addon3">Fec Nómina</span></div>
+        <select
+          class="custom-select form-control-sm mr-sm-2 mb-sm-0"
+          ng-model="vm.viewmodel.Fec_Nomina"
+          ng-options="(f|date:'dd/MM/yyyy') for f in vm.data.Fecs_Nomina | orderBy:f:true"
+          ng-change="vm.Get_Fec_Ing_Novedad()"
+        ></select>
+      </div>
+      <div class="input-group input-group-sm col" ng-if="vm.viewmodel.Fec_Nomina">
+        <div class="input-group-prepend"><span class="input-group-text" id="basic-addon3">Fec Ing Novedad</span></div>
+        <select class="custom-select form-control-sm mr-sm-2 mb-sm-0" ng-model="vm.viewmodel.Fec_Ing_Novedad">
+          <option value="all" selected>Todas</option>
+          <option ng-repeat="f in vm.data.Fecs_Ing_Novedad | orderBy:f:true" value="{{f}}">{{
+            f | date: 'dd/MM/yyyy'
+          }}</option>
+        </select>
+      </div>
+      <div class="col-auto" ng-if="vm.data.Prenomina_Disponible">
+        <input type="checkbox" ng-model="vm.prenomina" />Prenomina
+      </div>
+      <div class="col">
+        <button class="btn btn-sm btn-success float-right" ng-click="vm.generatePlanilla()">Generar</button>
+      </div>
+    </form>
+  </div>
+  <div class="grid-container">
+ 
+      <div class="blank" ng-show="!vm.dataLoaded">Seleccione los parametros para generar la planilla de nómina.</div>
+
+    <jqx-grid jqx-settings="vm.grid_principal" ng-show="vm.dataLoaded"></jqx-grid>
+  </div>
+  <div class="card-footer text-muted">
+    <a ui-sref="dashboard" class="btn btn-outline-secondary btn-sm">
+      <i class="material-icons">arrow_back</i> Volver a Juliana Web
+    </a>
+    <button class="btn btn-primary btn-sm float-right" ng-if="vm.data.Prenomina_Disponible">Aprobar Planilla</button>
+  </div>
+</div>
+
+
+  <div class="full-page-wrapper">
+    <div class="container-fluid header p-1">
+      <form>
+        <div class="form-row align-items-center">
+          <div class="col-auto">
+            <label class="mr-sm-2">Empresa:</label>
+            <select class="custom-select form-control-sm mr-sm-2 mb-sm-0" ng-model="vm.viewmodel.Empresa" ng-change="vm.Get_Conceptos_OtrasNov()"
+              ng-options="e.BaseDatos as e.Nombre_Empresa for e in vm.data.Empresas"></select>
+          </div>
+          <div class="col-auto">
+            <label class="mr-sm-2">Fecha nómina:</label>
+            <select class="custom-select form-control-sm mr-sm-2 mb-sm-0" ng-model="vm.viewmodel.Fec_Nomina" ng-options="(f|date:'dd/MM/yyyy') for f in vm.data.Fecs_Nomina | orderBy:f:true"
+              ng-change="vm.Get_Fec_Ing_Novedad()"></select>
+          </div>
+          <div class="col-auto" ng-if="vm.data.Fecs_Ing_Novedad.length > 0">
+            <label class="mr-sm-2">Fechas Ingreso Novedad:</label>
+            <select class="custom-select form-control-sm mr-sm-2 mb-sm-0" ng-model="vm.viewmodel.Fec_Ing_Novedad" ng-options="(f|date:'dd/MM/yyyy') for f in vm.data.Fecs_Ing_Novedad | orderBy:f:true"
+              ng-change="vm.Get_Fec_Ing_Novedad()"></select>
+          </div>
+          <div class="col">
+            <button class="btn btn-sm btn-success">Generar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="plantilla_nomina_flex">
+      <jqx-grid jqx-settings="vm.grid_principal"></jqx-grid>
+    </div>
+
+    <div class="card-footer">
+      <a ui-sref="dashboard" class="btn btn-outline-secondary btn-sm">
+        <i class="material-icons">arrow_back</i> Volver a Juliana Web</a>
+      <button class="btn btn-primary btn-sm float-right">Aprobar Planilla</button>
+    </div>
+  </div>
+

@@ -1,0 +1,162 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item active">
+    <a ui-sref="dashboard">Consultas y Solicitudes</a>
+  </li>
+  <li class="breadcrumb-item active">Cesantias</li>
+</ol>
+
+
+<div id="tile-vacaciones" class="tile-container tile-row tile-sm-col">
+  <div class="tile-child tile-row tile-sm-col tile-big">
+    <div class="tile-child tile-big">
+      <div class="tile tile--small tile-big">
+        <div class="tile__title">Cesantias Periodo Actual</div>
+        <div class="tile__info">{{::vm.data.valorCesantiasCausadas |currency:"$":0}}</div>
+      </div>
+    </div>
+    <div class="tile-child tile-col tile-sm-row">
+      <div class="tile-child">
+        <div class="tile tile--small">
+          <div class="tile__title">Intereses Periodo Actual</div>
+          <div class="tile__info">{{::vm.data.valorIntereseCausados |currency:"$":0}}</div>
+        </div>
+      </div>
+      <div class="tile-child">
+        <div class="tile tile--small">
+          <div class="tile__title">Total Periodo Actual</div>
+          <div class="tile__info">{{::vm.data.valorCesantiasCausadas + vm.data.valorIntereseCausados |currency:"$":0}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tile-child tile-row tile-sm-col tile-big" ng-if="vm.data.cesantiasConsolidadas.length > 0">
+    <div class="tile-child tile-big">
+      <div class="tile tile--small tile-big">
+        <div class="tile__title">Cesantias Consolidadas</div>
+        <div class="tile__info">{{::vm.data.valorCesantiasConsolidadas | currency:"$":0}}</div>
+      </div>
+    </div>
+    <div class="tile-child tile-col tile-sm-row">
+      <div class="tile-child">
+        <div class="tile tile--small">
+          <div class="tile__title">Intereses Consolidados</div>
+          <div class="tile__info">{{::vm.data.valorInteresesConsolidados | currency:"$":0}}</div>
+        </div>
+      </div>
+      <div class="tile-child">
+        <div class="tile tile--small">
+          <div class="tile__title">Total Consolidadas</div>
+          <div class="tile__info">
+            {{vm.data.valorCesantiasConsolidadas + vm.data.valorInteresesConsolidados |currency:"$":0}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row mb-1">
+  <div class="col-md-12">
+    <!-- <button type="button" class="btn btn-success" ng-click="vm.openSolicitudDialog()">
+      <i class="material-icons">add_box</i>
+      Nueva Solicitud
+    </button> -->
+    <div class="float-right">
+      <button class="m-x-1 btn btn-info" type="button" ng-if="hasPermission(['aprobar'])" ui-sref="solicitudes.aprobador">
+        <i class="material-icons">done_all</i>
+        <span class="d-none d-md-inline">Aprobar Solicitudes</span>
+      </button>
+      <button class="btn btn-secondary" type="button" ui-sref="solicitudes">
+        <i class="material-icons">list</i>
+        <span class="d-none d-md-inline">Registro de solicitudes</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="card primary-theme shadow">
+  <div class="cd-tabs">
+    <nav class="cd-tabs-navigation ">
+      <ul>
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" role="tab" href="#" data-target="#Historico">
+            <i class="icon-cesantias tab-icon"></i>
+            <span class="tab-text">Cesantias y Intereses</span>
+          </a>
+        </li>
+        <li class="nav-item" ng-if="vm.data.historicoAnticipos.length > 0">
+          <a class="nav-link" data-toggle="tab" role="tab" href="#" data-target="#Anticipos">
+            <i class="icon-cesantias tab-icon"></i>
+            <span class="tab-text">Anticipos Pagados</span>
+          </a>
+        </li>
+        <li class="nav-item" ng-if="vm.data.solicitudesPendientes.length > 0">
+          <a class="nav-link" data-toggle="tab" role="tab" href="#" data-target="#Pendientes">
+            <i class="material-icons tab-icon">hourglass_empty</i>
+            <span class="tab-text">Solicitudes Pendientes</span>
+          </a>
+        </li>
+        <li class="nav-item" ng-if="vm.data.solicitudesAprobadas.length > 0">
+          <a class="nav-link" data-toggle="tab" role="tab" href="#" data-target="#Aprobadas">
+            <i class="material-icons tab-icon">done_all</i>
+            <span class="tab-text">Solicitudes Aprobadas</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane" id="Pendientes" role="tabpanel" ng-if="vm.data.solicitudesPendientes.length > 0" table-morphe>
+      <table ng-table="vm.solPendientesGrid" class="table table-sm table-bordered table-striped">
+        <tr ng-repeat="v in $data">
+          <td class="text-xs-center" data-title="'Valor'" sortable="'Cantidad'">{{v.Cantidad |currency:"$":0}}</td>
+          <td class="text-xs-center" data-title="'Fecha Solicitud'" sortable="'Fec_Solicitud'">{{v.Fec_Solicitud | date: 'yyyy/MM/dd'}}</td>
+          <td class="text-xs-center" data-title="'Aprueba'" sortable="'aprobador.Empleado'">{{v.aprobador.Empleado}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="tab-pane" id="Aprobadas" role="tabpanel" ng-if="vm.data.solicitudesAprobadas.length > 0" table-morphe>
+      <table ng-table="vm.solAprobadasGrid" class="table table-sm table-bordered table-striped">
+        <tr ng-repeat="v in $data">
+          <td class="text-xs-center" data-title="'Valor'" sortable="'Cantidad'">{{v.Cantidad |currency:"$":0}}</td>
+          <td class="text-xs-center" data-title="'Fecha Solicitud'" sortable="'Fec_Solicitud'">{{v.Fec_Solicitud | date: 'fullDate'}}</td>
+          <td class="text-xs-center" data-title="'Aprueba'" sortable="'aprobador.Empleado'">{{v.aprobador.Empleado}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="tab-pane" id="Anticipos" role="tabpanel">
+      <table ng-table="vm.anticiposGrid" class="table table-sm table-bordered table-striped" table-morphe>
+        <tr ng-repeat="c in $data">
+          <td class="text-xs-center" data-title="'Valor'" sortable="'Valor'">{{c.Valor | currency:"$":0}}</td>
+          <td class="text-xs-center" data-title="'Tipo Registro'" sortable="'Tipo_Registro'">{{c.Tipo_Registro}}</td>
+          <td class="text-xs-center" data-title="'Desde'" sortable="'Desde'">{{c.Desde | date: 'yyyy/MM/dd'}}</td>
+          <td class="text-xs-center" data-title="'Hasta'" sortable="'Hasta'">{{c.Hasta | date: 'yyyy/MM/dd'}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="tab-pane active" id="Historico" role="tabpanel">
+      <div class="blank" ng-if="!vm.data.historicoCesantias.length > 0">
+        <i class="icon-cesantias"></i>
+        <p>No haz generado ningún registro de cesantias o intereses </p>
+      </div>
+      <div ng-if="vm.data.historicoCesantias.length > 0">
+        <table ng-table="vm.historicoGrid" class="table table-sm table-bordered table-striped" table-morphe>
+          <tr ng-repeat="c in $data">
+            <td class="text-xs-center" data-title="'Valor'" sortable="'Valor'">{{c.Valor | currency:"$":0}}</td>
+            <td class="text-xs-center" data-title="'Tipo Registro'" sortable="'Tipo_Registro'">{{c.Tipo_Registro}}</td>
+            <td class="text-xs-center" data-title="'Desde'" sortable="'Desde'">{{c.Desde | date: 'yyyy/MM/dd'}}</td>
+            <td class="text-xs-center" data-title="'Hasta'" sortable="'Hasta'">{{c.Hasta | date: 'yyyy/MM/dd'}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

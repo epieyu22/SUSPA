@@ -1,0 +1,53 @@
+/*.content-wrapper:before {
+  background-color: rgb(0, 145, 90) !important;
+}
+
+@media only screen and (min-width: 768px) {
+  .cd-main-header {
+    background-color: rgb(0, 145, 90) !important;
+  }
+  .cd-top-nav .has-children {
+    background-color: rgb(0, 0, 0, .1) !important;
+  }
+}
+
+.breadcrumb,
+.bg-title {
+  background-color: #008251 !important;
+}
+
+.card.primary-theme .card-header,
+.modal-header.primary-theme {
+  background-color: #008251 !important;
+}
+
+.btn-primary {
+  background-color: rgb(0, 145, 90) !important;
+  border-color: #008251 !important;
+}
+
+.big-button:hover {
+  color: rgb(0, 145, 90);
+}
+
+.cliente_logo {
+  position: absolute;
+  background-color: white;
+  padding: 1em;
+}
+
+.tile-container {
+  background-color: rgb(0, 145, 90) !important;
+}
+
+
+.cd-tabs nav{
+  background-color: #008251 !important;
+}
+
+
+
+.cd-tabs nav ul li a.active{
+  color: rgb(0, 145, 90) !important;
+  box-shadow:  inset 0 5px 0 #008251 !important;
+}*/

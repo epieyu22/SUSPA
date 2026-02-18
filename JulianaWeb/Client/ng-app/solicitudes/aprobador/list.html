@@ -1,0 +1,203 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard"> <i class="material-icons">home</i> </a>
+  </li>
+  <li class="breadcrumb-item active">Aprobaciones</li>
+  <li class="breadcrumb-item active">Solicitudes Pendientes</li>
+</ol>
+
+<div class="card primary-theme shadow">
+  <div class="card-header">Seleccione la Empresa</div>
+  <div class="card-body">
+    <div class="form-group">
+      <label for="">Empresa:</label>
+      <select
+        class="form-control custom-select "
+        ng-model="vm.viewmodel.Empresa"
+        ng-change="vm.CargarSolicitudes()"
+        ng-options="i.BaseDatos.trim() as i.Nombre_Empresa for i in vm.data.empresas"
+      ></select>
+    </div>
+  </div>
+</div>
+<div class="row my-3">
+  <div class="col-md-12">
+    <button class="m-r-1 btn btn-success" type="button" ng-if="hasPermission(['reporte.vacaciones'])" ui-sref="report">
+      <i class="material-icons">date_range</i> <span class="d-none d-md-inline">Reporte de Ausentismos</span>
+    </button>
+  </div>
+</div>
+
+<div class="card primary-theme shadow" ng-if="vm.loading">
+  <div class="col-12 my-3">
+    <div class="p-3 mb-3 col-12 animated-background"></div>
+    <div class="p-3 mb-3 col-8 animated-background"></div>
+    <div class="p-3 mb-3 col-8 animated-background"></div>
+  </div>
+</div>
+
+<div class="card primary-theme shadow" ng-if="!vm.loading">
+  <div class="cd-tabs">
+    <nav>
+      <ul class="cd-tabs-navigation nav">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" role="tab" href="#" data-target="#vacaciones">
+            <i class="icon-vacaciones tab-icon"></i>
+            <span class="tab-text">
+              Vacaciones
+              <span style="font-size:0.7em" ng-if="vm.data.vacaciones.length">
+                <span class="tag tag-pill tag-danger">{{ vm.data.vacaciones.length }}</span>
+              </span>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" role="tab" href="#" data-target="#Licencias">
+            <i class="icon-cesantias tab-icon"></i>
+            <span class="tab-text">
+              Licencias
+              <span style="font-size:0.7em" ng-if="vm.data.licencias.length">
+                <span class="tag tag-pill tag-danger">{{ vm.data.licencias.length }}</span>
+              </span>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" role="tab" href="#" data-target="#cesantias">
+            <i class="icon-cesantias tab-icon"></i>
+            <span class="tab-text">
+              Anticipos de Cesantias
+              <span style="font-size:0.7em" ng-if="vm.data.cesantias.length">
+                <span class="tag tag-pill tag-danger">{{ vm.data.cesantias.length }}</span>
+              </span>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" role="tab" href="#" data-target="#certificados">
+            <i class="icon-certflaboral tab-icon"></i>
+            <span class="tab-text">
+              Certificados
+              <span style="font-size:0.7em" ng-if="vm.data.certificados.length">
+                <span class="tag tag-pill tag-danger">{{ vm.data.certificados.length }}</span>
+              </span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane active" id="vacaciones">
+      <div class="blank m-a-2" ng-if="!vm.data.vacaciones.length > 0">
+        <i class="icon-vacaciones m-y-1"></i>
+        <p>No Tienes ninguna solicitud de vacaciones pendiente por aprobar</p>
+      </div>
+      <div ng-if="vm.data.vacaciones.length > 0">
+        <table ng-table="vm.solVacacionesGrid" class="table table-bordered table-striped" table-morphe>
+          <tr ng-repeat="v in $data">
+            <td class="text-xs-center" data-title="'Días'" sortable="'Cantidad'">{{ v.Cantidad }}</td>
+            <td class="text-xs-center" data-title="'Fecha Salida'" sortable="'Fec_Salida'">
+              {{ v.Fec_Salida | date: 'yyyy/MM/dd' }}
+            </td>
+            <td class="text-xs-center" data-title="'Fecha Llegada'" sortable="'Fec_Llegada'">
+              {{ v.Fec_Llegada | date: 'yyyy/MM/dd' }}
+            </td>
+            <td class="text-xs-center" data-title="'Empleado'" sortable="'empleado.Empleado'">
+              {{ v.empleado.Empleado }}
+            </td>
+            <td class="text-xs-center" data-title="'Aprobador'" sortable="'aprobador.Tercero'">
+              {{ v.aprobador.Tercero }}
+            </td>
+            <td class="solicitud__estado--{{v.Estado}}" data-title="'Estado'" sortable="'Estado'">{{ v.Estado }}</td>
+            <td class="text-sm-center" data-title="'Acciones'">
+              <button class="btn btn-sm btn-success"
+                      ui-sref="solicitudEmpresa({Empresa:vm.viewmodel.Empresa, Cod_Solicitud: v.Cod_Solicitud})">
+                <i class="material-icons">sort</i> Detalles
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="Licencias">
+      <div class="blank m-a-2" ng-if="!vm.data.licencias.length > 0">
+        <i class="icon-cesantias m-y-1"></i>
+        <p>No tienes ninguna solicitud de licencias pendiente por aprobar</p>
+      </div>
+      <div ng-if="vm.data.licencias.length > 0">
+        <table ng-table="vm.solIncapacidades" class="table table-bordered table-striped" table-morphe>
+          <tr ng-repeat="v in $data">
+            <td class="text-xs-center" data-title="'Valor'" sortable="'Cantidad'">{{ v.Cantidad }}</td>
+            <td class="text-xs-center" data-title="'Fecha Solicitud'" sortable="'Fec_Solicitud'">
+              {{ v.Fec_Solicitud | date: 'yyyy/MM/dd' }}
+            </td>
+            <td class="text-xs-center" data-title="'Empleado'" sortable="'empleado.Empleado'">
+              {{ v.empleado.Empleado }}
+            </td>
+            <td class="text-xs-center" data-title="'Aprobador'" sortable="'aprobador.Tercero'">
+              {{ v.aprobador.Tercero }}
+            </td>
+            <td class="solicitud__estado--{{v.Estado}}" data-title="'Estado'" sortable="'Estado'">{{ v.Estado }}</td>
+            <td class="text-sm-center" data-title="'Acciones'">
+              <button class="btn btn-sm btn-success"
+                      ui-sref="solicitudLicencia({Empresa:vm.viewmodel.Empresa, Cod_Solicitud: v.Cod_Solicitud})">
+                <i class="material-icons">sort</i> Detalles
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="cesantias">
+      <div class="blank m-a-2" ng-if="!vm.data.cesantias.length > 0">
+        <i class="icon-cesantias m-y-1"></i>
+        <p>No tienes ninguna solicitud de anticipos de cesantias pendiente por aprobar</p>
+      </div>
+      <div ng-if="vm.data.cesantias.length > 0">
+        <table ng-table="vm.solCesantiasGrid" class="table table-bordered table-striped" table-morphe>
+          <tr ng-repeat="v in $data">
+            <td class="text-xs-center" data-title="'Valor'" sortable="'Cantidad'">{{ v.Cantidad }}</td>
+            <td class="text-xs-center" data-title="'Fecha Solicitud'" sortable="'Fec_Solicitud'">
+              {{ v.Fec_Solicitud | date: 'yyyy/MM/dd' }}
+            </td>
+            <td class="text-xs-center" data-title="'Empleado'" sortable="'empleado.Empleado'">
+              {{ v.empleado.Empleado }}
+            </td>
+            <td class="solicitud__estado--{{v.Estado}}" data-title="'Estado'" sortable="'Estado'">{{ v.Estado }}</td>
+            <td class="text-sm-center" data-title="'Acciones'">
+              <button class="btn btn-sm btn-success" ui-sref="solicitud({Cod_Solicitud: v.Cod_Solicitud})">
+                <i class="material-icons">sort</i> Detalles
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="certificados">
+      <div class="blank m-a-2" ng-if="!vm.data.certificados.length > 0">
+        <i class="icon-cesantias m-y-1"></i>
+        <p>No tienes ninguna solicitud de certificados pendiente por aprobar</p>
+      </div>
+      <div ng-if="vm.data.certificados.length > 0">
+        <table ng-table="vm.solCertificados" class="table table-bordered table-striped" table-morphe>
+          <tr ng-repeat="v in $data">
+            <td class="text-xs-center" data-title="'Valor'" sortable="'Cantidad'">{{ v.Cantidad }}</td>
+            <td class="text-xs-center" data-title="'Fecha Solicitud'" sortable="'Fec_Solicitud'">
+              {{ v.Fec_Solicitud | date: 'yyyy/MM/dd' }}
+            </td>
+            <td class="text-xs-center" data-title="'Empleado'" sortable="'empleado.Empleado'">
+              {{ v.empleado.Empleado }}
+            </td>
+            <td class="solicitud__estado--{{v.Estado}}" data-title="'Estado'" sortable="'Estado'">{{ v.Estado }}</td>
+            <td class="text-sm-center" data-title="'Acciones'">
+              <button class="btn btn-sm btn-success" ui-sref="solicitud({Cod_Solicitud: v.Cod_Solicitud})">
+                <i class="material-icons">sort</i> Detalles
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard"> <i class="material-icons">home</i> </a>
+  </li>
+  <li class="breadcrumb-item"><a ui-sref="dashboard">Comprobantes y Certificados</a></li>
+  <li class="breadcrumb-item"><a ui-sref="compropago">Comprobante de Pago</a></li>
+  <li class="breadcrumb-item active">Masivos</li>
+</ol>
+
+<div class="card primary-theme shadow">
+  <div class="card-header">Seleccione la Empresa</div>
+  <div class="card-body">
+    <div class="form-group">
+      <label for="">Empresa:</label>
+      <select
+        class="form-control custom-select "
+        ng-model="vm.viewmodel.Empresa"
+        ng-change="vm.Load_Config_Compropago()"
+        ng-options="i.BaseDatos as i.Nombre_Empresa for i in vm.data.empresas"
+      ></select>
+    </div>
+  </div>
+</div>
+
+<div class="card shadow primary-theme" ng-if="vm.viewmodel.Empresa && !vm.loading">
+  <div class="card-header">Seleccione la fecha de nómina de la cual quiere generar el comprobante de pago</div>
+  <div class="card-body">
+    <form name="certlaboralForm">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Año:</label>
+            <select
+              class="form-control form-control-sm custom-select custom-select-sm"
+              ng-model="vm.viewmodel.ano"
+              ng-options="i as i for i in vm.years"
+              ng-change="vm.checkMeses(vm.viewmodel.ano)"
+            ></select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Mes:</label>
+            <select
+              class="form-control form-control-sm custom-select custom-select-sm"
+              ng-model="vm.viewmodel.mes"
+              ng-options="i.value as i.name for i in vm.mesesToShow"
+              ng-change="vm.Load_Empleados_Compropago()"
+            ></select>
+          </div>
+        </div>
+        <div class="col-md-4" ng-if="vm.config.liqNomina == 15">
+          <div class="form-group">
+            <label>Quincena:</label>
+            <select
+              class="form-control form-control-sm custom-select custom-select-sm"
+              ng-model="vm.viewmodel.quincena"
+              ng-change="vm.Load_Empleados_Compropago()"
+            >
+              <option value="1">Primera</option>
+              <option value="2">Segunda</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-12"><p>Seleccionar Empleados:</p></div>
+  <table ng-table="vm.empleadosGird " class="text-xs not-transform table table-sm table-bordered table-striped">
+    <tbody>
+      <tr
+        ng-repeat="e in $data"
+        selection-model
+        selection-model-type="'checkbox'"
+        selection-model-mode="'multiple-additive'"
+        selection-model-selected-class="'bg-info'"
+        selection-model-selected-items="vm.viewmodel.empleados"
+        selection-model-on-change="vm.selectedChange($data)"
+      >
+        <td header="'headerCheckbox.html'">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" /> <span class="custom-control-indicator"></span>
+          </label>
+        </td>
+        <td data-title="'Empleado'" filter="{Empleado: 'text'}" sortable="'Empleado'">{{ e.Empleado }}</td>
+        <td data-title="'Doc. Identificación'" filter="{Cedula: 'text'}" sortable="'Cedula'">{{ e.Cedula }}</td>
+        <td
+          data-title="'Sucursal'"
+          filter="{Cod_Sucursal: 'select'}"
+          filter-data="vm.sucursales"
+          sortable="'Cod_Sucursal'"
+        >
+          {{ e.Cod_Sucursal }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="card-footer">
+    <span class="d-none d-md-inline" ng-if="vm.viewmodel.empleados.length > 0">
+      <button class="btn btn-sm btn-secondary" ng-click="vm.Deselect_Items(vm.viewmodel.empleados)">
+        <i class="material-icons">clear_all</i>
+      </button>
+      {{ vm.viewmodel.empleados.length }} Empleados Seleccionados
+    </span>
+    <button
+      type="button"
+      class="btn btn-primary float-right"
+      ng-disabled="certlaboralForm.$invalid || vm.viewmodel.empleados.length == 0"
+      ng-click="vm.Generate_Admin_Compropago()"
+    >
+      Generar Seleccionados
+    </button>
+    <button
+      class="btn btn-info mx-3 float-right"
+      ng-if="vm.viewmodel.Empresa"
+      ng-disabled="vm.viewmodel.empleados.length == 0"
+      ng-click="vm.SendMailCompropago()"
+    >
+      <i class="material-icons">mail_outline</i> Enviar via correo electronico
+    </button>
+  </div>
+</div>
+
+<script type="text/ng-template" id="headerCheckbox.html">
+    <label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input select-all" ng-model="vm.tableSelectAll" ng-click="vm.log($data)" >
+    <span class="custom-control-indicator" ></span>
+  </label>
+</script>

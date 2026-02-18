@@ -1,0 +1,217 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard"> <i class="material-icons">home</i> </a>
+  </li>
+  <li class="breadcrumb-item active">Consultas y Solicitudes</li>
+  <li class="breadcrumb-item active">Vacaciones</li>
+</ol>
+
+<div class="alert alert-info alert-dismissible  show" role="alert" ng-if="vm.MostrarAlertaVacaciones">
+  <i class="material-icons">info</i> {{ vm.AlertaVacaciones }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div id="tile-vacaciones" class="tile-container tile-row tile-sm-col" ng-if="!vm.data.mostrarDiasBNP">
+  <div class="tile-child tile-row tile-sm-col tile-big">
+    <div class="tile-child tile-col">
+      <div class="tile">
+        <div class="tile__title">
+          Días Disponibles a la Fecha
+        </div>
+        <div class="tile__info" ng-if="vm.data.diasDisponibles <= 0">0</div>
+        <div class="tile__info" ng-if="vm.data.diasDisponibles >= 0">{{ vm.data.diasDisponibles | number: 2 }}</div>
+      </div>
+      <div class="tile-child">
+        <div class="tile">
+          <div class="tile__title">
+            Días Disponibles a Diciembre
+          </div>
+          <div class="tile__info">{{::vm.data.diasCausadosDiciembre31 | number:2}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="tile-child tile-col tile-sm-row">
+      <div class="tile-child">
+        <div class="tile" flex>
+          <div class="tile__title">Días Causados</div>
+          <div class="tile__info">{{::vm.data.diasCausados | number:2}}</div>
+        </div>
+      </div>
+      <div class="tile-child">
+        <div class="tile">
+          <div class="tile__title">Días Tomados</div>
+          <div class="tile__info">{{::vm.data.diasTomados-vm.data.diasAprobados | number:2}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tile-child tile-col tile-sm-row">
+    <div class="tile-child">
+      <div class="tile">
+        <div class="tile__title">Días Solicitados sin Aprobar</div>
+        <div class="tile__info">{{::vm.data.diasPendientes | number:2}}</div>
+      </div>
+    </div>
+    <div class="tile-child">
+      <div class="tile">
+        <div class="tile__title">Días Solicitados Aprobados</div>
+        <div class="tile__info">{{::vm.data.diasAprobados}}</div>
+      </div>
+    </div>
+  </div>  
+</div>
+
+<div id="tile-vacaciones" class="tile-container tile-row tile-sm-col" ng-if="vm.data.mostrarDiasBNP">
+  <div class="tile-child tile-row tile-sm-col tile-big">
+    <div class="tile-child tile-big">
+      <div class="tile tile-big">
+        <div class="tile__title">Días Ley</div>
+        <div class="tile__info">{{ vm.data.DiasLey | number: 2 }}</div>
+      </div>
+    </div>
+    <div class="tile-child tile-col tile-sm-row">
+      <div class="tile-child">
+        <div class="tile" flex>
+          <div class="tile__title">Días Beneficios</div>
+          <div class="tile__info">{{ vm.data.DiasBeneficio | number: 2 }}</div>
+        </div>
+      </div>      
+    </div>
+    <div class="tile-child tile-col tile-sm-row">
+      <div class="tile-child">
+        <div class="tile">
+          <div class="tile__title">Días Solicitados</div>
+          <div class="tile__info">{{::vm.data.diasPendientes}}</div>
+        </div>
+      </div>
+      <div class="tile-child">
+        <div class="tile">
+          <div class="tile__title">Días Aprobados</div>
+          <div class="tile__info">{{::vm.data.diasAprobados}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-1">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-success" ng-click="vm.openSolicitudDialog()">
+      <i class="material-icons">add_box</i> Nueva Solicitud
+    </button>
+    <div class="float-right">
+      <button class="m-r-1 btn btn-success" type="button" ng-if="hasPermission(['reporte.vacaciones'])" ui-sref="report">
+        <i class="material-icons">date_range</i> <span class="d-none d-md-inline">Reporte Vacaciones</span>
+      </button>
+      <button class="m-r-1 btn btn-info" type="button" ng-if="hasPermission(['aprobar'])"
+        ui-sref="solicitudes.aprobador">
+        <i class="material-icons">done_all</i> <span class="d-none d-md-inline">Aprobar Solicitudes</span>
+      </button>
+      <button class="btn btn-secondary" type="button" ui-sref="solicitudes">
+        <i class="material-icons">list</i> <span class="d-none d-md-inline">Registro de Solicitudes</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="card primary-theme shadow">
+  <div class="cd-tabs">
+    <nav>
+      <ul class="cd-tabs-navigation nav">
+        <li class="nav-item">
+          <a href="#" class="nav-link active" data-toggle="tab" role="tab" data-target="#Historico">
+            <i class="icon-vacaciones tab-icon"></i> <span class="tab-text">Libro de Vacaciones</span>
+          </a>
+        </li>
+        <li class="nav-item" ng-if="vm.data.pendientes.length > 0">
+          <a href="#" class="nav-link" data-toggle="tab" role="tab" data-target="#Pendientes">
+            <i class="material-icons tab-icon">hourglass_empty</i> <span class="tab-text">Solicitudes Pendientes</span>
+          </a>
+        </li>
+        <li class="nav-item" ng-if="vm.data.aprobadas.length > 0">
+          <a href="#" class="nav-link" data-toggle="tab" role="tab" data-target="#Aprobadas">
+            <i class="material-icons tab-icon">done_all</i> <span class="tab-text">Solicitudes Aprobadas</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane" id="Pendientes" role="tabpanel" ng-if="vm.data.pendientes.length > 0" table-morphe>
+      <table ng-table="vm.solPendientesGrid" class="table table-sm table-bordered table-striped">
+        <tr ng-repeat="v in $data">
+          <td class="text-right" data-title="'Días'" sortable="'Cantidad'">
+            <span class="badge badge-pill badge-info mr-2" ng-if="v.Modo_Vacaciones == 'B'">Block Leave</span>
+            <span class="badge badge-pill badge-success mr-2" ng-if="v.Modo_Vacaciones == 'D'">$ Dinero</span>
+            {{ v.Cantidad | number: 0 }}
+          </td>
+          <td class="text-center" data-title="'Fecha Salida'" sortable="'Fec_Salida'">
+            {{ v.Fec_Salida | date: 'yyyy/MM/dd' }}
+          </td>
+          <td class="text-center" data-title="'Fecha Llegada'" sortable="'Fec_Llegada'">
+            {{ v.Fec_Llegada | date: 'yyyy/MM/dd' }}
+          </td>
+          <td class="text-center" data-title="'Aprueba'" sortable="'aprobador.Tercero'">{{ v.aprobador.Tercero }}</td>
+          <td class="text-center" data-title="'Acciones'">
+            <button class="btn btn-sm btn-danger m-l-2 "
+                    ng-disabled="v.Estado !== 'P'"
+                    ng-click="vm.Confirm_Del_Solicitud(v.Cod_Solicitud)"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Eliminar">
+              <i class="material-icons">delete</i> Eliminar
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="tab-pane" id="Aprobadas" role="tabpanel">
+      <table ng-table="vm.solAprobadasGrid" class="table table-sm table-bordered table-striped" table-morphe>
+        <tr ng-repeat="v in $data">
+          <td class="text-right" data-title="'Días'" sortable="'Cantidad'">
+            <span class="badge badge-pill badge-info mr-2" ng-if="v.Modo_Vacaciones == 'B'">Block Leave</span>
+            <span class="badge badge-pill badge-success mr-2" ng-if="v.Modo_Vacaciones == 'D'">$ Dinero</span>
+            {{ v.Cantidad | number: 0 }}
+          </td>
+          <td class="text-center" data-title="'Fecha Salida'" sortable="'Desde'">
+            {{ v.Fec_Salida | date: 'yyyy/MM/dd' }}
+          </td>
+          <td class="text-center" data-title="'Fecha Llegada'" sortable="'Fec_Llegada'">
+            {{ v.Fec_Llegada | date: 'yyyy/MM/dd' }}
+          </td>
+          <td data-title="'Aprueba'" sortable="'aprobador.Tercero'">{{ v.aprobador.Tercero }}</td>
+          <td class="text-center" data-title="'Acciones'">
+            <div class="btn btn-sm btn-danger m-l-2" ng-click="vm.Confirm_PD_Solicitud(v.Cod_Solicitud)">
+              <i class="material-icons">close</i> Pedir Desaprobación
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="tab-pane active" id="Historico" role="tabpanel">
+      <div class="blank" ng-if="!vm.data.historico.length > 0">
+        <i class="icon-vacaciones"></i>
+        <p>No haz tomado ningún periodo de vacaciones</p>
+      </div>
+      <div ng-if="vm.data.historico.length > 0">
+        <table ng-table="vm.historicoGrid"
+          class="not-transform table table-sm table-bordered table-striped text-center">
+          <tr ng-repeat="v in $data">
+            <td class="text-right" data-title="'Días'" sortable="'Cantidad'">
+              {{ v.Cantidad | number: 0 }}
+              <span class="badge badge-pill badge-success mr-2" ng-if="v.ModoVacaciones != 'Tiempo'">$ Dinero</span>
+            </td>
+            <td class="text-center" data-title="'Fecha Salida'" sortable="'Desde'">
+              {{ v.Desde | date: 'yyyy/MM/dd' }}
+            </td>
+            <td class="text-center" data-title="'Fecha Llegada'" sortable="'Hasta'">
+              {{ v.Hasta | date: 'yyyy/MM/dd' }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

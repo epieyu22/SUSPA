@@ -1,0 +1,60 @@
+<form name="FormNuevaLicencia">
+  <div class="ngdialog-header">
+    <h5 class="modal-title">Nueva solicitud de licencia</h5>
+  </div>
+  <div class="row ngdialog-body">
+    <div class="col-md-12 form-group">
+      <label for="">Concepto:</label>
+      <select class="form-control custom-select" ng-model="viewmodel.Concepto" ng-options="i as i.Nom_Concepto for i in data.conceptos" ng-change="changeConcepto()" required></select>
+    </div>
+
+    <div class="col-md-12 form-group">
+      <label>Descripción</label>
+      <textarea class="form-control" ng-model="viewmodel.Descripcion" min="1" required></textarea>
+    </div>
+
+    <div class="col-md-6 form-group">
+      <label>Fecha Salida:</label>
+      <input type="date" class="form-control d-md-none" ng-model="viewmodel.Desde" ng-change="checkDate()" required>
+      <jqx-date-time-input id="jqxWidget" class="d-none d-md-block" jqx-ng-model ng-model="viewmodel.Desde" jqx-settings="licenciaInput"></jqx-date-time-input>
+    </div>
+
+    <div class="col-md-4 form-group">
+      <label ng-if="mostrarDias">Días:</label>
+      <label ng-if="mostrarHoras">Dias/Horas:</label>
+      <input type="number" class="form-control" ng-model="viewmodel.Dias" min="1" required>
+    </div>
+
+
+    <div class="col-md-12 form-group" ng-if="viewmodel.Concepto.Cod_Concepto === 24 || viewmodel.Concepto.Cod_Concepto === 25">
+      <label>
+        <i class="material-icons" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">help</i>
+        Motivo:
+      </label>
+      <textarea class="form-control" rows="4" placeholder="Describa los motivos para esta solicitud. Solo usar este tipo de licencia en caso de que el tipo de licencia NO este contemplado en los conceptos de licencias definidos por la Compañía"></textarea>
+    </div>
+    <div class="col-md-12 form-group" ng-if="viewmodel.Concepto.Cod_Concepto !== 260">
+      <label>Aprobador:</label>
+      <select class="custom-select"
+              ng-model="viewmodel.Cod_Aprobador"
+              ng-options="t.Cod_Tercero as t.Tercero for t in data.aprobadores"></select>
+    </div>
+
+    <div class="col-md-12 form-group">
+      <label for="">Adjuntos:</label>
+      <input type="file" class="form-control" file-model="adjunto" required="{{viewmodel.Concepto.Tipo_Concepto == 'L'}}" accept="application/pdf">
+    </div>
+
+    <div class="alert alert-danger col-md-12 " ng-if="showerror">
+      {{showerror}}
+    </div>
+
+    <div class="col-md-12 mt-3">
+      <button type="button" class="btn btn-outline-secondary" ng-click="closeDialog()">Cancelar</button>
+      <button type="button" class="btn btn-success float-right" ng-disabled="(FormNuevaLicencia.$invalid || (viewmodel.Concepto.Tipo_Concepto == 'L' && viewmodel.Concepto.Nom_Concepto === 'LICENCIA DE LUTO' && !adjunto) || (viewmodel.Dias > 5) || loading)" ng-click="New_Incapacidad()">
+        Enviar Solicitud
+      </button>
+    </div>
+
+  </div>
+</form>

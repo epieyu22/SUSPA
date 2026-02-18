@@ -1,0 +1,19 @@
+<form name="RolesForm">
+  <div class="ngdialog-header">
+    <h5 class="modal-title">Asignar Rol a Usuarios</h5>
+  </div>
+  <div class="row ngdialog-body">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="">Seleccionar Rol:</label>
+        <select class="form-control" ng-model="vm.viewmodel.groupId" ng-options="i.Id as i.Name for i in vm.data.roles" required></select>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <button type="button" class="btn btn-outline-secondary" ng-click="Close_Dialog()">Cancelar</button>
+      <button type="button" class="btn btn-success float-right" ng-disabled="RolesForm.$invalid" ng-click="vm.Assing_Roles_to_Users()">
+        Guardar Cambios
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,60 @@
+<form name="ReferenciaForm">
+  <div class="ngdialog-header">
+    <h5 class="modal-title">Añadir referencia</h5>
+  </div>
+  <div class="ngdialog-body">
+    <div class="row">
+
+      <div class="col-md-6 form-group">
+        <label for="">Nombre y apellido:</label>
+        <input type="text" ng-model="viewmodel.Nombre" class="form-control" placeholder="Nombre y Apellido" required>
+      </div>
+
+      <div class="col-md-6 form-group">
+        <label>Tipo de referencia:</label>
+        <select class="form-control" ng-model="viewmodel.Tipo_Referencia" required>
+          <option value="" disabled selected>Tipo de referencia</option>
+          <option value="P">Personal</option>
+          <option value="F">Familiar</option>
+          <option value="L">Laboral</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label>Ocupación:</label>
+        <oi-select
+          oi-options="i.Descripcion for i in data.tables.profesiones track by i.Cod_Profesion"
+          ng-model="viewmodel.Cod_Ocupacion"
+          placeholder="Buscar Ocupación"  
+          oi-select-options="{
+                    newItem: true,
+                     newItemModel: {Descripcion: $query}
+                }"
+          required>
+        </oi-select>
+      </div>
+
+      <div class="col-md-6 form-group">
+          <label>Teléfono:</label>
+          <input type="number" class="form-control" ng-model="viewmodel.Telefono" placeholder="Telefono de contacto" required>
+      </div>
+
+      <div class="col-md-12">
+        {{data.Cod_Referencia_Personal}}
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <button type="button" class="btn btn-outline-secondary" ng-click="Close()">Cancelar</button>
+        <button type="button" class="btn btn-success" ng-if="data.referencia" ng-disabled="ReferenciaForm.$invalid" ng-click="Update_Referencia()">
+          Guardar Cambios
+        </button>
+        <button type="button" class="btn btn-success" ng-if="!data.referencia" ng-disabled="ReferenciaForm.$invalid" ng-click="Add_Referencia()">
+          Añadir
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

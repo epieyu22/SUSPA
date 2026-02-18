@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body{
+      font-family: "Arial";
+      margin: 0;
+      padding-left:  100px;
+      padding-right: 70px;
+      font-size: 13pt;
+      line-height: 115%;
+      padding-bottom: 50px;
+      text-rendering: geometricPrecision;
+    }
+
+    .row .row{
+      display: table;
+    }
+
+    .row {
+      display: table;
+      width: 100%;
+    }
+    .row div{
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .row.padding{
+      padding: 10px 0;
+    }
+    .text-center{
+      text-align: center;
+    }
+    .text-left{
+      text-align: left;
+    }
+    .text-right{
+      text-align: right;
+    }
+    .text-justify{
+      text-align: justify;
+    }
+  </style>
+</head>
+<body style="page-break-before: always;">
+  <div class="row">
+    <div style="vertical-align: middle;"><p>Ferrostaal de Colombia S.A.S Bogotá. Colombia</p></div>
+    <div style="width: 25%;text-align: center;">
+      <img src="@Model.logo" style="width:100%">
+    </div>
+  </div>
+  <div class="row">
+    <div>&nbsp;</div>
+    <div style="width:25%">
+      <p style="font-size: 14px">
+        <b>Ferrostaal de Colombia S.A.S</b> <br>
+        Av. El Dorado # 96J - 03 <br>
+        Piso 4 <br>
+        Bogotá D.C. <br><br>
+        PBX: +571 4011300   <br>
+        Fax:  +571 4011318 <br>
+
+        www.ferrostaal.co <br>
+        860.004.755-0 <br>
+        Bogotá, @Model.fecha.ToString("dd-MM-yyyy") <br>
+      </p>
+    </div>
+  </div>
+  <div class="row" style="margin-top:100px">
+    <div class="text-center"><h3>A QUIEN INTERESE</h3></div>
+  </div>
+  <div class="row">
+    <div class="text-justify">
+      <p>Por medio de la presente certificamos que (la) señor(a), @(Model.empleado.PNombre.Trim() + " " + Model.empleado.SNombre.Trim() + " " + Model.empleado.PApellido.Trim() + " " + Model.empleado.SApellido.Trim()) identificado (a) con la cédula de ciudadanía No. @(Model.empleado.Cedula.Trim()), trabaja en nuestra empresa desde el @Model.fechaIngreso.ToString("D"), actualmente desempeña el cargo de @(Model.cargo.Trim()), con un contrato @Model.tipoContrato y una asignación salarial mensual de @(Model.salario) ($@Model.empleado.Salario.ToString("N0")). </p>
+
+
+      @if (Model.ShowotrosDevengos  == true){
+      <div class="row">
+        <p>Con unos ingresos adicionales promediados a los ultimos @Model.mesesPromedio meses, descritos en los siguientes conceptos:</p>
+        <p>
+          @if (Model.ShowHorasExtras == true){
+            <span>Horas Extras: $@Model.promedioHorasExtras.ToString("N0")</span> <br>
+          }
+          @if (Model.showBeneficios == true){
+            <span>Benficios salario: $@Model.promedioBeneficios.ToString("N0")</span> <br>
+          }
+          @if (Model.showOtrosIngresos == true){
+            <span>Otros ingresos: $@Model.promedioOtroIngresos.ToString("N0")</span> <br>
+          }
+        </p>
+        @if (Model.conceptosEspecificos.Count > 0){
+          foreach(var concepto in Model.conceptosEspecificos){
+            <span>@(concepto.Key): $@(concepto.Value.ToString("N0"))</span><br>
+          }
+        }
+        <p>Devengando en total un promedio de $@Model.netoAPagar.ToString("N0") Pesos mensuales.</p>
+      </div>
+    }
+
+    @if(Model.dirigidoEmbajada == true){
+      <div class="row">
+        @if(Model.viajeLaboral == true){
+          <p>@Model.textViajeLaboral</p>
+        }else{
+          <p>@Model.textEmbajada</p>
+        }
+      </div>
+    }
+
+      <p>La presente certificación se expide a solicitud de la interesada a los @Model.fecha.Day días del mes de @Model.fecha.ToString("MMMM") de @(Model.fecha.Year).</p>
+      <p>Cordialmente,</p>
+      <p>Ferrostaal de Colombia S.A.S.</p>
+
+
+    </div>
+  </div>
+  <div class="row" style="margin-top:100px">
+    <div style="width: 45%;" >
+      @if (Model.Firmar_Certlab  == true){
+        <img src="@Model.firma" height="100px">
+      }
+      <div style="padding-top: 5px; border-top: 1px solid #000">
+        <p>
+          @Model.autoriza<br>
+          @Model.autorizaCargo
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>

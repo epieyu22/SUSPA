@@ -1,0 +1,30 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item"><a ui-sref="dashboard"><i class="material-icons">home</i></a></li>
+  <li class="breadcrumb-item active"><a ui-sref="admin">Configuración</a></li>
+  <li class="breadcrumb-item active">Roles</li>
+</ol>
+
+
+<div class="card shadow primary-theme">
+  <div class="card-header clearfix">
+    <button class="btn btn-secondary" ui-sref="admin.users"><i class="material-icons">group_add</i> Asignar Roles a Usuarios</button>
+    <button class="btn btn-success float-right" ng-click="vm.Open_New_Role_Dialog()"><i class="material-icons">add_box</i> Nuevo Rol</button>
+  </div>
+  <table ng-table="vm.grid" class="table table-sm table-bordered table-striped" table-morphe>
+    <tr ng-repeat="r in $data">
+      <td class="text-xs-center" data-title="'Rol'" sortable="'Name'" style="width: 50%">{{r.Name}}</td>
+      <td class="text-right" data-title="'Acciones'" ng-if="r.Name != 'Aspirante'">
+        <button class="btn btn-primary btn-sm" ng-if="r.Name != 'Empleado'">
+            <i class="material-icons">edit</i> Cambiar Nombre
+        </button>
+        <button class="btn btn-warning btn-sm m-l-1" ng-click="vm.Open_Permisos_Dialog(r)">
+          <i class="material-icons">lock_open</i> Editar Permisos
+        </button>
+        <button class="btn btn-danger btn-sm m-l-1" ng-if="r.Name != 'Empleado'">
+          <i class="material-icons">delete</i> Eliminar
+        </button>
+      </td>
+      <!--<td  class="text-right" ng-if="r.Name == 'Administrador' || r.Name == 'Aspirante'">ESTE ROL NO PUEDE SER EDITADO</td>-->
+    </tr>
+  </table>
+</div>

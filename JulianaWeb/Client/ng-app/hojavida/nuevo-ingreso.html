@@ -1,0 +1,102 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item"><a ui-sref="dashboard"><i class="material-icons">home</i></a></li>
+  <li class="breadcrumb-item"><a ui-sref="hojavida.aprobar">Hojas de vida</a></li>
+  <li class="breadcrumb-item active">{{vm.data.Aspirante}}</li>
+</ol>
+
+
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    <h5>Nuevo ingreso</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Aspirante:</label>
+          <input class="form-control" ng-model="vm.data.Aspirante" type="mail" disabled>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Tipo de Documento:</label>
+          <select class="form-control" ng-model="vm.data.Tipo_Documento" ng-options='i.id as i.name for i in vm.TIPO_DOCUMENTOS' disabled>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Número Documento</label>
+          <input class="form-control" ng-model="vm.data.Doc_Identidad" type="text" disabled>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Correo Electrónico:</label>
+          <input class="form-control" ng-model="vm.data.Dir_Electronica" type="mail" disabled>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="pull-md-right">
+      <button type="button" class="btn btn-danger" ng-click="vm.aprobar()" data-toggle="modal" data-target="#EliminarDialog">
+        <i class="material-icons">close</i>
+        Eliminar
+      </button>
+      <button type="button" class="btn btn-success" ng-click="vm.aprobar()" data-toggle="modal" data-target="#AprobarDialog">
+        <i class="material-icons">done</i>
+        Aprobar
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="AprobarDialog" tabindex="-1" role="dialog" aria-labelledby="AprobarDialogLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header primary-theme">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="AprobarDialogLabel">Aprobar Esta solicitud?</h5>
+      </div>
+      <div class="modal-body">
+        <p>Al aprobar esta solicitud le dará acceso a la plataforma a la persona {{vm.data.Aspirante}}, desea continuar?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="vm.aprobarAspirante()">
+          <i class="material-icons">done</i>
+        Aprobar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="EliminarDialog" tabindex="-1" role="dialog" aria-labelledby="AprobarDialogLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header primary-theme">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="AprobarDialogLabel">Eliminar esta solicitud?</h5>
+      </div>
+      <div class="modal-body">
+        <p>Toda la información sera borrada de nuestra base de datos, desea continuar?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.rechazarAspirante()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

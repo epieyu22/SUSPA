@@ -1,0 +1,68 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item"><a ui-sref="dashboard"><i class="material-icons">home</i></a></li>
+  <li class="breadcrumb-item active">Consultas y Solicitudes</li>
+  <li class="breadcrumb-item active">Registro de solicitudes</li>
+</ol>
+
+
+<div class="card primary-theme shadow">
+  <div class="cd-tabs">
+    <nav>
+      <ul class="cd-tabs-navigation nav">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab"  role="tab" href="#" data-target="#vacaciones">
+            <i class="icon-vacaciones tab-icon"></i>
+            <span class="tab-text">Vacaciones</span>
+          </a>
+        </li>
+        <li class="nav-item" ng-if="hasPermission(['consultas.cesantias'])">
+          <a class="nav-link" data-toggle="tab"  role="tab" href="#" data-target="#cesantias">
+            <i class="icon-cesantias tab-icon"></i>
+            <span class="tab-text">Anticipos de Cesantias</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane active" id="vacaciones">
+      <div class="blank" ng-if="!vm.data.vacaciones.length > 0">
+        <i class="icon-vacaciones"></i>
+        <p>No haz hecho ninguna solicitud por medio de la plataforma</p>
+      </div>
+      
+      <div ng-if="vm.data.vacaciones.length > 0">
+        <table ng-table="vm.solVacacionesGrid" class="table table-sm table-bordered table-striped" table-morphe>
+          <tr ng-repeat="v in $data">
+            <td class="text-sm-left" data-title="'Días'" sortable="'Cantidad'">{{v.Cantidad}}</td>
+            <td class="text-sm-left" data-title="'Fecha Salida'" sortable="'Desde'">{{v.Fec_Salida | date: 'yyyy/MM/dd'}}</td>
+            <td class="text-sm-left" data-title="'Fecha Llegada'" sortable="'Fec_Llegada'">{{v.Fec_Llegada | date: 'yyyy/MM/dd'}}</td>
+            <td class="text-sm-left" data-title="'Aprobador'" sortable="'aprobador.Tercero'">{{v.aprobador.Tercero}}</td>
+            <td class="solicitud__estado--{{v.Estado}}" data-title="'Estado'" sortable="'Estado'">{{v.Estado}}</td>
+            <td class="text-sm-center" >
+              <button class="btn btn-sm btn-success" ui-sref="solicitud({Cod_Solicitud: v.Cod_Solicitud})">
+                <i class="material-icons">sort</i> Detalles
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="cesantias" ng-if="hasPermission(['consultas.cesantias'])">
+      <div class="blank" ng-if="!vm.data.cesantias.length > 0">
+        <i class="icon-cesantias"></i>
+        <p>No haz hecho ninguna solicitud por medio de la plataforma</p>
+      </div>
+      <div ng-if="vm.data.cesantias.length > 0">
+        <table ng-table="vm.solCesantiasGrid" class="table table-sm table-bordered table-striped" table-morphe>
+          <tr ng-repeat="v in $data">
+            <td class="text-sm-center" data-title="'Valor'" sortable="'Cantidad'">{{v.Cantidad | currency:"$":0}}</td>
+          <td class="text-sm-center" data-title="'Fecha Solicitud'" sortable="'Fec_Solicitud'">{{v.Fec_Solicitud | date: 'yyyy/MM/dd'}}</td>
+            <td class="text-sm-center" data-title="'Aprobo'" sortable="'aprobador.Tercero'">{{v.aprobador.Tercero}}</td>
+            <td class="solicitud__estado--{{v.Estado}}" data-title="'Estado'" sortable="'Estado'">{{v.Estado}}</td>
+          </tr>
+        </table>        
+      </div>
+    </div>
+  </div>
+</div>

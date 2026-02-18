@@ -1,0 +1,383 @@
+<div>
+  <div>
+
+    <ol class="breadcrumb d-none d-md-flex">
+      <li class="breadcrumb-item">
+        <a ui-sref="dashboard">
+          <i class="material-icons">home</i>
+        </a>
+      </li>
+      <li class="breadcrumb-item active">Procesos Especiales</li>
+      <li class="breadcrumb-item active">Nómina Electrónica</li>
+    </ol>
+
+    <div class="card primary-theme shadow">
+      <div class="card-header">
+        Generar archivo
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Empresa:</label>
+              <select class="form-control" ng-model="vm.viewmodel.Empresa" ng-options="e.BaseDatos as e.Nombre_Empresa for e in vm.Empresas"></select>
+              <div class="form-group">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Tipo de archivo:</label>
+              <select class="form-control" ng-model="vm.viewmodel.Cod_Archivo">
+                <option value="1">JSON ORIGINAL</option>
+                <option value="2">JSON AJUSTE</option>
+                <!--<option value="2">JSON ELIMINACIÒN</option>-->
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Año:</label>
+              <select class="custom-select" ng-model="vm.viewmodel.ano">
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Mes:</label>
+              <select class="custom-select" ng-model="vm.viewmodel.mes" ng-change="vm.LoadEmployes()" ng-options="i.value as i.name for i in vm.MESES"></select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.totales">
+      <div class="card-header">Consolidado de Nómina</div>
+      <div class="card-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 col-md-4 text-center">
+              <h4>Periodo de Nómina</h4>
+              <div class="row text-center">
+                <div class="col">
+                  <h6>Del</h6>
+                  <h5 class="font-weight-bold">{{ vm.facturacionGrid.data[0].MinFec }}</h5>
+                </div>
+                <div class="col">
+                  <h6>Al</h6>
+                  <h5 class="font-weight-bold">{{ vm.facturacionGrid.data[0].MaxFec }}</h5>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 text-center">
+              <h4>Empleados</h4>
+              <h3 class="font-weight-bold">{{ vm.totales.employees }}</h3>
+            </div>
+            <div class="col-12 col-md-4">
+              <h4 class="text-center">Resumen</h4>
+              <div class="row">
+                <div class="col-5"><h6 class="m-0 font-weight-bold">Devengados:</h6></div>
+                <div class="col-7 text-right">{{ vm.totales.devengoTotal | currency:'$':0 }}</div>
+              </div>
+              <div class="row">
+                <div class="col-5"><h6 class="m-0 font-weight-bold">Deducciones:</h6></div>
+                <div class="col-7 text-right">{{ vm.totales.deduccionTotal | currency:'$':0 }}</div>
+              </div>
+              <div class="row">
+                <div class="col-5"><h6 class="m-0 font-weight-bold">Total:</h6></div>
+                <div class="col-7 text-right">{{ vm.totales.total | currency:'$':0 }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.viewmodel.mes">
+      <div class="card-header">Seleccione los empleados que seran enviados</div>
+      <table ng-table="vm.facturacionGrid" class="not-transform table table-sm table-bordered table-striped text-center">
+        <tbody>
+          <tr ng-repeat="e in $data"
+              selection-model
+              selection-model-type="'checkbox'"
+              selection-model-mode="'multiple-additive'"
+              selection-model-selected-class="'bg-info'"
+              selection-model-selected-items="vm.viewmodel.empleados">
+            <td header="'headerCheckbox.html'">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" /> <span class="custom-control-indicator"></span>
+              </label>
+            </td>
+            <td data-title="'Doc. Identificación'" filter="{Cedula: 'text'}" sortable="'Cedula'">{{ e.Cedula }}</td>
+            <td data-title="'Empleado'" filter="{Empleado: 'text'}" sortable="'Empleado'" class="text-left">{{ e.Empleado }}</td>
+            <td data-title="'Salario'" class="text-right">{{ e.Salario | currency:'$':0 }}</td>
+            <td data-title="'Devengados'" class="text-right">{{ e.Devengo | currency:'$':0 }}</td>
+            <td data-title="'Deducciones'" class="text-right">{{ e.Deduccion | currency:'$':0 }}</td>
+            <td data-title="'Total'" class="text-right">{{ e.Total | currency:'$':0 }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card-footer">
+        <button type="button"
+                class="btn btn-primary float-right"
+                ng-click="vm.LoadBilling()">
+          Generar Seleccionados
+        </button>
+
+      </div>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.validations.CONCEPTOS_REPETIDOS">
+      <div class="card-header">
+        {{ vm.validations.CONCEPTOS_REPETIDOS.message }}:
+      </div>
+      <table class="not-transform table table-sm table-bordered table-striped">
+        <thead>
+          <tr class="text-center">
+            <th width="30%">Codigo de Concepto</th>
+            <th width="70%">Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="error in vm.validations.CONCEPTOS_REPETIDOS.list">
+            <td class="text-center">{{ error.Codigo }}</td>
+            <td>{{ error.Nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.validations.COD_ALTERNO2">
+      <div class="card-header">
+        {{ vm.validations.COD_ALTERNO2.message }}:
+      </div>
+      <table class="not-transform table table-sm table-bordered table-striped">
+        <thead>
+          <tr class="text-center">
+            <th width="30%">Codigo de Concepto</th>
+            <th width="70%">Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="error in vm.validations.COD_ALTERNO2.list">
+            <td class="text-center">{{ error.Codigo }}</td>
+            <td>{{ error.Nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.validations.TIPOS_DE_CONTRATO">
+      <div class="card-header">
+        {{ vm.validations.TIPOS_DE_CONTRATO.message }}:
+      </div>
+      <table class="not-transform table table-sm table-bordered table-striped">
+        <thead>
+          <tr class="text-center">
+            <th width="30%">Codigo de Empleado</th>
+            <th width="70%">Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="error in vm.validations.TIPOS_DE_CONTRATO.list">
+            <td class="text-center">{{ error.Codigo }}</td>
+            <td>{{ error.Nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.validations.TIPOS_DE_DOCUMENTO">
+      <div class="card-header">
+        {{ vm.validations.TIPOS_DE_DOCUMENTO.message }}:
+      </div>
+      <table class="not-transform table table-sm table-bordered table-striped">
+        <thead>
+          <tr class="text-center">
+            <th width="30%">Codigo de Concepto</th>
+            <th width="70%">Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="error in vm.validations.TIPOS_DE_DOCUMENTO.list">
+            <td class="text-center">{{ error.Codigo }}</td>
+            <td>{{ error.Nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.validations.CORREOS">
+      <div class="card-header">
+        {{ vm.validations.CORREOS.message }}:
+      </div>
+      <table class="not-transform table table-sm table-bordered table-striped">
+        <thead>
+          <tr class="text-center">
+            <th width="30%">Codigo de Concepto</th>
+            <th width="70%">Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="error in vm.validations.CORREOS.list">
+            <td class="text-center">{{ error.Codigo }}</td>
+            <td>{{ error.Nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.validations.DIRECCION">
+      <div class="card-header">
+        {{ vm.validations.DIRECCION.message }}:
+      </div>
+      <table class="not-transform table table-sm table-bordered table-striped">
+        <thead>
+          <tr class="text-center">
+            <th width="30%">Codigo de Concepto</th>
+            <th width="70%">Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="error in vm.validations.DIRECCION.list">
+            <td class="text-center">{{ error.Codigo }}</td>
+            <td>{{ error.Nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.validations.CIUDAD">
+      <div class="card-header">
+        {{ vm.validations.CIUDAD.message }}:
+      </div>
+      <table class="not-transform table table-sm table-bordered table-striped">
+        <thead>
+          <tr class="text-center">
+            <th width="30%">Codigo de Concepto</th>
+            <th width="70%">Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="error in vm.validations.CIUDAD.list">
+            <td class="text-center">{{ error.Codigo }}</td>
+            <td>{{ error.Nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.validations.MAPEO">
+      <div class="card-header">
+        {{ vm.validations.MAPEO.message }}:
+      </div>
+      <table class="not-transform table table-sm table-bordered table-striped">
+        <thead>
+          <tr class="text-center">
+            <th width="30%">Codigo de Concepto</th>
+            <th width="70%">Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="error in vm.validations.MAPEO.list">
+            <td class="text-center">{{ error.Codigo }}</td>
+            <td class="text-center">{{ error.Fecha }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.validations.SOLIDARIDAD_PENSIONAL">
+      <div class="card-header">
+        {{ vm.validations.SOLIDARIDAD_PENSIONAL.message }}:
+      </div>
+      <table class="not-transform table table-sm table-bordered table-striped">
+        <thead>
+          <tr class="text-center">
+            <th width="30%">Codigo de Concepto</th>
+            <th width="70%">Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="error in vm.validations.SOLIDARIDAD_PENSIONAL.list">
+            <td class="text-center">{{ error.Codigo }}</td>
+            <td>{{ error.Nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.validations.NOVEDAD_PRESTACIONES">
+      <div class="card-header">
+        {{ vm.validations.NOVEDAD_PRESTACIONES.message }}:
+      </div>
+      <table class="not-transform table table-sm table-bordered table-striped">
+        <thead>
+          <tr class="text-center">
+            <th width="30%">Codigo de Concepto</th>
+            <th width="70%">Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="error in vm.validations.NOVEDAD_PRESTACIONES.list">
+            <td class="text-center">{{ error.Codigo }}</td>
+            <td>{{ error.Nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.validations.MAPEO_REPETIDOS">
+      <div class="card-header">
+        {{ vm.validations.MAPEO_REPETIDOS.message }}:
+      </div>
+      <table class="not-transform table table-sm table-bordered table-striped">
+        <thead>
+          <tr class="text-center">
+            <th width="30%">Codigo de Concepto</th>
+            <th width="70%">Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="error in vm.validations.MAPEO_REPETIDOS.list">
+            <td class="text-center">{{ error.Codigo }}</td>
+            <td>{{ error.Nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.validations.VALIDAR_MAPEO">
+      <div class="card-header">
+        {{ vm.validations.VALIDAR_MAPEO.message }}:
+      </div>
+      <table class="not-transform table table-sm table-bordered table-striped">
+        <thead>
+          <tr class="text-center">
+            <th width="30%">Codigo de Concepto</th>
+            <th width="70%">Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="error in vm.validations.VALIDAR_MAPEO.list">
+            <td class="text-center">{{ error.Codigo }}</td>
+            <td>{{ error.Nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card shadow primary-theme" ng-if="vm.errors.length > 0">
+      <div class="card-header">
+        Errores encontrados
+      </div>
+      <table class="not-transform table table-sm table-bordered table-striped">
+        <tr ng-repeat="error in vm.errors">
+          <td><p class="p-2">{{ error.error }}</p></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  </div>
+
+<script type="text/ng-template" id="headerCheckbox.html">
+  <label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" ng-model="vm.tableSelectAll" ng-click="vm.log()">
+    <span class="custom-control-indicator"></span>
+  </label>
+</script>

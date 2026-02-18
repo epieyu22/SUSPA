@@ -1,0 +1,94 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">Comprobantes y Certificados</a>
+  </li>
+  <li class="breadcrumb-item active">Certificado Laboral</li>
+</ol>
+
+<div class="row">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-success" ui-sref="certlaboral.admin" ng-if="hasPermission(['certlaboral.admin'])">
+      <i class="material-icons">launch</i>
+      <span>Opción </span>
+      <span class="hidden-xs-down">de Certificados</span>
+      <span>Masivos</span>
+    </button>
+    <button type="button" class="btn btn-primary float-right" ui-sref="certlaboral.config" ng-if="hasPermission(['certlaboral.config'])">
+      <i class="material-icons">settings</i>
+      <span class="hidden-xs-down">Configuración</span>
+    </button>
+  </div>
+</div>
+
+<div class="alert alert-info alert-dismissible show" role="alert" ng-if="vm.MostrarAlertaCertlaboral">
+  <i class="material-icons">info</i>
+  {{vm.AlertaCertlaboral}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="row" >
+  <div class="col-md-6">
+    <div class="input-group">
+      <input type="text" class="form-control" ng-model="vm.searchFile" placeholder="Buscar Cod. Verificación">
+      <span class="input-group-btn">
+        <button class="btn btn-info" ng-click="vm.Search_Certlab()">
+          buscar
+        </button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<form name="certlaboralForm">
+  <div class="card primary-theme shadow">
+    <div class="card-header">
+      <i class="icon-certflaboral"></i> Opción de Certificado Laboral Personal.
+    </div>
+    <div class="card-body">
+      <div class="row">
+
+        <div class="col-md-12" ng-if="vm.UseDirigidoCertificado">
+          <div class="form-group">
+            <label>A quien va dirigido:</label>
+            <input class="form-control" type="text" ng-model="vm.certlaboralViewModel.dirigido" required>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" ng-model="vm.certlaboralViewModel.dirigidoEmbajada" ng-change="vm.certlaboralViewModel.viajeLaboral = false">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-label">Dirigido a embajada</span>
+          </label>
+          <div class="m-y-1" ng-if="vm.certlaboralViewModel.dirigidoEmbajada">
+            <label class="custom-control custom-radio">
+              <input id="radio1" name="radio" type="radio" class="custom-control-input" value="true" ng-model="vm.certlaboralViewModel.viajeLaboral">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-label">Viaje Laboral</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input id="radio2" name="radio" type="radio" class="custom-control-input" value="false" ng-model="vm.certlaboralViewModel.viajeLaboral">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-label">Vacaciones</span>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-12 m-y-2">
+          <div class="alert alert-danger" role="alert" ng-if="!vm.config.Cod_Empleado_Autoriza">
+            No se a configurado un aprobador por defecto para esta empresa
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-primary float-right" ng-disabled="certlaboralForm.$invalid || !vm.config.Cod_Empleado_Autoriza"
+        ng-click="vm.generateCertlab()">Generar</button>
+    </div>
+  </div>
+</form>

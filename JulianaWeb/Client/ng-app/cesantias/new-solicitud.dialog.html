@@ -1,0 +1,44 @@
+<form name="SolicitudVacacionesForm">
+  <div class="ngdialog-header">
+    <h5 class="modal-title">Nueva solicitud de Anticipo de cesantias</h5>
+  </div>
+  <div class="row ngdialog-body">
+    <div class="form-group col-md-6">
+      <label>Cantidad anticipo:</label>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="number" class="form-control" min="50000" max="{{data.totalDisponible}}" step="50000" ng-model="viewmodel.Cantidad" required>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Motivo de la solicitud:</label>
+      <select class="form-control custom-select" ng-model="viewmodel.Modo_Vacaciones" required>
+        <option value="V">Vivienda</option>
+        <option value="E">Educación</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Aprueba:</label>
+      <select class="form-control custom-select" required>
+        <option ng-repeat="i in data.aprobadores" ng-model="viewmodel.Cod_Aprobador" value="{{i.empleado.Cod_Empleado}}">{{i.empleado.Empleado}}</option>
+      </select>
+    </div>
+    <div class="col-md-12">
+      <div class="alert alert-danger" ng-if="!data.aprobadores.length > 0">
+        No se ha configurado un empleado como aprobador de para las solicitudes de <b>anticipos de cesantias</b>. Comuníquese con el administrador para generar esta configuración
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="alert alert-info">
+        <p>Solo se puede realizar un anticipo hasta el valor de cesantias  causado hasta la fecha, <b>{{vm.data.totalDisponible | currency:"$":0}}</b>. Si deseas hacer un anticipo mayor del total de las cesantias comuníquese directamente con el personal de Nomina o RRHH.</p>
+        <p>No olvide llevar al área de Nómina o RRHH los documentos correspondientes, para validar y aprobar esta solicitud</p>
+      </div>
+    </div>
+    <div class="col-md-12 text-right">
+        <button type="button" class="btn btn-outline-secondary" ng-click="closeDialog()">Cancelar</button>
+        <button type="button" class="btn btn-success" ng-disabled="SolicitudVacacionesForm.$invalid" ng-click="sendSolicitudCesantias()">
+          Enviar Solicitud
+        </button>
+    </div>
+  </div>
+</form>

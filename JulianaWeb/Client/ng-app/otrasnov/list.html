@@ -1,0 +1,41 @@
+<style>
+  .container-flex {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .container-flex .breadcrumb {
+    margin-bottom: 0;
+  }
+
+  .grid-copntainer {
+    flex: 1;
+  }
+</style>
+
+<div class="container-flex">
+  <nav aria-label="breadcrumb" role="navigation">
+    <ol class="breadcrumb d-none d-md-flex">
+      <li class="breadcrumb-item">
+        <a ui-sref="dashboard">
+          <i class="material-icons">home</i>
+        </a>
+      </li>
+      <li class="breadcrumb-item active">
+        <a ui-sref="dashboard">Procesos Especiales</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <a ui-sref="otrasnov">Novedades ocasionales o Permanentes</a>
+      </li>
+      <li class="breadcrumb-item active">Subir Novedades</li>
+    </ol>
+  </nav>
+  <div class="grid-copntainer">
+    <jqx-grid jqx-settings="vm.grilla"></jqx-grid>
+  </div>
+  <div class="card-footer text-muted">
+    <button type="button" class="btn btn-outline-secondary" ui-sref="otrasnov">Cancelar</button>
+    <button type="button" class="btn btn-primary float-right" ng-click="vm.confirm_upload()">Aceptar</button>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="mt-5" ng-controller="AlertasCtrl as vm">
+  <div class="alert alert-warning mx-3" role="alert" ng-if="vm.alertaBlockLeave">
+    <h5 class="alert-heading">
+      Alerta Block Leave!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </h5>
+    <p>
+      No ha realizado una solicitud de vacaciones para este periodo que cumpla con las politicas de <b>Block Leave</b>.
+    </p>
+    <hr />
+    <a href="" class="btn btn-success" ui-sref="vacaciones">
+      <span> <i class="material-icons">launch</i> Solicitar Vacaciones </span>
+    </a>
+  </div>
+  <div class="alert alert-warning mx-3" role="alert" ng-if="vm.alertaVacacionesVencidads">
+    <h5 class="alert-heading">
+      Alerta Días De Vcaciones Proximos A Vencer!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </h5>
+    <p>
+      Usted Posee <b>@dias</b> días de vaciones de periodos anteriores proximos a vencer. Si no disfruta de estos días
+      antes de la fecha <b>@fecha</b>, serán descontados de sus días disponibles.
+    </p>
+    <hr />
+    <a href="" class="btn btn-success" ui-sref="vacaciones">
+      <span> <i class="material-icons">launch</i> Ir a la opción de Vacaciones </span>
+    </a>
+  </div>
+</div>

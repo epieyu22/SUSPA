@@ -1,0 +1,174 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard"> <i class="material-icons">home</i> </a>
+  </li>
+  <li class="breadcrumb-item"><a ui-sref="solicitudes.aprobador">Solicitudes</a></li>
+  <li class="breadcrumb-item active" ng-if="vm.data.solicitud">{{ vm.data.solicitud.Cod_Solicitud }}</li>
+  <li class="breadcrumb-item active" ng-if="!vm.data.solicitud">No encontrado</li>
+</ol>
+
+<div class="card primary-theme shadow" ng-if="!vm.data.solicitud">
+  <div class="ma-3 blank">No se encontro la página buscada</div>
+</div>
+
+<div class="card primary-theme shadow" ng-if="vm.data.solicitud">
+  <div class="card-header">
+    <h5 ng-if="vm.data.solicitud.Tipo_Solicitud == 'V'" class="m-b-0">
+      Solicitud de Vacaciones #{{ vm.data.solicitud.Cod_Solicitud }}
+    </h5>
+    <h5 ng-if="vm.data.solicitud.Tipo_Solicitud == 'C'" class="m-b-0">
+      Solicitud de Cesantias #{{ vm.data.solicitud.Cod_Solicitud }}
+    </h5>
+  </div>
+  <div ng-switch="vm.data.solicitud.Estado">
+    <div ng-switch-when="A" class="solicitud__estado--Aprobada p-3 text-sm-left">Aprobada</div>
+    <div ng-switch-when="A0" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente Aprobación Nivel 2</div>
+    <div ng-switch-when="A1" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente Aprobación Nivel 3</div>
+    <div ng-switch-when="A2" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente Aprobación Nivel 4</div>
+    <div ng-switch-when="A3" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente Aprobación Nivel 5</div>
+    <div ng-switch-when="A4" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente Aprobación Nivel 6</div>
+    <div ng-switch-when="A5" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente Aprobación Nivel 6</div>
+    <div ng-switch-when="R" class="solicitud__estado--Rechazada p-3 text-sm-left">Rechazada</div>
+    <div ng-switch-when="P" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente de Aprobación</div>
+    <div ng-switch-when="PR" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente de Desaprobación</div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <h6>Empleado:</h6>
+        <span class="tile__info tile__info--nobold">{{ vm.data.solicitud.empleado.Empleado }}</span>
+      </div>
+    </div>
+    <div class="row row my-3">
+      <div class="col-md-6">
+        <h6>Fecha Salida:</h6>
+        <span class="tile__info tile__info--nobold">{{ vm.data.solicitud.Fec_Salida | date: 'fullDate' }}</span>
+      </div>
+      <div class="col-md-6">
+        <h6>Fecha Llegada:</h6>
+        <span class="tile__info tile__info--nobold">{{ vm.data.solicitud.Fec_Llegada | date: 'fullDate' }}</span>
+      </div>
+    </div>
+    <div class="row row my-3">
+      <!--Para Licencias-->
+      <div ng-if="vm.data.solicitud.Tipo_Solicitud" class="col-md-6">
+        <h6 ng-if="vm.data.solicitud.Tipo_Solicitud == 'L'">Tipo de licencia:</h6>
+        <h6 ng-if="vm.data.solicitud.Tipo_Solicitud == 'H'">Tipo de licencia:</h6>
+        <span class="tile__info tile__info--nobold">{{vm.data.concepto.Nom_Concepto}}</span>
+      </div>
+
+      <div ng-if="vm.data.solicitud.Descripcion" class="col-md-6">
+        <h6>Descripcion:</h6>
+        <span class="tile__info tile__info--nobold">{{ vm.data.solicitud.Descripcion }}</span>
+      </div>
+
+
+    </div>
+    <div class="row row my-3">
+      <!--Para vacaciones-->
+      <div ng-if="vm.data.solicitud.Modo_Vacaciones" class="col-md-6">
+        <h6 ng-if="vm.data.solicitud.Modo_Vacaciones == 'T'">Modo Vacaciones:</h6>
+        <h6 ng-if="vm.data.solicitud.Modo_Vacaciones == 'D'">Modo Vacaciones:</h6>
+        <h6 ng-if="vm.data.solicitud.Modo_Vacaciones == 'B'">Modo Vacaciones:</h6>
+        <span class="tile__info tile__info--nobold" ng-if="vm.data.solicitud.Modo_Vacaciones == 'T'">Tiempo</span>
+        <span class="tile__info tile__info--nobold" ng-if="vm.data.solicitud.Modo_Vacaciones == 'D'">Dinero</span>
+        <span class="tile__info tile__info--nobold" ng-if="vm.data.solicitud.Modo_Vacaciones == 'B'">Block Leave</span>
+      </div>
+      <div class="col-md-6">
+        <h6>Cantidad:</h6>
+        <span class="tile__info tile__info--nobold">{{ vm.data.solicitud.Cantidad }}</span>
+      </div>
+    </div>
+
+    <div class="col-12 d-flex justify-content-between align-items-center my-3">
+      <button class="btn btn-info" ng-if="vm.data.solicitud.Tipo_Solicitud != 'L'" ng-click="vm.Decargar_PDF_Solicitud()">
+        <i class="material-icons">file_download</i> Descargar
+      </button>
+      <a href="{{ vm.data.solicitud.Adjunto }}" target="_blank" class="btn btn-primary" ng-if="vm.data.solicitud.Adjunto">
+        <i class="material-icons">file_download</i> Ver Adjunto
+      </a>
+    </div>
+  </div>
+    <div class="card-header" ng-if="vm.data.aprobaciones.length > 0">Lista de Aprobaciones</div>
+    <table class="table table-sm table-bordered table-striped" ng-if="vm.data.aprobaciones.length > 0">
+      <thead>
+      <th>Aprobador</th>
+      <th>Fecha</th>
+      <th>Acción</th>
+      <th>Nivel</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="i in vm.data.aprobaciones">
+          <td>{{ i.Aprobador }}</td>
+          <td>{{ i.Fec_Aprobacion | date: 'fullDate' }}</td>
+          <td>{{ i.Observaciones }}</td>
+          <td>{{ i.Nivel }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="card-footer">
+      <div class="row"
+           ng-if="vm.data.solicitud.Estado != 'A' && vm.data.solicitud.Estado != 'AP' && vm.data.solicitud.Estado != 'D' && vm.data.solicitud.Estado != 'R'">
+        <div class="col-md-12" ng-if="vm.isTheAprobador">
+          <div class="btn btn-success float-right"
+               ng-if="vm.data.solicitud.Estado != 'PR' && !vm.data.Periodo_Cerrado"
+               ng-click="vm.Confirm_Aprobar_Solicitud(vm.data.solicitud.Cod_Solicitud)">
+            <i class="material-icons">done</i> Aprobar
+          </div>
+          <div class="text-danger float-right" ng-if="vm.data.Periodo_Cerrado">
+            <p class="m-0 py-2">Periodo Cerrado.</p>
+          </div>
+          <div class="btn btn-danger" ng-click="vm.Confirm_Rechazar_Solicitud(vm.data.solicitud)">
+            <i class="material-icons">close</i> Desaprobar Solicitud
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="card primary-theme shadow" ng-if="vm.data.solicitud &&  vm.data.solicitud.Tipo_Solicitud == 'O'">
+  <div ng-switch="vm.data.solicitud.Estado">
+    <div ng-switch-when="A" class="solicitud__estado--Aprobada p-3 text-sm-left">Aprobada</div>
+    <div ng-switch-when="A0" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente Aprobación Nivel 2</div>
+    <div ng-switch-when="A1" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente Aprobación Nivel 3</div>
+    <div ng-switch-when="A2" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente Aprobación Nivel 4</div>
+    <div ng-switch-when="A3" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente Aprobación Nivel 5</div>
+    <div ng-switch-when="A4" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente Aprobación Nivel 6</div>
+    <div ng-switch-when="A5" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente Aprobación Nivel 6</div>
+    <div ng-switch-when="R" class="solicitud__estado--Rechazada p-3 text-sm-left">Rechazada</div>
+    <div ng-switch-when="P" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente de Aprobación</div>
+    <div ng-switch-when="PR" class="solicitud__estado--Pendiente p-3 text-sm-left">Pendiente de Desaprobación</div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <h6>Empleado:</h6>
+        <span class="tile__info tile__info--nobold">{{ vm.data.solicitud.empleado.Empleado }}</span>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center p-5">
+          <a href="{{vm.data.solicitud.Observacion}}" target="blank" class="btn btn-primary">Ver Documento</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div
+      class="row"
+      ng-if="vm.data.solicitud.Estado != 'A' && vm.data.solicitud.Estado != 'AP' && vm.data.solicitud.Estado != 'D' && vm.data.solicitud.Estado != 'R'"
+    >
+      <div class="col-md-12" ng-if="vm.isTheAprobador">
+        <div
+          class="btn btn-success float-right"
+          ng-if="vm.data.solicitud.Estado != 'PR'"
+          ng-click="vm.Confirm_Aprobar_Solicitud(vm.data.solicitud.Cod_Solicitud)"
+        >
+          <i class="material-icons">done</i> Aprobar
+        </div>
+        <div class="btn btn-danger" ng-click="vm.Confirm_Rechazar_Solicitud(vm.data.solicitud)">
+          <i class="material-icons">close</i> Rechazar
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

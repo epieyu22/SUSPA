@@ -1,0 +1,117 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">Consultas y Solicitudes</a>
+  </li>
+  <li class="breadcrumb-item active">Incapacidades</li>
+</ol>
+
+
+
+<div class="row mb-1">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-success" ng-click="vm.Open_Inacapacidades_Dialog()">
+      <i class="material-icons">add_box</i>
+      Reportar Incapacidad
+    </button>
+  </div>
+</div>
+
+<div class="card primary-theme shadow">
+  <div class="cd-tabs">
+    <nav>
+      <ul class="cd-tabs-navigation nav">
+        <li class="nav-item">
+          <a href="#" class="nav-link active" data-toggle="tab" role="tab" data-target="#Historico">
+            <i class="material-icons tab-icon">history</i>
+            <span class="tab-text">Historico</span>
+          </a>
+        </li>
+        <li class="nav-item" ng-if="vm.data.incapacidades.length > 0">
+          <a href="#" class="nav-link" data-toggle="tab" role="tab"  data-target="#Solicitadas">
+            <i class="material-icons tab-icon icon-fondoriesgo"></i>
+            <span class="tab-text">Incapacidades</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane active" id="Historico">
+      <div class="blank" ng-if="vm.data.historicoIncapacidades.length == 0">
+        <p>No hay datos para mostrar</p>
+      </div>
+
+      <table class="table table-bordered table-striped table-sm" ng-if="vm.data.historicoIncapacidades.length > 0">
+        <thead>
+          <tr>
+            <th>Concepto</th>
+            <th class="text-xs-center text-sm-right">Días</th>
+            <th class="text-xs-center text-sm-right">Desde</th>
+            <th class="text-xs-center text-sm-right">Hasta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="i in vm.data.historicoIncapacidades">
+            <td>{{i.Concepto}}</td>
+            <td class="center text-sm-right">{{i.Dias}}</td>
+            <td class="center text-sm-right">{{i.Desde | date: 'fullDate'}}</td>
+            <td class="center text-sm-right">{{i.Hasta | date: 'fullDate'}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="card-body" ng-if="vm.Loading_Historico">
+        <div class="spinner blue">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="tab-pane" id="Solicitadas">
+      <table class="table table-bordered table-striped table-sm" ng-if="vm.data.incapacidades.length > 0">
+        <thead>
+          <tr>
+            <th>Concepto</th>
+            <th class="text-xs-center text-sm-right">Días</th>
+            <th class="text-xs-center text-sm-right">Fecha Inicial</th>
+            <th class="text-xs-center text-sm-right">Fecha Final</th>
+            <th class="text-xs-center">Adjuntos</th>
+            <th class="text-xs-center">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="i in vm.data.incapacidades">
+            <td>{{i.Concepto}}</td>
+            <td class="center text-sm-right">{{i.Dias}}</td>
+            <td class="center text-sm-right">{{i.Desde | date: 'fullDate'}}</td>
+            <td class="center text-sm-right">{{vm.calcularFechaLLegadaCliente(i.Hasta) | date: 'fullDate'}}</td>
+            <td class="text-center">
+              <a href="{{i.Adjunto}}" target="blank" class="btn btn-sm btn-success hidden-md-down" ng-if="i.Adjunto">
+                <i class="material-icons">sort</i> Ver
+              </a>
+            </td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-danger"
+                      ng-if="i.Estado != 'P'"
+                      ng-click="vm.Confirm_Del_Incapacidad(i.Cod_Novaut)"><i class="material-icons">delete</i> Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card-body" ng-if="vm.data.incapacidades.length > 0">
+        <div class="alert alert-warning">
+          Incapacidades reportadas aún
+          <b>no pagadas</b> en el Sistema de nómina.
+        </div>
+      </div>
+      <div ng-if="vm.data.incapacidades.length === 0"> No hay datos para mostrar</div>
+    </div>
+  </div>
+</div>

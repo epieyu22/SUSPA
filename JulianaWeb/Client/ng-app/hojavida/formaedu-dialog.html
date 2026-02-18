@@ -1,0 +1,105 @@
+<form name="ReferenciaForm">
+
+<div class="ngdialog-header">
+  <h5 class="modal-title">Añadir educación y formación</h5>
+</div>
+<div class="ngdialog-body">
+
+  <div class="row">
+
+
+    <div class="form-group col-md-6">
+      <label>Institución:</label>
+      <input type="text" class="form-control" ng-model="selectedInstitucion" placeholder="Nombre de la institucion" required>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Nivel de estudio:</label>
+      <select class="form-control" ng-model="nivelSelected" ng-options="i.value as i.name for i in nivelestudio" required>
+        <option value="" disabled selected>Nivel de estudio</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Titulo:</label>
+      <oi-select oi-options="i.Descripcion for i in data.tables.profesiones track by i.Cod_Profesion"
+                 ng-model="Cod_Titulo"
+                 placeholder="Buscar Ocupación"
+                 oi-select-options="{
+                    newItem: true,
+                     newItemModel: {Descripcion: $query}
+                }"
+                 >
+      </oi-select>
+    </div>
+    <div class="form-group col-md-6">
+
+      <label>Otro titulo:</label>
+      <input type="text" class="form-control" ng-model="otroTitulo" placeholder="Nombre de la institucion">
+    </div>
+
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label class="custom-control custom-radio">
+          <input class="custom-control-input " type="radio" ng-model="Estado" value="T">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-label">Culminado</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <input class="custom-control-input" type="radio" ng-model="Estado" value="A">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-label">Abandonado / Aplazado</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <input class="custom-control-input" type="radio" ng-model="Estado" value="C">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-label">Cursando</span>
+        </label>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <div class="row">
+        <div class="col-sm-6">
+          <label>Inicio:</label>
+          <select class="form-control" ng-model="FormAcademicaInicio.ano" ng-options="i as i for i in years" required>
+            <option value="" disabled selected>Año</option>
+          </select>
+          <select class="form-control" ng-model="FormAcademicaInicio.mes" ng-options="i.value as i.name for i in MONTHS" required>
+            <option value="" disabled selected>Mes</option>
+          </select>
+        </div>
+        <div class="col-sm-6">
+          <label>Salida:</label>
+          <select class="form-control" ng-model="FormAcademicaSalida.ano" ng-options="i as i for i in years" required>
+            <option value="" disabled selected>Año</option>
+          </select>
+          <select class="form-control" ng-model="FormAcademicaSalida.mes" ng-options="i.value as i.name for i in MONTHS" required>
+            <option value="" disabled selected>Mes</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group m-y-1 col-md-12">
+      <label>Adjuntos:</label>
+      <input type="file" name="file" class="form-control" accept="application/pdf" file-model="adjunto" disabled>
+    </div>
+
+  </div>
+
+
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <button type="button" class="btn btn-outline-secondary" ng-click="Close()">Cancelar</button>
+        <button type="button" class="btn btn-success" ng-if="data.referencia" ng-disabled="ReferenciaForm.$invalid" ng-click="Update_Referencia()">
+          Guardar Cambios
+        </button>
+        <button type="button" class="btn btn-success" ng-if="!data.referencia" ng-disabled="ReferenciaForm.$invalid" ng-click="AddFormAcademica()">
+          Añadir
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+</form>

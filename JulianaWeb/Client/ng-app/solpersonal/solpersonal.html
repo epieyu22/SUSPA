@@ -1,0 +1,75 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item active">Procesos Especiales</li>
+  <li class="breadcrumb-item active">Solicitud De Personal</li>
+</ol>
+
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    Solicitud De Personal
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="">Empresa:</label>
+          <select class="form-control" ng-model="vm.viewmodel.Empresa" ng-change="vm.Get_Conceptos_OtrasNov()" ng-options="e.BaseDatos as e.Nombre_Empresa for e in vm.Empresas"></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label for="">Motivo:</label>
+        <select ng-model="vm.viewmodel.Cod_Motivo" name="" id="" class="form-control form-control-sm custom-select custom-select-sm">
+          <option value="1">Retiro Del Empleado</option>
+          <option value="2">Translado Del Empleado</option>
+          <option value="3">Ascenso Del Empleado</option>
+          <option value="4">Reemplazo Del Empleado</option>
+          <option value="5">Nuevo Cargo</option>
+        </select>
+      </div>
+      <div class="col-md-4 form-group">
+        <label for="">Cargo:</label>
+        <select name="" ng-model="vm.viewmodel.Cod_Cargo" id="" class="form-control form-control-sm custom-select custom-select-sm"
+          ng-model="vm.cargo" ng-options="c.Cod_Cargo as c.Nom_Cargo for c in vm.data.cargos"></select>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-3 form-group">
+        <label for="">Zona:</label>
+        <select ng-model="vm.viewmodel.Cod_Zona" name="" id="" class="form-control form-control-sm custom-select custom-select-sm"
+          ng-model="vm.zona" ng-options="c.Cod_Zona as c.Nom_Zona for c in vm.data.zonas"></select>
+      </div>
+      <div class="col-md-3 form-group">
+        <label for="">Sucursal:</label>
+        <select name="" id="" ng-model="vm.viewmodel.Cod_Sucursal" class="form-control form-control-sm custom-select custom-select-sm"
+          ng-model="vm.sucursal" ng-options="c.Cod_Sucursal as c.Nom_Sucursal for c in vm.data.sucursal"></select>
+      </div>
+      <div class="col-md-3 form-group">
+        <label for="">Centro De Costo:</label>
+        <select name="" id="" ng-model="vm.viewmodel.Coc_Ccosto" class="form-control form-control-sm custom-select custom-select-sm"
+          ng-model="vm.ccosto" ng-options="c.Cod_Ccosto as c.Nom_Ccosto for c in vm.data.ccostos"></select>
+      </div>
+      <div class="col-md-3 form-group">
+        <label for="">Departamento:</label>
+        <select name="" ng-model="vm.viewmodel.Cod_Depto" id="" class="form-control form-control-sm custom-select custom-select-sm"
+          ng-model="vm.depto" ng-options="c.Cod_Depto as c.Nombre_Depto for c  in vm.data.deptos"></select>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <label for="">Descripción:</label>
+        <textarea ng-model="vm.viewmodel.Descripcion" class="form-control form-control-sm"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="button" class="btn btn-primary float-right" ng-click="vm.GuardarRequerimiento()">Aceptar</button>
+  </div>
+</div>

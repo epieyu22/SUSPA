@@ -1,0 +1,36 @@
+<div class="card punch-event">
+  <div class="card-body">
+
+    <div ng-if="!punchData.hasTurn">
+      Unscheduled
+    </div>
+
+    <div ng-if="punchData.hasTurn">
+      <p class="text-center">
+        <span>{{punchData.checkinHour}} </span> - <span>{{punchData.checkoutHour}}</span>
+      </p>
+      <p ng-if="punchData.workedHours" class="text-center">
+        <i class="las la-business-time"></i> <b>({{punchData.workedHours}})</b>
+      </p>
+    </div>
+    <hr />
+    <div ng-if="punchData.hasPunch">
+      <span  class="badge bg-primary text-light"><i class="las la-hourglass-start"></i>{{punchData.punchCheckinHour}} </span> -
+      <span  class="badge bg-danger text-light"><i class="las la-hourglass-end"></i>{{punchData.punchCheckoutHour}}</span>
+    </div>
+    <hr />
+    <div ng-if="punchData.delayedHours" >
+      <p class="text-center"><i class="las la-user-clock"></i> <b>{{punchData.delayedHours}}</b> </p>
+    </div>
+
+    <div ng-if="!punchData.hasPunch">
+      Missing Punch
+    </div>
+
+    <div ng-if="false">
+      <button type="button" class="btn btn-primary btn-space" ng-click="$ctrl.openEditModal()">
+        <i class="las la-edit"></i>
+      </button>
+    </div>
+  </div>
+</div>

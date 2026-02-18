@@ -1,0 +1,114 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">Comprobantes y Certificados</a>
+  </li>
+  <li class="breadcrumb-item active">Certificado Laboral</li>
+</ol>
+
+<div class="row">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-success" ui-sref="certlaboral_admin" ng-if="hasPermission(['certlaboral.admin'])">
+      <i class="material-icons">launch</i>
+      <span>Opción </span>
+      <span class="hidden-xs-down">de Certificados</span>
+      <span>Masivos</span>
+    </button>
+    <button type="button" class="btn btn-primary float-right" ui-sref="certlaboral_config" ng-if="hasPermission(['certlaboral.config'])">
+      <i class="material-icons">settings</i>
+      <span class="hidden-xs-down">Configuración</span>
+    </button>
+  </div>
+</div>
+
+<!-- <div class="alert alert-info alert-dismissible show" role="alert" ng-if="vm.MostrarAlertaCertlaboral">
+  <i class="material-icons">info</i>
+  {{vm.AlertaCertlaboral}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div> -->
+
+<div class="row mt-3" >
+  <div class="col-md-6">
+    <div class="input-group">
+      <input type="text" class="form-control" ng-model="vm.searchFile" placeholder="Buscar Cod. Verificación">
+      <span class="input-group-btn">
+        <button class="btn btn-info" ng-click="vm.Search_Certlab()">
+          buscar
+        </button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<form name="certlaboralForm">
+  <div class="card primary-theme shadow">
+    <div class="card-header">
+      <i class="icon-certflaboral"></i> Opción de Certificado Laboral Personal.
+    </div>
+    <div class="card-body">
+      <div class="row">        
+
+        <div class="col-12" ng-if="vm.loading">
+          <div class="p-3 mb-3 col-12 animated-background"></div>
+          <div class="p-3 mb-3 col-8 animated-background"></div>
+          <div class="p-3 mb-3 col-8 animated-background"></div>
+        </div>
+
+        <div ng-if="!vm.loading" class="col-12">
+          <div class="col-md-12 form-group">
+            <label for="">Plantilla</label>
+            <div class="input-group">
+              <select 
+                class="custom-select form-control" 
+                ng-model="vm.model.Cod_Plantilla" 
+                ng-change="vm.cambiarPlantilla()" 
+                ng-options="p.Autonum as p.Nomb_Plantilla for p in vm.data.plantillas">
+              </select>
+              <!-- <div class="input-group-append">
+                <button class="btn btn-secondary" type="button">Vista Previa</button>
+              </div> -->
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group" ng-if="vm.UseDirigidoCertificado">
+              <label>A quién va dirigido:</label>
+              <input class="form-control" type="text" ng-model="vm.model.dirigido" required>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="alert alert-info" role="alert" ng-if="vm.splantilla.Aprobacion">
+              <h5 class="alert-heading">Requiere Aprobación!</h5>
+              <p>La plantilla de certificado laboral seleccionada requiere ser aprobada, enviaremos un correo electrónico a
+                la persona encargada de firmar este certificado con su solicitud para sea revisada.</p>
+              <hr>
+              <p class="mb-0">Si la respuesta es positiva,
+                <b>vía correo electrónico llegara adjunto la certificación solicitada</b>. De lo contrario le llegara una alerta
+                informado lo motivos del rechazo.
+              </p>
+            </div>
+          </div>
+          <!--<div class="col-md-12 m-y-2">
+            <div class="alert alert-danger" role="alert" ng-if="!vm.config.Cod_Empleado_Autoriza">
+              No se a configurado un aprobador por defecto para esta empresa
+            </div>
+          </div>-->
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-primary float-right" ng-click="vm.generateCertlaboral()" ><!--ng-disabled="certlaboralForm.$invalid || !vm.config.Cod_Empleado_Autoriza"-->
+  
+        <span ng-if="!vm.splantilla.Aprobacion">
+          <i class="material-icons">get_app</i> Generar Documento</span>
+        <span ng-if="vm.splantilla.Aprobacion">
+          <i class="material-icons">markunread</i> Solicitar Documento</span>
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,25 @@
+<div class="jw-modal">
+  <header>
+    <h5>Seleccionar Empleado</h5>
+  </header>
+  <section class="search">
+    <div class="row">
+      <div class="col-md-12">
+        <input type="search" ng-model="buscar.Empleado" placeholder="Buscar Empleado">
+      </div>
+    </div>
+  </section>
+  <section class="body">
+    <table class="table table-sm table-bordered table-hover">
+      <tbody>
+        <tr ng-repeat="e in data | filter:buscar | filter:{Estado: '!R'} " ng-click="confirm(e)">
+          <td>{{e.Cedula.trim()}}</td>
+          <td>{{e.Empleado}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <footer>
+    <button type="button" class="btn btn-outline-secondary" ng-click="closeThisDialog()">Cancelar</button>
+  </footer>
+</div>

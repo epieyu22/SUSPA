@@ -1,0 +1,105 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item"><a ui-sref="dashboard">Consultas y Solicitudes</a></li>
+  <li class="breadcrumb-item active">
+    <a ui-sref="timesheet">Time sheet report</a>
+  </li>
+</ol>
+
+
+<div class="card shadow primary-theme">
+  <div class="cd-tabs">
+    
+  </div>
+  <div class="tab-content">
+
+      <div class="cd-tabs">
+        <nav class="cd-tabs-navigation ">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="active" data-toggle="tab" role="tab" href="#" data-target="#Referencias">
+                <i class="far fa-address-card"></i>
+                <span class="tab-text">Reporte de horas registradas</span>
+              </a>
+            </li>
+          </ul>
+
+        </nav>
+      </div>
+      <div class="tab-pane active" id="Referencias" role="tabpanel">
+        <table class="table table-bordered table-striped" table-morphe ng-if="vm.data.clientes">
+
+          <thead>
+            <th>Total x dia</th>
+            <th>Fecha</th>
+            <th >Horas</th>
+            <th>Cliente</th>
+            <th>Area</th>
+            <th>Concepto</th>
+            <th>Descripcion</th>
+            <th>N° Req</th>
+            <th>Acciones</th>
+          </thead>
+          <thead>
+          <th>x Hora</th>
+
+          <th>
+            <input type="date" class="form-control" ng-model="vm.timesheet.fecha" required>
+          </th>
+          <th>
+            <input type="number" class="form-control" ng-model="vm.timesheet.num_horas" required>
+          </th>
+          <th>
+            <select class="form-control" ng-model="vm.timesheet.Id_Cliente" ng-options="i.Id_Cliente as i.Nombre for i in vm.data.clientes"
+                    required></select>
+          </th>
+          <th>
+            <select class="form-control" ng-model="vm.timesheet.Id_Area" ng-options="i.Id_Area as i.Nombre for i in vm.data.areas"
+                    required></select>
+          </th>
+          <th>
+            <select class="form-control" ng-model="vm.timesheet.Id_Concepto" ng-options="i.Id_Concepto as i.Nombre for i in vm.data.areas_con"
+                    required></select>
+          </th>
+          <th>
+            <input class="form-control" ng-model="vm.timesheet.Descripcion" type="text" required>
+          </th>
+          <th>
+            <input type="number" class="form-control" ng-model="vm.timesheet.numReq" required>
+          </th>
+          <th>
+            <button type="submit" class="btn btn-success pull-xs-rigth" ng-click="vm.add_registro_horas()">
+          Registrar
+        </button>
+          </th>
+          </thead>
+          <tbody>
+
+            <tr ng-repeat="i in vm.data.ths_report">
+              <td>{{i.Cant_Horas}}</td>
+              <td>{{i.Fecha}}</td>
+              <td>{{i.Cant_Horas}}</td>
+              <td>{{i.clientes.Nombre }}</td>
+              <td>{{i.areas.Nombre}}</td>
+              <td>{{i.conceptos.Nombre}}</td>
+              <td>{{i.Descripcion}}</td>
+              <td>{{i.Req}}</td>
+
+              <td style="text-align: center">
+                <button type="button" class="btn btn-success btn-sm m-r-1" ng-click="vm.Open_Referencias_dialog(r)">
+                  <i class="material-icons">edit</i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!--<div class="blank" ng-if="!vm.data.ths_report.length > 0">
+          <p>No se han añadido horas al time sheet</p>
+        </div>-->
+      </div>
+    </div>
+</div>

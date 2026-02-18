@@ -1,0 +1,67 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">Comprobantes y Certificados</a>
+  </li>
+  <li class="breadcrumb-item active">Ingresos y Retenciones</li>
+</ol>
+
+<div class="row m-t-1">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-success" ui-sref="retefuenteAdmin" ng-if="hasPermission(['retefuente.admin'])">
+      <i class="material-icons">launch</i>
+      <span>Opción </span>
+      <span class="hidden-xs-down">de Certificados</span>
+      <span>Masivos</span>
+    </button>
+    <button type="button" class="btn btn-primary float-right" ui-sref="retefuente.config" ng-if="hasPermission(['retefuente.config'])">
+      <i class="material-icons">settings</i>
+      <span class="hidden-xs-down">Configuración</span>
+    </button>
+  </div>
+</div>
+
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    <i class="icon-certfretefuente"></i> Opcion de Certificado de Ingresos y Retenciones Personal
+  </div>
+  <div class="card-body">
+    <div class="col-md-12">
+      <p>Seleccione el año gravable del cual generar el certificado:</p>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Año:</label>
+        <select class="custom-select" ng-model="vm.retefuenteViemModel.anoContable" ng-options="i as i for i in vm.years" ng-change="vm.checkMeses(vm.viewmodel.ano)"></select>
+      </div>
+    </div>
+    <div class="col-md-12" ng-if="!vm.years.length > 0">
+      <div class="alert alert-danger" role="alert">
+        <p>Su fecha de ingreso es superior al ultimo año aprobado para generar los certificados de ingresos y retenciones.</p>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex justify-content-between">
+      <!--<button type="button" class="btn btn-success float-left" onclick="window.open(downloadPdf1(), '_blank')">
+        <i class="material-icons">get_app</i> Formato Deducible 1
+      </button>
+      <button type="button" class="btn btn-success float-left" onclick="downloadPdf2()">
+        <i class="material-icons">get_app</i> Formato Deducible 2
+      </button>-->
+      <button type="button" class="btn btn-primary float-right" ng-click="vm.generateRetefuente()" ng-disabled="!vm.years.length > 0">
+        <i class="material-icons">get_app</i> Generar Certificado
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function downloadPdf1() { window.location.href = '/JulianaWeb/DDB/Static/uploads/DEDUCIBLES/FormatoDeducibles.pdf'; }
+  function downloadPdf2() { window.location.href = '/JulianaWeb/DDB/Static/uploads/DEDUCIBLES/FormatoDeducibles2.pdf'; }
+</script>

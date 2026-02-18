@@ -1,0 +1,21 @@
+<form name="RechazarSolicitudForm">
+  <div class="ngdialog-header">
+    <h5 class="modal-title">¿Rechazar Solicitud?</h5>
+  </div>
+  <div class="row ngdialog-body">
+    <div class="form-group col-md-12">
+      <label>Motivo del rechazo:</label>
+      <select class="form-control" ng-model="data.Cod_Motivo_Rechazo" ng-options="i.Cod_Motivo_Rechazo as i.Descripcion for i in motivos"></select>
+    </div>
+    <div class="form-group col-md-12">
+      <label for="">Observación:</label>
+      <textarea class="form-control" ng-model="data.Observacion"></textarea>
+    </div>
+    <div class="col-md-12 text-right">
+      <button type="button" class="btn btn-outline-secondary" ng-click="closeDialog()">Cancelar</button>
+      <button type="button" class="btn btn-success" ng-disabled="RechazarSolicitudForm.$invalid" ng-click="Rechazar_Solicitud()">
+        Rechazar Solicitud
+      </button>
+    </div>
+  </div>
+</form>

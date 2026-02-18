@@ -1,0 +1,78 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">Procesos Especiales</a>
+  </li>
+  <li class="breadcrumb-item active">Planilla de Nómina</li>
+</ol>
+
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    Planilla de Nómina
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="">Empresa:</label>
+          <select class="form-control" ng-model="vm.viewmodel.Empresa" ng-change="vm.Get_Conceptos_OtrasNov()" ng-options="e.BaseDatos as e.Nombre_Empresa for e in vm.data.Empresas"></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" ng-if="vm.data.Prenomina_Disponible">
+      <div class="form-group col-md-6">
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" ng-model="vm.viewmodel.prenomina">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-label">Premonina</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label for="">Filtro:</label>
+        <select class="form-control" ng-model="vm.viewmodel.Filtro">
+          <option value="Default">-- Sin filtros --</option>
+          <option value="Fec_Nomina" ng-if="!vm.viewmodel.prenomina">Fecha Nómina</option>
+          <option value="Fec_Ing_Novedad">Fecha Ingreso Novedad</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-4" ng-if="vm.viewmodel.Filtro === 'Fec_Nomina'">
+        <label for="">Fecha Nómina:</label>
+        <select class="form-control" ng-model="vm.viewmodel.Fec_Nomina" ng-options="(f|date:'dd/MM/yyyy') for f in vm.data.Fecs_Nomina  | orderBy:f:true">
+        </select>
+      </div>
+
+      <div class="form-group col-md-4" ng-if="vm.viewmodel.Filtro === 'Fec_Ing_Novedad'">
+        <label for="">Fecha ingreso Novedad:</label>
+        <jqx-date-time-input class="d-none d-md-block" jqx-ng-model ng-model="viewmodel.Fec_Salida" ng-change="checkDate()" jqx-settings="vm.datetimeInput"></jqx-date-time-input>
+        </select>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    <button type="button" class="btn btn-primary float-right " ng-click="vm.Upload_Novedades()">Generar</button>
+  </div>
+
+
+</div>
+
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    Planilla de Nómina
+  </div>
+  <jqx-grid jqx-settings="vm.grid_principal"></jqx-grid>
+</div>

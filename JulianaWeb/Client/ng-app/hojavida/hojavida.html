@@ -1,0 +1,734 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item"><a ui-sref="dashboard"><i class="material-icons">home</i></a></li>
+  <li class="breadcrumb-item"><a ui-sref="dashboard">Consultas y Solicitudes</a></li>
+  <li class="breadcrumb-item active">Hoja de vida</li>
+</ol>
+
+
+<div class="card shadow primary-theme">
+  <div class="cd-tabs">
+    <nav class="cd-tabs-navigation ">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="active" data-toggle="tab" role="tab" href="#" data-target="#Basico">
+            <i class="material-icons tab-icon">person</i>
+            <span class="tab-text">Información Básica</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a data-toggle="tab" role="tab" href="#" data-target="#Contacto">
+            <i class="material-icons tab-icon">phone</i>
+            <span class="tab-text">Contacto</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a data-toggle="tab" role="tab" href="#" data-target="#Perfil">
+            <i class="material-icons tab-icon">assignment_ind</i>
+            <span class="tab-text">Perfil Profesional</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane active" id="Basico" role="tabpanel">
+      <div class="card-body">
+        <!--Foto, Identidificación y Nombres-->
+        <div class="row m-y-2">
+          <div class="col-md-3 text-xs-center">
+            <div class="fileinput fileinput-new m-x-auto" data-provides="fileinput">
+              <div class="fileinput-new img-thumbnail mb-1">
+                <img alt="100%x100%" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22200%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20200%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1571f49029b%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1571f49029b%22%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2275.5%22%20y%3D%22104.5%22%3E200x200%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                     style="height: 100%; width: 100%; display: block;" ng-if="!vm.data.Imagen_Perfil">
+                <img ng-src="{{vm.data.Imagen_Perfil}}" alt="" ng-if="vm.data.Imagen_Perfil">
+              </div>
+              <div class="fileinput-preview fileinput-exists img-thumbnail mb-1" style="max-width: 200px; max-height: 150px;"></div>
+              <div class="">
+                <span class="btn btn-sm btn-secondary btn-file">
+                  <span class="fileinput-new">Seleccionar imagen</span>
+                  <span class="fileinput-exists">Cambiar</span>
+                  <input type="file" name="profileImg" accept="image/*" file-model="vm.profileImage">
+                </span>
+                <a href="#" class="btn btn-sm btn-danger fileinput-exists" data-dismiss="fileinput">
+                  Quitar
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Tipo de Documento:</label>
+              <select class="form-control" ng-model="vm.data.Tipo_Documento" ng-options='i.id as i.name for i in vm.TIPO_DOCUMENTOS'
+                      ng-disabled="vm.disabled" required>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Número Documento</label>
+              <input class="form-control" ng-model="vm.data.Doc_Identidad" type="text" ng-disabled="vm.disabled"
+                     required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Primer Nombre</label>
+              <input type="text" class="form-control" ng-model="vm.data.PNombre" ng-disabled="vm.disabled" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Segundo Nombre:</label>
+              <input type="text" class="form-control" ng-model="vm.data.SNombre" ng-disabled="vm.disabled" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Primer Apellido:</label>
+              <input type="text" class="form-control" ng-model="vm.data.PApellido" ng-disabled="vm.disabled" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Segundo Apellido:</label>
+              <input type="text" class="form-control" ng-model="vm.data.SApellido" ng-disabled="vm.disabled" required>
+            </div>
+          </div>
+        </div>
+        <!--Genero-->
+        <div class="row m-y-2">
+          <div class="col-md-12">
+            <label class="custom-control custom-radio">
+              <input class="custom-control-input " type="radio" ng-model="vm.data.Sexo" value="M" ng-disabled="vm.disabled">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-label">Masculino</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input class="custom-control-input" type="radio" ng-model="vm.data.Sexo" value="F" ng-disabled="vm.disabled">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-label">Femenino</span>
+            </label>
+          </div>
+        </div>
+        <!--Nacionalidad y Estado Civil-->
+        <div class="row m-y-2">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Nacionalidad:</label>
+              <select class="form-control" ng-model="vm.data.Cod_Nacionalidad" ng-options="i.Cod_Pais as i.Pais for i in vm.tables.paises"
+                      ng-disabled="vm.disabled"></select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Estado Civil:</label>
+              <select class="form-control" ng-model="vm.data.Est_Civil" ng-options="i.id as i.name for i in vm.ESTADOS_CIVILES"></select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-md-6">
+            <div>
+              <label>Fecha de Nacimiento:</label>
+            </div>
+            <div class="input-group mb-3">
+              <select class="form-control" ng-model="vm.Fec_Nacimiento.ano" ng-options="i as i for i in vm.YEARS"
+                      ng-disabled="vm.disabled"></select>
+              <select class="form-control" ng-model="vm.Fec_Nacimiento.mes" ng-options="i.value as i.name for i in vm.MONTHS"
+                      ng-disabled="vm.disabled"></select>
+              <select class="form-control" ng-model="vm.Fec_Nacimiento.dia" ng-options="i as i for i in vm.DAYS"
+                      ng-disabled="vm.disabled"></select>
+            </div>
+          </div>
+        </div>
+        <!--Posibilidad de Translado, Aspiración Salarial-->
+        <div class="row m-y-3" ng-if="!vm.disabled">
+          <div class="form-group col-md-6">
+            <label>Cargo Al Que Aspira:</label>
+            <oi-select oi-options="i.Cod_Cargo as i.Nom_Cargo for i in vm.tables.cargos track by i.Cod_Cargo" ng-model="vm.data.Cod_Cargo_Aspira"
+                       placeholder="Buscar Cargo"></oi-select>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Aspiración Salarial:</label>
+            <div class="input-group">
+              <span class="input-group-prepend input-group-text">$</span>
+              <input type="number" class="form-control" ng-model="vm.data.Asp_Salarial">
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <label>Años Experiencia:</label>
+            <input type="number" class="form-control" ng-model="vm.data.Anos_Experiencia">
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" ng-model="vm.data.PViaje" ng-init="vm.data.PViaje=vm.data.PViaje.trim()"
+                       ng-true-value="'S'" ng-false-value="'N'">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-label">Posibilidad de Viaje</span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" ng-model="vm.data.PTraslado" ng-init="vm.data.PTraslado=vm.data.PTraslado.trim()"
+                       ng-true-value="'S'" ng-false-value="'N'">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-label">
+                  Posibilidad de traslado
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-success pull-xs-rigth" ng-click="vm.Update_Hojavida()">
+              Guardar Cambios
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="Contacto" role="tabpanel">
+      <div class="card-body">
+        <div class="row m-y-2">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>País Residencia:</label>
+              <select class="form-control" ng-model="vm.data.Cod_Pais" ng-options="i.Cod_Pais as i.Pais for i in vm.tables.paises"></select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Estado Residencia:</label>
+              <select class="form-control" ng-model="vm.departamento" ng-options="i.Codigo_Dane.trim() as i.Nom_Depto for i in vm.tables.departamentos"
+                      ng-change="vm.filterCiudades()"></select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Ciudad Residencia:</label>
+              <select class="form-control" ng-model="vm.data.Cod_Ciudad" ng-options="i.Codigo as i.Nom_Ciudad for i in vm.ciudades"></select>
+            </div>
+          </div>
+        </div>
+        <div class="row m-y-2">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Dirección de Residencia:</label>
+              <div class="input-group">
+                <span class="input-group-prepend input-group-text" id="basic-addon1"><i class="material-icons">location_on</i></span>
+                <input class="form-control" ng-model="vm.data.Direccion" type="text" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Correo Electrónico:</label>
+              <div class="input-group">
+                <span class="input-group-prepend input-group-text" id="basic-addon1">@</span>
+                <input class="form-control" ng-model="vm.data.Dir_Electronica" type="mail" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Teléfono:</label>
+              <div class="input-group">
+                <span class="input-group-prepend input-group-text" id="basic-addon1"><i class="material-icons">phone</i></span>
+                <input class="form-control" ng-model="vm.data.Tel1" type="text" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Teléfono Móvil:</label>
+              <div class="input-group">
+                <span class="input-group-prepend input-group-text required" id="basic-addon1"><i class="material-icons">stay_current_portrait</i></span>
+                <input class="form-control required" ng-model="vm.data.Celular" type="text" required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h6 class="col-md-12">Contacto de Emergancia</h6>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Nombre:</label>
+              <div class="input-group">
+                <span class="input-group-prepend input-group-text" id="basic-addon1"><i class="material-icons">group</i></span>
+                <input class="form-control" ng-model="vm.data.Unidad_Tiempo" type="text" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Teléfono:</label>
+              <div class="input-group">
+                <span class="input-group-prepend input-group-text" id="basic-addon1"><i class="material-icons">phone</i></span>
+                <input class="form-control" ng-model="vm.data.Tel2" type="text" required>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-success pull-xs-rigth" ng-click="vm.Update_Hojavida()">
+              Guardar Cambios
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Contacto-->
+    <div class="tab-pane" id="Perfil" role="tabpanel">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Descripción breve de su perfil profesional:</label>
+              <textarea class="form-control" ng-model="vm.data.Sketch" placeholder="Ej: Amplia experiencia en la área financiera analista de crédito (énfasis en el manejo, identificación, clasificación, análisis y evaluación de operaciones de crédito). Análisis y aplicación de políticas financieras para la toma de decisiones en productos financieros y riesgo crediticio. Análisis de peticiones, quejas y reclamos."
+                        rows="5"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-success pull-xs-rigth" ng-click="vm.Update_Hojavida()">
+              Guardar Cambios
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Perfil profecional-->
+  </div>
+</div>
+
+
+<div class="card shadow primary-theme">
+  <div class="cd-tabs">
+    <nav class="cd-tabs-navigation ">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="active" data-toggle="tab" role="tab" href="#" data-target="#Referencias">
+            <i class="material-icons tab-icon">group</i>
+            <span class="tab-text">Referencias</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a data-toggle="tab" role="tab" href="#" data-target="#EduForma">
+            <i class="material-icons tab-icon">school</i>
+            <span class="tab-text">Educación y Formación</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a data-toggle="tab" role="tab" href="#" data-target="#ExpLaboral">
+            <i class="material-icons tab-icon">business_center</i>
+            <span class="tab-text">Experiencia laboral</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <!--Referencias personales grid-->
+  <div class="tab-content">
+    <div class="tab-pane active" id="Referencias" role="tabpanel">
+      <table class="table table-bordered table-striped" table-morphe ng-if="vm.REFERENCIAS_PERSONALES.length > 0">
+        <thead>
+        <th>Nombre</th>
+        <th>Ocupación</th>
+        <th>Telefono</th>
+        <th>Tipo Referencia</th>
+        <th style="min-width: 100px">Acciones</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="r in vm.REFERENCIAS_PERSONALES">
+            <td>{{r.Nombre}}</td>
+            <td>{{r.Ocupacion}}</td>
+            <td>{{r.Telefono}}</td>
+            <td>
+              <span class="" ng-switch="r.Tipo_Referencia">
+                <span ng-switch-when="P">Personal</span>
+                <span ng-switch-when="L">Laboral</span>
+                <span ng-switch-when="F">Familiar</span>
+              </span>
+            </td>
+            <td style="text-align: center">
+              <button type="button" class="btn btn-success btn-sm m-r-1" ng-click="vm.Open_Referencias_dialog(r)">
+                <i class="material-icons">edit</i>
+              </button>
+
+              <button type="button" class="btn btn-danger btn-sm" ng-click="vm.Delete_Referencia(r)">
+                <i class="material-icons">close</i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="blank" ng-if="!vm.REFERENCIAS_PERSONALES.length > 0">
+        <p>No se ha añadido datos de Referencias</p>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <button type="button" class="btn btn-success" ng-click="vm.Open_Referencias_dialog()">
+              <i class="material-icons">add_box</i>
+              Añadir
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Formacion Academica-->
+    <div class="tab-pane" id="EduForma" role="tabpanel">
+      <table class="table table-bordered table-striped" table-morphe ng-if="vm.FORMACADEMICA.length > 0">
+        <thead>
+        <th>Nivel Estudio</th>
+        <th>Institución</th>
+        <th>Titulo</th>
+        <th>Estado</th>
+        <th style="min-width: 200px">Periodo</th>
+        <th style="min-width: 150px">Acciones</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="i in vm.FORMACADEMICA">
+            <td>
+              <span ng-if="i.Cod_Nivel == 1">Nivel Técnico Profesional</span>
+              <span ng-if="i.Cod_Nivel == 2">Nivel Tecnológico</span>
+              <span ng-if="i.Cod_Nivel == 3">Nivel Profesional</span>
+              <span ng-if="i.Cod_Nivel == 4">Especialización</span>
+              <span ng-if="i.Cod_Nivel == 5">Maestría</span>
+              <span ng-if="i.Cod_Nivel == 6">Doctorados</span>
+
+            </td>
+            <td>
+              <span ng-if="i.Cod_Institucion > 0">
+                {{::vm.filter(vm.tables.insteducativas, {Cod_Institucion: i.Cod_Institucion}).Nom_Institucion}}
+              </span>
+              <span ng-if="i.Cod_Institucion == 0">{{::i.Otra_Institucion}}</span>
+            </td>
+            <td>
+              <span ng-if="i.Cod_Titulo > 0">
+                {{::vm.filter(vm.tables.profesiones, {Cod_Profesion: i.Cod_Titulo}).Descripcion}}
+              </span>
+              <span ng-if="i.Cod_Titulo == 0">{{i.Otro_Titulo}}</span>
+            </td>
+            <td>
+              <span>
+                <span ng-if="i.Estado == 'T'">Culminado</span>
+                <span ng-if="i.Estado == 'A'">Abandonado / Aplazado</span>
+                <span ng-if="i.Estado == 'C'">Cursando</span>
+              </span>
+            </td>
+            <td>
+              {{::i.Inicio}} /  {{::i.Salida}}
+            </td>
+            <td style="text-align: center">
+              <button type="button" class="btn btn-success btn-sm m-r-1"  disabled>
+                <i class="material-icons">edit</i>
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" ng-click="vm.DeleteFormacionAcademica(i)">
+                <i class="material-icons">delete</i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="blank" ng-if="!vm.FORMACADEMICA.length > 0">
+        <p>No se ha ha añadido datos de Estudios</p>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <button type="button" class="btn btn-success" ng-click="vm.Open_FormaEdu_dialog()">
+              <i class="material-icons">add_box</i>
+              Añadir
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Experiencia laboral-->
+    <div class="tab-pane" id="ExpLaboral" role="tabpanel">
+      <table class="table table-bordered table-striped table-sm" table-morphe ng-if="vm.EXPLABORAL.length > 0">
+        <thead>
+          <tr>
+            <th rowspan="2" style="min-width: 150px">Empresa</th>
+            <th>Sector</th>
+            <th rowspan="2">Cargo</th>
+            <th rowspan="2">Teléfono</th>
+            <th rowspan="2" style="min-width: 200px">Periodo</th>
+            <th rowspan="2" style="min-width: 150px">Acciones</th>
+          </tr>
+          <tr>
+            <th>Área de Trabajo</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="i in vm.EXPLABORAL">
+          <tr>
+            <td rowspan="2">{{::i.Empresa}}</td>
+            <td>{{::i.Sector}}</td>
+            <td>{{::i.Cargo}}</td>
+            <td>{{::i.Telefono}}</td>
+            <td>
+              {{::vm.FormatDesdeHasta(i.Fec_Ingreso)}} / <br>
+              {{::vm.FormatDesdeHasta(i.Fec_Retiro)}}
+            </td>
+            <td rowspan="2" style="text-align: center">
+              <button type="button" class="btn btn-success btn-sm m-r-1" ng-click="vm.Open_Referencias_dialog(i.Cod_ExpLaboral)" disabled>
+                <i class="material-icons">edit</i>
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" ng-click="vm.Delete_Experiencia(i)">
+                <i class="material-icons">delete</i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>{{i.AreaTrabajo}}</td>
+            <td colspan="3"><b>Logros:</b> {{i.Logros}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card-body" ng-if="!vm.EXPLABORAL.length > 0">
+        <div class="row">
+          <div>
+            <p class="blank small">No se ha añadido datos de Experiancia laboral</p>
+          </div>
+        </div>
+        <div class="col-md-12" ng-if="vm.EXPLABORAL.length > 0">
+          <ul class="list-group">
+            <li class="list-group-item clearfix" ng-repeat="i in vm.EXPLABORAL">
+              <div class="col-md-8">
+                <h5>{{::i.Empresa}}</h5>
+              </div>
+              <div class="col-md-4 text-md-right">
+                <button type="button" class="btn btn-outline-danger btn-sm" ng-click="vm.removeReferencia(r)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+              <div class="col-md-12">
+                <span>
+                  <b>Sector empresa:</b>{{i.Sector}}</  span>
+                  <br>
+                  <span><b>Área de Trabajo:</b>{{i.AreaTrabajo}}</span>
+              </div>
+              <div class="col-md-12">
+                <span>
+                  <b>Teléfono Empresa:</b> {{::i.Telefono}}
+                </span>
+                <br>
+                <span>
+                  <b>Cargo ocupado:</b> {{::i.Cargo}}
+                </span>
+                <br>
+                <span>
+                  <b>Periodo:</b>
+                  {{::vm.FormatDesdeHasta(i.Fec_Ingreso)}}
+                  - {{::vm.FormatDesdeHasta(i.Fec_Retiro)}}
+                </span>
+                <br>
+                <span><b>Logros:</b> {{i.Logros}}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AddExpLaboralForm">
+              <i class="material-icons">add_box</i>
+              Añadir experiencia
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+<!--Idiomas-->
+
+<div class="card shadow primary-theme">
+  <div class="cd-tabs">
+    <nav class="cd-tabs-navigation ">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="active" data-toggle="tab" role="tab" href="#" data-target="#Idiomas">
+            <i class="material-icons tab-icon">translate</i>
+            <span class="tab-text">Idiomas</span>
+          </a>
+        </li>
+        <!--<li class="nav-item">
+          <a data-toggle="tab" role="tab" href="#" data-target="#Habilidades">
+            <i class="material-icons tab-icon">gavel</i>
+            <span class="tab-text">Conocimientos y habilidades</span>
+          </a>
+        </li>-->
+      </ul>
+    </nav>
+  </div>
+  <!--Idiomas-->
+  <div class="tab-content">
+    <div class="tab-pane active" id="Idiomas" role="tabpanel">
+      <div class="card-body">
+        <form name="IdiomasHojaVidaForm" class="clearfix">
+          <div class="form-group col-md-6">
+            <label>Idioma:</label>
+            <oi-select oi-options="i.Cod_Idioma as i.Nom_Idioma for i in vm.tables.idiomas track by i.Cod_Idioma"
+                       ng-model="vm.idiomaVm.Cod_Idioma" placeholder="Buscar Idioma"></oi-select>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Nivel:</label>
+            <select class="form-control" ng-model="vm.idiomaVm.Nivel_Idioma" ng-options="i.value as i.name for i in vm.NIVELES_IDIOMA"></select>
+          </div>
+          <div class="col-sm-12 col-md-2">
+            <button type="submit" class="btn btn-success m-y-2" ng-click="vm.addIdiomas()" ng-disabled="IdiomasHojaVidaForm.$invalid">
+              <i class="material-icons">add_box</i>
+              Añadir
+            </button>
+          </div>
+        </form>
+
+        <div class="row m-y-1 clearfix" ng-if="vm.IDIOMAS_HOJAVIDA.length > 0">
+          <div class="col-md-12">
+            <span class="tag tag-pill tag-primary m-r-1 mb-1" ng-repeat="i in vm.IDIOMAS_HOJAVIDA">
+              <span class="icon-text">
+                {{vm.filter(vm.tables.IDIOMAS, {Cod_Idioma: i.Cod_Idioma}).Nom_Idioma}}
+                /
+                {{vm.filter(vm.NIVELES_IDIOMA, {value: i.Nivel_Idioma}).name}}
+              </span>
+              <i class="material-icons icon-btn" title="Eliminar" ng-click="vm.Delete_Idioma(i)">delete</i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Habilidades-->
+    <!--<div class="tab-pane" id="Habilidades" role="tabpanel">
+
+      <div class="card-body">
+        <div class="row m-b-3">
+          <div class="form-group col-md-6">
+            <label>Escriba sus conocimientos:</label>
+            <oi-select oi-options="i.Cod_Especialidad as i.Descripcion for i in vm.tables.especialidades track by i.Cod_Especialidad"
+                       ng-model="vm.selectedEspecialidad" placeholder="Buscar Habilidad"></oi-select>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-success m-y-2" type="button" ng-click="vm.addIdiomas()" ng-disabled="IdiomasHojaVidaForm.$invalid">
+              <i class="material-icons">add_box</i>
+              Añadir
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>-->
+  </div>
+</div>
+
+<!-- Dialogs -->
+<!--ExpLaboral Dialog-->
+<div class="modal fade" id="AddExpLaboralForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form name="AddExpLaboralForm">
+      <div class="modal-content ">
+        <div class="modal-header primary-theme">
+          <h5 class="modal-title" id="myModalLabel">Añadir Experiencia Laboral</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body clearfix">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Empresa:</label>
+              <input type="text" class="form-control" ng-model="vm.expLaboralVm.Empresa" placeholder="Empresa" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Sector Empresa:</label>
+              <select class="form-control" ng-model="vm.expLaboralVm.Sector" ng-options="i.name as i.name for i in vm.sectoresEmpresa" required>
+                <option value="" disabled selected>Empresa</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Aréa Empresa:</label>
+              <select class="form-control" ng-model="vm.expLaboralVm.AreaTrabajo" ng-options="i.name as i.name for i in vm.areasEmpresa" required>
+                <option value="" disabled selected>Área empresa</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Teléfono Empresa:</label>
+              <input type="number" ng-model="vm.expLaboralVm.Telefono" placeholder="Teléfono" class="form-control" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Cargo:</label>
+
+              <angucomplete-alt id="exs1" placeholder="Buscar Cargo" pause="100" selected-object="vm.selectedCargo"
+                                local-data="vm.tables.cargos" search-fields="Nom_Cargo" title-field="Nom_Cargo" minlength="1" input-class="form-control"
+                                input-changed="vm.inputCargo" field-required="True" />
+            </div>
+            <div class="form-group col-md-6">
+              <label>Otro cargo:</label>
+              <input type="text" class="form-control" placeholder="Otro Cargo" ng-model="vm.expLaboralVm.otroCargo">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label>Inicio:</label>
+                  <select class="form-control" ng-model="vm.ExpLaboralInicio.ano" ng-options="i as i for i in vm.YEARS"
+                          required>
+                    <option value="" disabled selected>Año</option>
+                  </select>
+                  <select class="form-control" ng-model="vm.ExpLaboralInicio.mes" ng-options="i.value as i.name for i in vm.MONTHS"
+                          required>
+                    <option value="" disabled selected>Mes</option>
+                  </select>
+                </div>
+                <div class="col-sm-6">
+                  <label>Salida:</label>
+                  <select class="form-control" ng-model="vm.ExpLaboralSalida.ano" ng-options="i as i for i in vm.YEARS"
+                          required>
+                    <option value="" disabled selected>Año</option>
+                  </select>
+                  <select class="form-control" ng-model="vm.ExpLaboralSalida.mes" ng-options="i.value as i.name for i in vm.MONTHS"
+                          required>
+                    <option value="" disabled selected>Mes</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label>Funciones y logros del cargo:</label>
+              <textarea class="form-control" placeholder="Funciones y logros del cargo..." ng-model="vm.expLaboralVm.Logros" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-success" ng-disabled="AddExpLaboralForm.$invalid" ng-click="vm.addExpLaboral()">Añadir</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

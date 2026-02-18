@@ -1,0 +1,1322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{11D110B5-3D95-4495-A41C-EDD396877469}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JulianaWeb</RootNamespace>
+    <AssemblyName>JulianaWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AngularTemplates.Bundling, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7db11982946d6de4, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngularTemplates.Compile.1.2.1\lib\net40\AngularTemplates.Bundling.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AngularTemplates.Compile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7db11982946d6de4, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngularTemplates.Compile.1.2.1\lib\net40\AngularTemplates.Compile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Aspose.Words, Version=18.10.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Words.18.10.0\lib\net40\Aspose.Words.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.10.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.10\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=2.1.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.2.1.1\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Elmah, Version=1.2.13605.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2\lib\Elmah.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IdentityModel, Version=3.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IdentityModel.3.3.1\lib\net461\IdentityModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MailKit, Version=2.15.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.2.15.0\lib\net48\MailKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Build.Tasks.v4.0" />
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.3.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.3.0\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.5.3.0\lib\net461\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.5.3.0\lib\net461\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.3.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.4.2.2\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.2.2\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.2.2\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OpenIdConnect, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OpenIdConnect.4.2.2\lib\net45\Microsoft.Owin.Security.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit, Version=2.15.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.2.15.0\lib\net48\MimeKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.5.3.2\lib\net46\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.8.1.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.8.1\lib\net45\RazorEngine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Select.HtmlToPdf, Version=17.3.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
+      <HintPath>..\packages\Select.HtmlToPdf.17.3.0\lib\net40\Select.HtmlToPdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Doc, Version=6.3.0.41040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.6.3\lib\net40\Spire.Doc.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.3.6.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.6.3\lib\net40\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=4.3.5.2040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.6.3\lib\net40\Spire.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.3.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="TuesPechkin, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TuesPechkin.2.1.1\lib\net20\TuesPechkin.dll</HintPath>
+    </Reference>
+    <Reference Include="TuesPechkin.Wkhtmltox.AnyCPU, Version=0.12.4.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TuesPechkin.Wkhtmltox.AnyCPU.0.12.4.1\lib\net20\TuesPechkin.Wkhtmltox.AnyCPU.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebMarkupMin.Core, Version=2.2.4.0, Culture=neutral, PublicKeyToken=99472178d266584b, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebMarkupMin.Core.2.2.4\lib\net451\WebMarkupMin.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Client\bootstrap.min.js" />
+    <Content Include="Client\ng-app\aseo\bioseguridad.ctrl.js" />
+    <Content Include="Client\ng-app\aseo\bioseguridad.html" />
+    <Content Include="Client\ng-app\aseo\aseo.module.js" />
+    <Content Include="Client\ng-app\aseo\aseo.routes.js" />
+    <Content Include="Client\ng-app\aseo\bioseguridad.svc.js" />
+    <Content Include="Client\ng-app\aseo\bioseguridadReport\bioseguridadReport.html" />
+    <Content Include="Client\ng-app\bioseguridad\bioseguridad.ctrl.js" />
+    <Content Include="Client\ng-app\bioseguridad\bioseguridad.html" />
+    <Content Include="Client\ng-app\bioseguridad\bioseguridad.module.js" />
+    <Content Include="Client\ng-app\bioseguridad\bioseguridad.routes.js" />
+    <Content Include="Client\ng-app\bioseguridad\bioseguridad.svc.js" />
+    <Content Include="Client\ng-app\bioseguridad\bioseguridadReport\bioseguridadReport.html" />
+    <Content Include="Client\ng-app\bioseguridad\bioseguridad.ctrl.js" />
+    <Content Include="Client\ng-app\bioseguridad\bioseguridad.html" />
+    <Content Include="Client\ng-app\bioseguridad\bioseguridad.module.js" />
+    <Content Include="Client\ng-app\bioseguridad\bioseguridad.routes.js" />
+    <Content Include="Client\ng-app\bioseguridad\bioseguridad.svc.js" />
+    <Content Include="Client\ng-app\certlaboral\otroscert.html" />
+    <Content Include="Client\ng-app\certlaboral\politicas.html" />
+    <Content Include="Client\ng-app\certlaboral\otroscert.html" />
+    <Content Include="Client\ng-app\dashboardBi\dashboardBi_Payroll.html" />
+    <Content Include="Client\ng-app\dashboardBi\dashboardBi_Finanzas.html" />
+    <Content Include="Client\ng-app\dashboardBi\dashboardBi.ctrl.js" />
+    <Content Include="Client\ng-app\dashboardBi\dashboardBi.html" />
+    <Content Include="Client\ng-app\dashboardBi\dashboardBi.module.js" />
+    <Content Include="Client\ng-app\dashboardBi\dashboardBi.routes.js" />
+    <Content Include="Client\ng-app\dashboardBi\dashboardBi.svc.js" />
+    <Content Include="Client\ng-app\layout\loader-indicator.js" />
+    <Content Include="Client\ng-app\turnos\components\punch-event\punch-event.component.css" />
+    <Content Include="Client\ng-app\turnos\components\punch-event\punch-event.component.html" />
+    <Content Include="Client\ng-app\turnos\components\punch-event\punch-event.component.js" />
+    <Content Include="Client\ng-app\turnos\components\punch-form\punch-form.component.html" />
+    <Content Include="Client\ng-app\turnos\components\punch-form\punch-form.component.js" />
+    <Content Include="Client\ng-app\turnos\components\punch-schedule\punch-schedule.component.html" />
+    <Content Include="Client\ng-app\turnos\components\punch-schedule\punch-schedule.component.js" />
+    <Content Include="Client\ng-app\turnos\components\punch-trigger\punch-trigger.component.js" />
+    <Content Include="Client\ng-app\turnos\pages\punch-manager\punch-manager.page.html" />
+    <Content Include="Client\ng-app\turnos\pages\punch-manager\punch-manager.page.js" />
+    <Content Include="Client\ng-app\turnos\turnos.ctrl.js" />
+    <Content Include="Client\ng-app\turnos\turnos.html" />
+    <Content Include="Client\ng-app\turnos\turnos.module.js" />
+    <Content Include="Client\ng-app\turnos\turnos.routes.js" />
+    <Content Include="Client\ng-app\turnos\turnos.svc.js" />
+    <Content Include="Client\ng-app\cumpleaños\cumpleanos.html" />
+    <Content Include="Client\ng-app\cumpleaños\cumpleanos.ctrl.js" />
+    <Content Include="Client\ng-app\cumpleaños\cumpleanos.module.js" />
+    <Content Include="Client\ng-app\cumpleaños\cumpleanos.routes.js" />
+    <Content Include="Client\ng-app\cumpleaños\cumpleanos.svc.js" />
+    <Content Include="Client\ng-app\facElectronica\facElectronica.ctrl.js" />
+    <Content Include="Client\ng-app\facElectronica\facElectronica.html" />
+    <Content Include="Client\ng-app\facElectronica\facElectronica.module.js" />
+    <Content Include="Client\ng-app\facElectronica\facElectronica.routes.js" />
+    <Content Include="Client\ng-app\facElectronica\facElectronica.svc.js" />
+    <Content Include="Client\ng-app\layout\cake.png" />
+    <Content Include="Client\ng-app\timeSheet\timesheet.ctrl.js" />
+    <Content Include="Client\ng-app\timeSheet\timesheet.html" />
+    <Content Include="Client\ng-app\timeSheet\timesheet.module.js" />
+    <Content Include="Client\ng-app\timeSheet\timesheet.routes.js" />
+    <Content Include="Client\ng-app\timeSheet\timesheet.svc.js" />
+    <Content Include="Client\vendor\utils.js" />
+    <Content Include="Client\globalize.culture.es-Co.js" />
+    <Content Include="Client\globalize.js" />
+    <Content Include="Client\jquery.menu-aim.js" />
+    <Content Include="Client\layout.main.js" />
+    <Content Include="Client\manifest.json" />
+    <Content Include="Client\ng-app\ADLogin\adlogin.ctrl.js" />
+    <Content Include="Client\ng-app\ADLogin\adlogin.html" />
+    <Content Include="Client\ng-app\ADLogin\adlogin.module.js" />
+    <Content Include="Client\ng-app\ADLogin\adlogin.routes.js" />
+    <Content Include="Client\ng-app\ADLogin\RegularLogin.html" />
+    <Content Include="Client\ng-app\admin\admin.ctrl.js" />
+    <Content Include="Client\ng-app\admin\admin.html" />
+    <Content Include="Client\ng-app\admin\admin.module.js" />
+    <Content Include="Client\ng-app\admin\admin.routes.js" />
+    <Content Include="Client\ng-app\admin\admin.svc.js" />
+    <Content Include="Client\ng-app\admin\aprobaciones.ctrl.js" />
+    <Content Include="Client\ng-app\admin\aprobaciones.html" />
+    <Content Include="Client\ng-app\admin\aprobaciones\aprobaciones-dialog.html" />
+    <Content Include="Client\ng-app\admin\password.html" />
+    <Content Include="Client\ng-app\admin\roles\new-role-dialog.html" />
+    <Content Include="Client\ng-app\admin\roles\permisos-dialog.html" />
+    <Content Include="Client\ng-app\admin\roles\roles-dialog.html" />
+    <Content Include="Client\ng-app\admin\roles\roles.html" />
+    <Content Include="Client\ng-app\admin\roles\users.html" />
+    <Content Include="Client\ng-app\admin\solicitudes.html" />
+    <Content Include="Client\ng-app\app.module.js" />
+    <Content Include="Client\ng-app\certificados\admin\admin-certlaboral.html" />
+    <Content Include="Client\ng-app\certificados\admin\admin-certlaboral.js" />
+    <Content Include="Client\ng-app\certificados\admin\admin-compropago.html" />
+    <Content Include="Client\ng-app\certificados\admin\admin-retefuente.crtl.js" />
+    <Content Include="Client\ng-app\certificados\admin\admin-retefuente.html" />
+    <Content Include="Client\ng-app\certificados\admin\config-certlaboral.html" />
+    <Content Include="Client\ng-app\certificados\admin\config-compropago.html" />
+    <Content Include="Client\ng-app\certificados\admin\config-retefuente.html" />
+    <Content Include="Client\ng-app\certificados\certifica2.svc.js" />
+    <Content Include="Client\ng-app\certificados\certificados.module.js" />
+    <Content Include="Client\ng-app\certificados\certificados.routes.js" />
+    <Content Include="Client\ng-app\certificados\certificados.svc.js" />
+    <Content Include="Client\ng-app\certificados\certlab-filtro.html" />
+    <Content Include="Client\ng-app\certificados\certlaboral.ctrl.js" />
+    <Content Include="Client\ng-app\certificados\certlaboral.html" />
+    <Content Include="Client\ng-app\certificados\compropago.ctrl.js" />
+    <Content Include="Client\ng-app\certificados\compropago.html" />
+    <Content Include="Client\ng-app\certificados\pedido-certifido.dialog.html" />
+    <Content Include="Client\ng-app\certificados\retefuente.ctrl.js" />
+    <Content Include="Client\ng-app\certificados\retefuente.html" />
+    <Content Include="Client\ng-app\certificados\SRI\sri.ctrl.js" />
+    <Content Include="Client\ng-app\certificados\SRI\sri.html" />
+    <Content Include="Client\ng-app\certlaboral\certlaboral.ctrl.js" />
+    <Content Include="Client\ng-app\certlaboral\certlaboral.html" />
+    <Content Include="Client\ng-app\certlaboral\certlaboral.routes.js" />
+    <Content Include="Client\ng-app\cesantias\cesantias.ctrl.js" />
+    <Content Include="Client\ng-app\cesantias\cesantias.html" />
+    <Content Include="Client\ng-app\cesantias\new-solicitud.dialog.html" />
+    <Content Include="Client\ng-app\consultas\consultas.ctrl.js" />
+    <Content Include="Client\ng-app\consultas\consultas.module.js" />
+    <Content Include="Client\ng-app\consultas\consultas.routes.js" />
+    <Content Include="Client\ng-app\consultas\histosalario.html" />
+    <Content Include="Client\ng-app\consultas\segsocial.html" />
+    <Content Include="Client\ng-app\core\auth.svc.js" />
+    <Content Include="Client\ng-app\core\beautydate.filter.js" />
+    <Content Include="Client\ng-app\core\clickoutside.directive.js" />
+    <Content Include="Client\ng-app\core\compareTo.dir.js" />
+    <Content Include="Client\ng-app\core\core.module.js" />
+    <Content Include="Client\ng-app\core\core.run.js" />
+    <Content Include="Client\ng-app\core\custom-change.dir.js" />
+    <Content Include="Client\ng-app\core\dialog.svc.js" />
+    <Content Include="Client\ng-app\core\file-input.dir.js" />
+    <Content Include="Client\ng-app\core\idle.svc.js" />
+    <Content Include="Client\ng-app\core\jqx-grid.svc.js" />
+    <Content Include="Client\ng-app\core\notify.svc.js" />
+    <Content Include="Client\ng-app\core\permissions.dir.js" />
+    <Content Include="Client\ng-app\core\routre-helper.provider.js" />
+    <Content Include="Client\ng-app\core\table-morphe.dir.js" />
+    <Content Include="Client\ng-app\dashboard\dashboard.ctrl.js" />
+    <Content Include="Client\ng-app\dashboard\dashboard.html" />
+    <Content Include="Client\ng-app\dashboard\dashboard.module.js" />
+    <Content Include="Client\ng-app\dashboard\dashboard.routes.js" />
+    <Content Include="Client\ng-app\empleados\empleados.ctrl.js" />
+    <Content Include="Client\ng-app\empleados\empleados.dialog.html" />
+    <Content Include="Client\ng-app\hojavida\aprobar.html" />
+    <Content Include="Client\ng-app\hojavida\formaedu-dialog.html" />
+    <Content Include="Client\ng-app\hojavida\hojavida.ctrl.js" />
+    <Content Include="Client\ng-app\hojavida\hojavida.html" />
+    <Content Include="Client\ng-app\hojavida\hojavida.module.js" />
+    <Content Include="Client\ng-app\hojavida\hojavida.routes.js" />
+    <Content Include="Client\ng-app\hojavida\hojavida.svc.js" />
+    <Content Include="Client\ng-app\hojavida\individual.html" />
+    <Content Include="Client\ng-app\hojavida\nuevo-ingreso.html" />
+    <Content Include="Client\ng-app\hojavida\referencias-dialog.html" />
+    <Content Include="Client\ng-app\incapacidades\incapacidades.ctrl.js" />
+    <Content Include="Client\ng-app\incapacidades\incapacidades.dialog.html" />
+    <Content Include="Client\ng-app\incapacidades\incapacidades.html" />
+    <Content Include="Client\ng-app\incapacidades\incapacidades.module.js" />
+    <Content Include="Client\ng-app\incapacidades\incapacidades.routes.js" />
+    <Content Include="Client\ng-app\incapacidades\incapacidades.svc.js" />
+    <Content Include="Client\ng-app\incapacidades\licencias.ctrl.js" />
+    <Content Include="Client\ng-app\incapacidades\licencias.html" />
+    <Content Include="Client\ng-app\incapacidades\nueva_solicitud_licencia.html" />
+    <Content Include="Client\ng-app\layout\alertas.ctrl.js" />
+    <Content Include="Client\ng-app\layout\alertas.html" />
+    <Content Include="Client\ng-app\layout\layout.css" />
+    <Content Include="Client\ng-app\layout\layout.ctrl.js" />
+    <Content Include="Client\ng-app\layout\layout.html" />
+    <Content Include="Client\ng-app\layout\layout.old.html" />
+    <Content Include="Client\ng-app\layout\main-layout.css" />
+    <Content Include="Client\ng-app\layout\menu.svc.js" />
+    <Content Include="Client\ng-app\login\acceso.html" />
+    <Content Include="Client\ng-app\login\login.css" />
+    <Content Include="Client\ng-app\login\login.ctrl.js" />
+    <Content Include="Client\ng-app\login\login.html" />
+    <Content Include="Client\ng-app\login\login.module.js" />
+    <Content Include="Client\ng-app\login\login.routes.js" />
+    <Content Include="Client\ng-app\login\no-mail-validation.html" />
+    <Content Include="Client\ng-app\login\password_change.ctrl.js" />
+    <Content Include="Client\ng-app\login\password_change.html" />
+    <Content Include="Client\ng-app\login\request-password.html" />
+    <Content Include="Client\ng-app\otrasnov\list.html" />
+    <Content Include="Client\ng-app\otrasnov\listOtrasnov2.ctrl.js" />
+    <Content Include="Client\ng-app\otrasnov\otrasnov.ctrl.js" />
+    <Content Include="Client\ng-app\otrasnov\otrasnov.html" />
+    <Content Include="Client\ng-app\otrasnov\otrasnov.module.js" />
+    <Content Include="Client\ng-app\otrasnov\otrasnov.routes.js" />
+    <Content Include="Client\ng-app\otrasnov\otrasnov.svc.js" />
+    <Content Include="Client\ng-app\otrasnov\otrasnov_list.ctrl.js" />
+    <Content Include="Client\ng-app\otrasnov\otrasnov_upload.html" />
+    <Content Include="Client\ng-app\planilla_nomina\planilla_nomina.ctrl.js" />
+    <Content Include="Client\ng-app\planilla_nomina\planilla_nomina.html" />
+    <Content Include="Client\ng-app\planilla_nomina\planilla_nomina.module.js" />
+    <Content Include="Client\ng-app\planilla_nomina\planilla_nomina.routes.js" />
+    <Content Include="Client\ng-app\planilla_nomina\planilla_nomina_2.html" />
+    <Content Include="Client\ng-app\solicitudes\aprobador\aprobadores.ctrl.js" />
+    <Content Include="Client\ng-app\solicitudes\aprobador\list.html" />
+    <Content Include="Client\ng-app\solicitudes\aprobador\rechazar-solicitud-dialog.html" />
+    <Content Include="Client\ng-app\solicitudes\calandario-vacaiones.js" />
+    <Content Include="Client\ng-app\solicitudes\solicitud.html" />
+    <Content Include="Client\ng-app\solicitudes\solicitudes.admin.html" />
+    <Content Include="Client\ng-app\solicitudes\solicitudes.ctrl.js" />
+    <Content Include="Client\ng-app\solicitudes\solicitudes.html" />
+    <Content Include="Client\ng-app\solicitudes\solicitudes.module.js" />
+    <Content Include="Client\ng-app\solicitudes\solicitudes.routes.js" />
+    <Content Include="Client\ng-app\solicitudes\solicitudes.svc.js" />
+    <Content Include="Client\ng-app\solicitudes\solicitudes_aprobadores.ctrl.js" />
+    <Content Include="Client\ng-app\solicitudes\solicitudes_empresa.ctrl.js" />
+    <Content Include="Client\ng-app\solpersonal\solpersonal.ctrl.js" />
+    <Content Include="Client\ng-app\solpersonal\solpersonal.html" />
+    <Content Include="Client\ng-app\solpersonal\solpersonal.module.js" />
+    <Content Include="Client\ng-app\solpersonal\solpersonal.routes.js" />
+    <Content Include="Client\ng-app\solpersonal\solpersonal.svc.js" />
+    <Content Include="Client\ng-app\vacaciones\calandario2.ctrl.js" />
+    <Content Include="Client\ng-app\vacaciones\calendario.html" />
+    <Content Include="Client\ng-app\vacaciones\ingresarsolicitud.html" />
+    <Content Include="Client\ng-app\vacaciones\new-solicitud.dialog.html" />
+    <Content Include="Client\ng-app\vacaciones\report.ctrl.js" />
+    <Content Include="Client\ng-app\vacaciones\report.html" />
+    <Content Include="Client\ng-app\vacaciones\vacaciones.ctrl.js" />
+    <Content Include="Client\ng-app\vacaciones\vacaciones.html" />
+    <Content Include="Client\ng-app\vacaciones\vacaciones.module.js" />
+    <Content Include="Client\ng-app\vacaciones\vacaciones.routes.js" />
+    <Content Include="Client\ng-app\vacaciones\vacaciones.svc.js" />
+    <Content Include="Client\rAF.js" />
+    <Content Include="Client\vendor\angucomplete-alt.min.js" />
+    <Content Include="Client\vendor\angular-animate.min.js" />
+    <Content Include="Client\vendor\angular-aria.min.js" />
+    <Content Include="Client\vendor\angular-breadcrumb.min.js" />
+    <Content Include="Client\vendor\angular-cookies.min.js" />
+    <Content Include="Client\vendor\angular-froala.js" />
+    <Content Include="Client\vendor\angular-locale_es-co.js" />
+    <Content Include="Client\vendor\angular-material.min.css" />
+    <Content Include="Client\vendor\angular-material.min.js" />
+    <Content Include="Client\vendor\angular-messages.min.js" />
+    <Content Include="Client\vendor\angular-resource.min.js" />
+    <Content Include="Client\vendor\angular-sanitize.min.js" />
+    <Content Include="Client\vendor\angular-ui-router.min.js" />
+    <Content Include="Client\vendor\angular.min.js" />
+    <Content Include="Client\vendor\bootstrap.min.css" />
+    <Content Include="Client\vendor\css\plugins\char_counter.css" />
+    <Content Include="Client\vendor\css\plugins\char_counter.min.css" />
+    <Content Include="Client\vendor\css\plugins\code_view.css" />
+    <Content Include="Client\vendor\css\plugins\code_view.min.css" />
+    <Content Include="Client\vendor\css\plugins\colors.css" />
+    <Content Include="Client\vendor\css\plugins\colors.min.css" />
+    <Content Include="Client\vendor\css\plugins\draggable.css" />
+    <Content Include="Client\vendor\css\plugins\draggable.min.css" />
+    <Content Include="Client\vendor\css\plugins\emoticons.css" />
+    <Content Include="Client\vendor\css\plugins\emoticons.min.css" />
+    <Content Include="Client\vendor\css\plugins\file.css" />
+    <Content Include="Client\vendor\css\plugins\file.min.css" />
+    <Content Include="Client\vendor\css\plugins\fullscreen.css" />
+    <Content Include="Client\vendor\css\plugins\fullscreen.min.css" />
+    <Content Include="Client\vendor\css\plugins\help.css" />
+    <Content Include="Client\vendor\css\plugins\help.min.css" />
+    <Content Include="Client\vendor\css\plugins\image.css" />
+    <Content Include="Client\vendor\css\plugins\image.min.css" />
+    <Content Include="Client\vendor\css\plugins\image_manager.css" />
+    <Content Include="Client\vendor\css\plugins\image_manager.min.css" />
+    <Content Include="Client\vendor\css\plugins\line_breaker.css" />
+    <Content Include="Client\vendor\css\plugins\line_breaker.min.css" />
+    <Content Include="Client\vendor\css\plugins\quick_insert.css" />
+    <Content Include="Client\vendor\css\plugins\quick_insert.min.css" />
+    <Content Include="Client\vendor\css\plugins\special_characters.css" />
+    <Content Include="Client\vendor\css\plugins\special_characters.min.css" />
+    <Content Include="Client\vendor\css\plugins\table.css" />
+    <Content Include="Client\vendor\css\plugins\table.min.css" />
+    <Content Include="Client\vendor\css\plugins\video.css" />
+    <Content Include="Client\vendor\css\plugins\video.min.css" />
+    <Content Include="Client\vendor\FileSaver.min.js" />
+    <Content Include="Client\vendor\fonts\Glyphter.svg" />
+    <Content Include="Client\vendor\fonts\icons.data.svg.css" />
+    <Content Include="Client\vendor\fonts\material\codepoints.txt" />
+    <Content Include="Client\vendor\fonts\material\material-icons.css" />
+    <Content Include="Client\vendor\fonts\material\MaterialIcons-Regular.ijmap.txt" />
+    <Content Include="Client\vendor\fonts\material\MaterialIcons-Regular.svg" />
+    <Content Include="Client\vendor\froala-sanitize.js" />
+    <Content Include="Client\vendor\froala_editor.min.css" />
+    <Content Include="Client\vendor\froala_editor.min.js" />
+    <Content Include="Client\vendor\froala_style.min.css" />
+    <Content Include="Client\vendor\Glyphter.css" />
+    <Content Include="Client\vendor\iconfont\codepoints.txt" />
+    <Content Include="Client\vendor\iconfont\material-icons.css" />
+    <Content Include="Client\vendor\iconfont\MaterialIcons-Regular.eot" />
+    <Content Include="Client\vendor\iconfont\MaterialIcons-Regular.ijmap.txt" />
+    <Content Include="Client\vendor\iconfont\MaterialIcons-Regular.svg" />
+    <Content Include="Client\vendor\iconfont\MaterialIcons-Regular.ttf" />
+    <Content Include="Client\vendor\iconfont\MaterialIcons-Regular.woff" />
+    <Content Include="Client\vendor\iconfont\MaterialIcons-Regular.woff2" />
+    <Content Include="Client\vendor\images\backgroundTop.png" />
+    <Content Include="Client\vendor\images\backImage.png" />
+    <Content Include="Client\vendor\images\bg_black.png" />
+    <Content Include="Client\vendor\images\bg_blackhover.png" />
+    <Content Include="Client\vendor\images\bg_blackhover_horizontal.png" />
+    <Content Include="Client\vendor\images\bg_blackpressed.png" />
+    <Content Include="Client\vendor\images\bg_blackpressed_horizontal.png" />
+    <Content Include="Client\vendor\images\bg_black_horizontal.png" />
+    <Content Include="Client\vendor\images\bg_blueenergy.png" />
+    <Content Include="Client\vendor\images\bg_darkblue.png" />
+    <Content Include="Client\vendor\images\bg_darkbluehover.png" />
+    <Content Include="Client\vendor\images\bg_darkbluepressed.png" />
+    <Content Include="Client\vendor\images\blackbackground.png" />
+    <Content Include="Client\vendor\images\black_gradient.png" />
+    <Content Include="Client\vendor\images\check_black.png" />
+    <Content Include="Client\vendor\images\check_blue.png" />
+    <Content Include="Client\vendor\images\check_blue_indeterminate.png" />
+    <Content Include="Client\vendor\images\check_disabled.png" />
+    <Content Include="Client\vendor\images\check_indeterminate_black.png" />
+    <Content Include="Client\vendor\images\check_indeterminate_disabled.png" />
+    <Content Include="Client\vendor\images\check_indeterminate_white.png" />
+    <Content Include="Client\vendor\images\check_lightblue.png" />
+    <Content Include="Client\vendor\images\check_lightblue_indeterminate.png" />
+    <Content Include="Client\vendor\images\check_white.png" />
+    <Content Include="Client\vendor\images\close.png" />
+    <Content Include="Client\vendor\images\close_black.png" />
+    <Content Include="Client\vendor\images\close_blue.png" />
+    <Content Include="Client\vendor\images\close_white.png" />
+    <Content Include="Client\vendor\images\colorpicker\bar-hue.png" />
+    <Content Include="Client\vendor\images\colorpicker\bar-saturation.png" />
+    <Content Include="Client\vendor\images\colorpicker\map-hue.png" />
+    <Content Include="Client\vendor\images\colorpicker\map-saturation-overlay.png" />
+    <Content Include="Client\vendor\images\colorpicker\map-saturation.png" />
+    <Content Include="Client\vendor\images\colorpicker\ReadMe.txt" />
+    <Content Include="Client\vendor\images\common.png" />
+    <Content Include="Client\vendor\images\crosshair-white.png" />
+    <Content Include="Client\vendor\images\crosshair.png" />
+    <Content Include="Client\vendor\images\darkness\ReadMe.txt" />
+    <Content Include="Client\vendor\images\darkness\ui-bg_flat_30_cccccc_40x100.png" />
+    <Content Include="Client\vendor\images\darkness\ui-bg_flat_50_5c5c5c_40x100.png" />
+    <Content Include="Client\vendor\images\darkness\ui-bg_glass_20_555555_1x400.png" />
+    <Content Include="Client\vendor\images\darkness\ui-bg_glass_40_0078a3_1x400.png" />
+    <Content Include="Client\vendor\images\darkness\ui-bg_glass_40_ffc73d_1x400.png" />
+    <Content Include="Client\vendor\images\darkness\ui-bg_gloss-wave_25_333333_500x100.png" />
+    <Content Include="Client\vendor\images\darkness\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
+    <Content Include="Client\vendor\images\darkness\ui-bg_inset-soft_25_000000_1x100.png" />
+    <Content Include="Client\vendor\images\darkness\ui-bg_inset-soft_30_f58400_1x100.png" />
+    <Content Include="Client\vendor\images\darkness\ui-icons_222222_256x240.png" />
+    <Content Include="Client\vendor\images\darkness\ui-icons_4b8e0b_256x240.png" />
+    <Content Include="Client\vendor\images\darkness\ui-icons_a83300_256x240.png" />
+    <Content Include="Client\vendor\images\darkness\ui-icons_cccccc_256x240.png" />
+    <Content Include="Client\vendor\images\darkness\ui-icons_ffffff_256x240.png" />
+    <Content Include="Client\vendor\images\darkred_gradient.png" />
+    <Content Include="Client\vendor\images\drag.png" />
+    <Content Include="Client\vendor\images\dragcancel.png" />
+    <Content Include="Client\vendor\images\error.png" />
+    <Content Include="Client\vendor\images\filter.png" />
+    <Content Include="Client\vendor\images\html_editor.png" />
+    <Content Include="Client\vendor\images\html_editor_white.png" />
+    <Content Include="Client\vendor\images\icon-calendar-white.png" />
+    <Content Include="Client\vendor\images\icon-calendar.png" />
+    <Content Include="Client\vendor\images\icon-cancel-white.png" />
+    <Content Include="Client\vendor\images\icon-cancel.png" />
+    <Content Include="Client\vendor\images\icon-delete-white.png" />
+    <Content Include="Client\vendor\images\icon-delete.png" />
+    <Content Include="Client\vendor\images\icon-down-blue.png" />
+    <Content Include="Client\vendor\images\icon-down-transparent.png" />
+    <Content Include="Client\vendor\images\icon-down-white.png" />
+    <Content Include="Client\vendor\images\icon-down.png" />
+    <Content Include="Client\vendor\images\icon-edit-white.png" />
+    <Content Include="Client\vendor\images\icon-edit.png" />
+    <Content Include="Client\vendor\images\icon-first-blue.png" />
+    <Content Include="Client\vendor\images\icon-first-transparent.png" />
+    <Content Include="Client\vendor\images\icon-first-white.png" />
+    <Content Include="Client\vendor\images\icon-first.png" />
+    <Content Include="Client\vendor\images\icon-last-blue.png" />
+    <Content Include="Client\vendor\images\icon-last-transparent.png" />
+    <Content Include="Client\vendor\images\icon-last-white.png" />
+    <Content Include="Client\vendor\images\icon-last.png" />
+    <Content Include="Client\vendor\images\icon-left-blue.png" />
+    <Content Include="Client\vendor\images\icon-left-transparent.png" />
+    <Content Include="Client\vendor\images\icon-left-white.png" />
+    <Content Include="Client\vendor\images\icon-left.png" />
+    <Content Include="Client\vendor\images\icon-menu-minimized-white.png" />
+    <Content Include="Client\vendor\images\icon-menu-minimized.png" />
+    <Content Include="Client\vendor\images\icon-plus-white.png" />
+    <Content Include="Client\vendor\images\icon-plus.png" />
+    <Content Include="Client\vendor\images\icon-recurrence-exception-white.png" />
+    <Content Include="Client\vendor\images\icon-recurrence-exception.png" />
+    <Content Include="Client\vendor\images\icon-recurrence-white.png" />
+    <Content Include="Client\vendor\images\icon-recurrence.png" />
+    <Content Include="Client\vendor\images\icon-right-blue.png" />
+    <Content Include="Client\vendor\images\icon-right-transparent.png" />
+    <Content Include="Client\vendor\images\icon-right-white.png" />
+    <Content Include="Client\vendor\images\icon-right.png" />
+    <Content Include="Client\vendor\images\icon-save-white.png" />
+    <Content Include="Client\vendor\images\icon-save.png" />
+    <Content Include="Client\vendor\images\icon-showpassword-white.png" />
+    <Content Include="Client\vendor\images\icon-showpassword.png" />
+    <Content Include="Client\vendor\images\icon-time-white.png" />
+    <Content Include="Client\vendor\images\icon-time.png" />
+    <Content Include="Client\vendor\images\icon-up-blue.png" />
+    <Content Include="Client\vendor\images\icon-up-transparent.png" />
+    <Content Include="Client\vendor\images\icon-up-white.png" />
+    <Content Include="Client\vendor\images\icon-up.png" />
+    <Content Include="Client\vendor\images\info.png" />
+    <Content Include="Client\vendor\images\le-frog\ReadMe.txt" />
+    <Content Include="Client\vendor\images\le-frog\ui-bg_diagonals-small_0_aaaaaa_40x40.png" />
+    <Content Include="Client\vendor\images\le-frog\ui-bg_diagonals-thick_15_444444_40x40.png" />
+    <Content Include="Client\vendor\images\le-frog\ui-bg_diagonals-thick_95_ffdc2e_40x40.png" />
+    <Content Include="Client\vendor\images\le-frog\ui-bg_glass_55_fbf5d0_1x400.png" />
+    <Content Include="Client\vendor\images\le-frog\ui-bg_highlight-hard_30_285c00_1x100.png" />
+    <Content Include="Client\vendor\images\le-frog\ui-bg_highlight-soft_33_3a8104_1x100.png" />
+    <Content Include="Client\vendor\images\le-frog\ui-bg_highlight-soft_50_4eb305_1x100.png" />
+    <Content Include="Client\vendor\images\le-frog\ui-bg_highlight-soft_60_4ca20b_1x100.png" />
+    <Content Include="Client\vendor\images\le-frog\ui-bg_inset-soft_10_285c00_1x100.png" />
+    <Content Include="Client\vendor\images\le-frog\ui-icons_4eb305_256x240.png" />
+    <Content Include="Client\vendor\images\le-frog\ui-icons_72b42d_256x240.png" />
+    <Content Include="Client\vendor\images\le-frog\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Client\vendor\images\le-frog\ui-icons_ffffff_256x240.png" />
+    <Content Include="Client\vendor\images\lightness\icon-first.png" />
+    <Content Include="Client\vendor\images\lightness\icon-last.png" />
+    <Content Include="Client\vendor\images\lightness\ReadMe.txt" />
+    <Content Include="Client\vendor\images\lightness\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Client\vendor\images\lightness\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Client\vendor\images\lightness\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Client\vendor\images\lightness\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Client\vendor\images\lightness\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Client\vendor\images\lightness\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Client\vendor\images\lightness\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Client\vendor\images\lightness\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Client\vendor\images\lightness\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Client\vendor\images\lightness\ui-icons_222222_256x240.png" />
+    <Content Include="Client\vendor\images\lightness\ui-icons_228ef1_256x240.png" />
+    <Content Include="Client\vendor\images\lightness\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Client\vendor\images\lightness\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Client\vendor\images\lightness\ui-icons_ffffff_256x240.png" />
+    <Content Include="Client\vendor\images\loader-small.gif" />
+    <Content Include="Client\vendor\images\loader.gif" />
+    <Content Include="Client\vendor\images\mail.png" />
+    <Content Include="Client\vendor\images\menubutton.png" />
+    <Content Include="Client\vendor\images\metro-icon-down-white.png" />
+    <Content Include="Client\vendor\images\metro-icon-down.png" />
+    <Content Include="Client\vendor\images\metro-icon-first-white.png" />
+    <Content Include="Client\vendor\images\metro-icon-first.png" />
+    <Content Include="Client\vendor\images\metro-icon-last-white.png" />
+    <Content Include="Client\vendor\images\metro-icon-last.png" />
+    <Content Include="Client\vendor\images\metro-icon-left-white.png" />
+    <Content Include="Client\vendor\images\metro-icon-left.png" />
+    <Content Include="Client\vendor\images\metro-icon-right - Copy.png" />
+    <Content Include="Client\vendor\images\metro-icon-right-white.png" />
+    <Content Include="Client\vendor\images\metro-icon-right.png" />
+    <Content Include="Client\vendor\images\metro-icon-up-white.png" />
+    <Content Include="Client\vendor\images\metro-icon-up.png" />
+    <Content Include="Client\vendor\images\multi-arrow.gif" />
+    <Content Include="Client\vendor\images\office-icon-down.png" />
+    <Content Include="Client\vendor\images\office-icon-first.png" />
+    <Content Include="Client\vendor\images\office-icon-last.png" />
+    <Content Include="Client\vendor\images\office-icon-left.png" />
+    <Content Include="Client\vendor\images\office-icon-right.png" />
+    <Content Include="Client\vendor\images\office-icon-up.png" />
+    <Content Include="Client\vendor\images\overcast\ReadMe.txt" />
+    <Content Include="Client\vendor\images\overcast\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Client\vendor\images\overcast\ui-bg_flat_0_eeeeee_40x100.png" />
+    <Content Include="Client\vendor\images\overcast\ui-bg_flat_55_c0402a_40x100.png" />
+    <Content Include="Client\vendor\images\overcast\ui-bg_flat_55_eeeeee_40x100.png" />
+    <Content Include="Client\vendor\images\overcast\ui-bg_glass_100_f8f8f8_1x400.png" />
+    <Content Include="Client\vendor\images\overcast\ui-bg_glass_35_dddddd_1x400.png" />
+    <Content Include="Client\vendor\images\overcast\ui-bg_glass_60_eeeeee_1x400.png" />
+    <Content Include="Client\vendor\images\overcast\ui-bg_inset-hard_75_999999_1x100.png" />
+    <Content Include="Client\vendor\images\overcast\ui-bg_inset-soft_50_c9c9c9_1x100.png" />
+    <Content Include="Client\vendor\images\overcast\ui-icons_3383bb_256x240.png" />
+    <Content Include="Client\vendor\images\overcast\ui-icons_454545_256x240.png" />
+    <Content Include="Client\vendor\images\overcast\ui-icons_70b2e1_256x240.png" />
+    <Content Include="Client\vendor\images\overcast\ui-icons_999999_256x240.png" />
+    <Content Include="Client\vendor\images\overcast\ui-icons_fbc856_256x240.png" />
+    <Content Include="Client\vendor\images\pin-black.png" />
+    <Content Include="Client\vendor\images\pin-blue.png" />
+    <Content Include="Client\vendor\images\pin-lightblue.png" />
+    <Content Include="Client\vendor\images\pin-white.png" />
+    <Content Include="Client\vendor\images\pin-yellow.png" />
+    <Content Include="Client\vendor\images\pin.png" />
+    <Content Include="Client\vendor\images\pinned-black.png" />
+    <Content Include="Client\vendor\images\pinned-blue.png" />
+    <Content Include="Client\vendor\images\pinned-lightblue.png" />
+    <Content Include="Client\vendor\images\pinned-white.png" />
+    <Content Include="Client\vendor\images\pinned-yellow.png" />
+    <Content Include="Client\vendor\images\pinned.png" />
+    <Content Include="Client\vendor\images\plus.png" />
+    <Content Include="Client\vendor\images\plus_white.png" />
+    <Content Include="Client\vendor\images\pointer.png" />
+    <Content Include="Client\vendor\images\rangebar_classic.png" />
+    <Content Include="Client\vendor\images\rangebar_darkblue.png" />
+    <Content Include="Client\vendor\images\rangebar_shinyblack.png" />
+    <Content Include="Client\vendor\images\rangebar_summer.png" />
+    <Content Include="Client\vendor\images\redmond\icon-first.png" />
+    <Content Include="Client\vendor\images\redmond\icon-last.png" />
+    <Content Include="Client\vendor\images\redmond\ReadMe.txt" />
+    <Content Include="Client\vendor\images\redmond\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Client\vendor\images\redmond\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Client\vendor\images\redmond\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Client\vendor\images\redmond\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Client\vendor\images\redmond\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Client\vendor\images\redmond\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Client\vendor\images\redmond\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Client\vendor\images\redmond\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Client\vendor\images\redmond\ui-icons_217bc0_256x240.png" />
+    <Content Include="Client\vendor\images\redmond\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Client\vendor\images\redmond\ui-icons_469bdd_256x240.png" />
+    <Content Include="Client\vendor\images\redmond\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Client\vendor\images\redmond\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Client\vendor\images\redmond\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Client\vendor\images\redmond\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Client\vendor\images\red_arrow_down.png" />
+    <Content Include="Client\vendor\images\red_arrow_up.png" />
+    <Content Include="Client\vendor\images\red_gradient.png" />
+    <Content Include="Client\vendor\images\roundbg_check_black.png" />
+    <Content Include="Client\vendor\images\roundbg_check_disabled.png" />
+    <Content Include="Client\vendor\images\roundbg_check_indeterminate.png" />
+    <Content Include="Client\vendor\images\roundbg_check_white.png" />
+    <Content Include="Client\vendor\images\roundbg_classic_hover.png" />
+    <Content Include="Client\vendor\images\roundbg_classic_normal.png" />
+    <Content Include="Client\vendor\images\roundbg_disabled.png" />
+    <Content Include="Client\vendor\images\search.png" />
+    <Content Include="Client\vendor\images\search_white.png" />
+    <Content Include="Client\vendor\images\smoothness\ReadMe.txt" />
+    <Content Include="Client\vendor\images\smoothness\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Client\vendor\images\smoothness\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Client\vendor\images\smoothness\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Client\vendor\images\smoothness\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Client\vendor\images\smoothness\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Client\vendor\images\smoothness\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Client\vendor\images\smoothness\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Client\vendor\images\smoothness\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Client\vendor\images\smoothness\ui-icons_222222_256x240.png" />
+    <Content Include="Client\vendor\images\smoothness\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Client\vendor\images\smoothness\ui-icons_454545_256x240.png" />
+    <Content Include="Client\vendor\images\smoothness\ui-icons_888888_256x240.png" />
+    <Content Include="Client\vendor\images\smoothness\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Client\vendor\images\sortasc.png" />
+    <Content Include="Client\vendor\images\sortascbutton.png" />
+    <Content Include="Client\vendor\images\sortdesc.png" />
+    <Content Include="Client\vendor\images\sortdescbutton.png" />
+    <Content Include="Client\vendor\images\sortremove.png" />
+    <Content Include="Client\vendor\images\star.png" />
+    <Content Include="Client\vendor\images\start\ReadMe.txt" />
+    <Content Include="Client\vendor\images\start\ui-bg_flat_55_999999_40x100.png" />
+    <Content Include="Client\vendor\images\start\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Client\vendor\images\start\ui-bg_glass_45_0078ae_1x400.png" />
+    <Content Include="Client\vendor\images\start\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="Client\vendor\images\start\ui-bg_glass_75_79c9ec_1x400.png" />
+    <Content Include="Client\vendor\images\start\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="Client\vendor\images\start\ui-bg_gloss-wave_50_6eac2c_500x100.png" />
+    <Content Include="Client\vendor\images\start\ui-bg_gloss-wave_75_2191c0_500x100.png" />
+    <Content Include="Client\vendor\images\start\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Client\vendor\images\start\ui-icons_0078ae_256x240.png" />
+    <Content Include="Client\vendor\images\start\ui-icons_056b93_256x240.png" />
+    <Content Include="Client\vendor\images\start\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Client\vendor\images\start\ui-icons_e0fdff_256x240.png" />
+    <Content Include="Client\vendor\images\start\ui-icons_f5e175_256x240.png" />
+    <Content Include="Client\vendor\images\start\ui-icons_f7a50d_256x240.png" />
+    <Content Include="Client\vendor\images\start\ui-icons_fcd113_256x240.png" />
+    <Content Include="Client\vendor\images\star_disabled.png" />
+    <Content Include="Client\vendor\images\star_hover.png" />
+    <Content Include="Client\vendor\images\stripes.png" />
+    <Content Include="Client\vendor\images\success.png" />
+    <Content Include="Client\vendor\images\sunny\ReadMe.txt" />
+    <Content Include="Client\vendor\images\sunny\ui-bg_diagonals-medium_20_d34d17_40x40.png" />
+    <Content Include="Client\vendor\images\sunny\ui-bg_flat_30_cccccc_40x100.png" />
+    <Content Include="Client\vendor\images\sunny\ui-bg_flat_50_5c5c5c_40x100.png" />
+    <Content Include="Client\vendor\images\sunny\ui-bg_gloss-wave_45_817865_500x100.png" />
+    <Content Include="Client\vendor\images\sunny\ui-bg_gloss-wave_60_fece2f_500x100.png" />
+    <Content Include="Client\vendor\images\sunny\ui-bg_gloss-wave_70_ffdd57_500x100.png" />
+    <Content Include="Client\vendor\images\sunny\ui-bg_gloss-wave_90_fff9e5_500x100.png" />
+    <Content Include="Client\vendor\images\sunny\ui-bg_highlight-soft_100_feeebd_1x100.png" />
+    <Content Include="Client\vendor\images\sunny\ui-bg_inset-soft_30_ffffff_1x100.png" />
+    <Content Include="Client\vendor\images\sunny\ui-icons_3d3d3d_256x240.png" />
+    <Content Include="Client\vendor\images\sunny\ui-icons_bd7b00_256x240.png" />
+    <Content Include="Client\vendor\images\sunny\ui-icons_d19405_256x240.png" />
+    <Content Include="Client\vendor\images\sunny\ui-icons_eb990f_256x240.png" />
+    <Content Include="Client\vendor\images\sunny\ui-icons_ed9f26_256x240.png" />
+    <Content Include="Client\vendor\images\sunny\ui-icons_fadc7a_256x240.png" />
+    <Content Include="Client\vendor\images\sunny\ui-icons_ffe180_256x240.png" />
+    <Content Include="Client\vendor\images\tick.png" />
+    <Content Include="Client\vendor\images\time.png" />
+    <Content Include="Client\vendor\images\track_classic.png" />
+    <Content Include="Client\vendor\images\track_darkblue.png" />
+    <Content Include="Client\vendor\images\track_shinyblack.png" />
+    <Content Include="Client\vendor\images\track_summer.png" />
+    <Content Include="Client\vendor\images\warning.png" />
+    <Content Include="Client\vendor\images\wp_check_indeterminate_white.png" />
+    <Content Include="Client\vendor\images\wp_check_white.png" />
+    <Content Include="Client\vendor\jasny-bootstrap.min.css" />
+    <Content Include="Client\vendor\jasny-bootstrap.min.js" />
+    <Content Include="Client\vendor\jquery-2.2.4.min.js" />
+    <Content Include="Client\vendor\jqx-all.js" />
+    <Content Include="Client\vendor\jqx.base.css" />
+    <Content Include="Client\vendor\jqx.metro.css" />
+    <Content Include="Client\vendor\jqxdata.export.js" />
+    <Content Include="Client\vendor\md-data-table.min.css" />
+    <Content Include="Client\vendor\md-data-table.min.js" />
+    <Content Include="Client\vendor\ng-notify.min.css" />
+    <Content Include="Client\vendor\ng-notify.min.js" />
+    <Content Include="Client\vendor\ng-table.min.css" />
+    <Content Include="Client\vendor\ng-table.min.js" />
+    <Content Include="Client\vendor\ngDialog-theme-default.min.css" />
+    <Content Include="Client\vendor\ngDialog-theme-plain.css" />
+    <Content Include="Client\vendor\ngDialog.min.css" />
+    <Content Include="Client\vendor\ngDialog.min.js" />
+    <Content Include="Client\vendor\ngStorage.min.js" />
+    <Content Include="Client\vendor\plugins\align.min.js" />
+    <Content Include="Client\vendor\plugins\code_beautifier.min.js" />
+    <Content Include="Client\vendor\plugins\colors.min.js" />
+    <Content Include="Client\vendor\plugins\draggable.min.js" />
+    <Content Include="Client\vendor\plugins\entities.min.js" />
+    <Content Include="Client\vendor\plugins\font_family.min.js" />
+    <Content Include="Client\vendor\plugins\font_size.min.js" />
+    <Content Include="Client\vendor\plugins\forms.min.js" />
+    <Content Include="Client\vendor\plugins\inline_style.min.js" />
+    <Content Include="Client\vendor\plugins\line_breaker.min.js" />
+    <Content Include="Client\vendor\plugins\lists.min.js" />
+    <Content Include="Client\vendor\plugins\paragraph_format.min.js" />
+    <Content Include="Client\vendor\plugins\paragraph_style.min.js" />
+    <Content Include="Client\vendor\plugins\quick_insert.min.js" />
+    <Content Include="Client\vendor\plugins\quote.min.js" />
+    <Content Include="Client\vendor\plugins\save.min.js" />
+    <Content Include="Client\vendor\plugins\table.min.js" />
+    <Content Include="Client\vendor\select-tpls.min.js" />
+    <Content Include="Client\vendor\select.min.css" />
+    <Content Include="Client\vendor\selection-model.min.js" />
+    <Content Include="Client\vendor\smart-table.min.js" />
+    <Content Include="Static\favicons\android-chrome-192x192.png" />
+    <Content Include="Static\favicons\apple-touch-icon.png" />
+    <Content Include="Static\favicons\browserconfig.xml" />
+    <Content Include="Static\favicons\cake.png" />
+    <Content Include="Static\favicons\favicon-16x16.png" />
+    <Content Include="Static\favicons\favicon-32x32.png" />
+    <Content Include="Static\favicons\favicon.ico" />
+    <Content Include="Static\favicons\mstile-150x150.png" />
+    <Content Include="Static\favicons\safari-pinned-tab.svg" />
+    <Content Include="Static\images\calidad.jpg" />
+    <Content Include="Static\images\calidad2.png" />
+    <Content Include="Static\images\dian.PNG" />
+    <Content Include="Static\images\empleado.PNG" />
+    <Content Include="Static\images\icons\add.svg" />
+    <Content Include="Static\images\icons\certflaboral.svg" />
+    <Content Include="Static\images\icons\certfretefuente.svg" />
+    <Content Include="Static\images\icons\cesantias.svg" />
+    <Content Include="Static\images\icons\clock.svg" />
+    <Content Include="Static\images\icons\compropago.svg" />
+    <Content Include="Static\images\icons\date.svg" />
+    <Content Include="Static\images\icons\delete.svg" />
+    <Content Include="Static\images\icons\done.svg" />
+    <Content Include="Static\images\icons\error.svg" />
+    <Content Include="Static\images\icons\excel-file.svg" />
+    <Content Include="Static\images\icons\fondocesantias.svg" />
+    <Content Include="Static\images\icons\fondopension.svg" />
+    <Content Include="Static\images\icons\fondoriesgo.svg" />
+    <Content Include="Static\images\icons\fondos.svg" />
+    <Content Include="Static\images\icons\fondosalud.svg" />
+    <Content Include="Static\images\icons\histosalario.svg" />
+    <Content Include="Static\images\icons\hojavida.svg" />
+    <Content Include="Static\images\icons\ic_group.svg" />
+    <Content Include="Static\images\icons\ic_key.svg" />
+    <Content Include="Static\images\icons\ic_person_outline.svg" />
+    <Content Include="Static\images\icons\mark.svg" />
+    <Content Include="Static\images\icons\menu.svg" />
+    <Content Include="Static\images\icons\morevert.svg" />
+    <Content Include="Static\images\icons\notification.svg" />
+    <Content Include="Static\images\icons\pdf.svg" />
+    <Content Include="Static\images\icons\permisos.svg" />
+    <Content Include="Static\images\icons\show.svg" />
+    <Content Include="Static\images\icons\timemoney.svg" />
+    <Content Include="Static\images\icons\user.svg" />
+    <Content Include="Static\images\icons\vacaciones.svg" />
+    <Content Include="Static\images\juliana_logo.png" />
+    <Content Include="Static\images\juliana_logo_white_md.png" />
+    <Content Include="Static\images\juliana_logo_white_xs.png" />
+    <Content Include="Static\images\juliana_logo_xs.png" />
+    <Content Include="Static\images\Jweb-xs.png" />
+    <Content Include="Static\images\Jweb.png" />
+    <Content Include="Static\images\muisca.PNG" />
+    <Content Include="Static\images\payroll.jpg" />
+    <Content Include="Static\images\retenedor.PNG" />
+    <Content Include="Static\images\systems_logo.png" />
+    <Content Include="Static\images\work_with_us.jpg" />
+    <Content Include="Static\templates\certificados\dian_202_2015.html" />
+    <Content Include="Static\templates\certificados\dian_202_2016.html" />
+    <Content Include="Static\templates\certificados\dian_202_2017.html" />
+    <Content Include="Static\templates\certificados\dian_202_2018.html" />
+    <Content Include="Static\templates\certificados\dian_202_2024.html" />
+    <Content Include="Static\templates\certificados\dian_202_2023.html" />
+    <Content Include="Static\templates\certificados\dian_202_2022.html" />
+    <Content Include="Static\templates\certificados\dian_202_2021.html" />
+    <Content Include="Static\templates\certificados\dian_202_2020.html" />
+    <Content Include="Static\templates\certificados\dian_202_2019.html" />
+    <Content Include="Static\templates\certificados\sri_107.html" />
+    <Content Include="Static\templates\emails\alerta_block_leave.html" />
+    <Content Include="Static\templates\emails\alerta_vacaciones_vencidas.html" />
+    <Content Include="Static\templates\emails\aprobar-hojavida.html" />
+    <Content Include="Static\templates\emails\aprobar_solicitud_vacaciones.html" />
+    <Content Include="Static\templates\emails\certlab.html" />
+    <Content Include="Static\templates\emails\compropago_info.html" />
+    <Content Include="Static\templates\emails\delete-aspirante.html" />
+    <Content Include="Static\templates\emails\desaprobar_solicitud_vacaciones.html" />
+    <Content Include="Static\templates\emails\informe_incapacidad.html" />
+    <Content Include="Static\templates\emails\nueva_solicitud_vacaciones.html" />
+    <Content Include="Static\templates\emails\nuevo-aspirante.html" />
+    <Content Include="Static\templates\emails\rechazar_solicitud_licencias.html" />
+    <Content Include="Static\templates\emails\rechzar_solicitud_vacaciones.html" />
+    <Content Include="Static\templates\emails\restore-password.html" />
+    <Content Include="Static\templates\emails\solicitud_certificado_laboral.html" />
+    <Content Include="Static\templates\emails\solicitud_certlaboral.html" />
+    <Content Include="Static\templates\emails\solicitud_licencias.html" />
+    <Content Include="Static\templates\emails\solicitud_licencias_aprobada.html" />
+    <Content Include="Static\templates\emails\solicitud_vacaciones_pendiete.html" />
+    <Content Include="Static\templates\emails\welcome-aspirante.html" />
+    <Content Include="Static\templates\emails\welcome.html" />
+    <Content Include="Static\templates\solicitud_licencia.html" />
+    <Content Include="Static\templates\solicitud_vacaciones.html" />
+    <Content Include="Template_App_Offline.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Business\Aseo\AseoBO.cs" />
+    <Compile Include="Business\Auth\AuthBOService.cs" />
+    <Compile Include="Business\Auth\ConsolidatedUserService.cs" />
+    <Compile Include="Business\Bioseguridad\BioseguridadBO.cs" />
+    <Compile Include="Business\Cumpleanos\CumpleanosBO.cs" />
+    <Compile Include="Business\ElectronicPayroll\DataicoPayrollService.cs" />
+    <Compile Include="Business\ElectronicPayroll\HttpWebService.cs" />
+    <Compile Include="Business\Exceptions\JulianaException.cs" />
+    <Compile Include="Business\Generals\ParameterGetter.cs" />
+    <Compile Include="Business\ReportesBO.cs" />
+    <Compile Include="Business\Auth\SSOService.cs" />
+    <Compile Include="Business\TimeSheet\TimeSheetBO.cs" />
+    <Compile Include="Business\Turnos\TurnosBO.cs" />
+    <Compile Include="Controllers\API\AccountController.cs" />
+    <Compile Include="Controllers\API\ADController.cs" />
+    <Compile Include="Controllers\API\AdminController.cs" />
+    <Compile Include="Controllers\API\AseoController.cs" />
+    <Compile Include="Controllers\API\BioseguridadController.cs" />
+    <Compile Include="Controllers\API\CertificadosController.cs" />
+    <Compile Include="Controllers\API\CesantiasController.cs" />
+    <Compile Include="Controllers\API\ConfigController.cs" />
+    <Compile Include="Controllers\API\EmpleadosController.cs" />
+    <Compile Include="Controllers\API\EmpresaController.cs" />
+    <Compile Include="Controllers\API\HistoSalarioController.cs" />
+    <Compile Include="Controllers\API\HojaVidaController.cs" />
+    <Compile Include="Controllers\API\IncapacidadesController.cs" />
+    <Compile Include="Controllers\API\LicenciasController.cs" />
+    <Compile Include="Controllers\API\OtrasNovController.cs" />
+    <Compile Include="Controllers\API\PlanillaNominaController.cs" />
+    <Compile Include="Controllers\API\RequerimientosController.cs" />
+    <Compile Include="Controllers\API\SolicitudesController.cs" />
+    <Compile Include="Controllers\API\facElectronicaController.cs" />
+    <Compile Include="Controllers\API\SolPersonalController.cs" />
+    <Compile Include="Controllers\API\CumpleanosController.cs" />
+    <Compile Include="Controllers\API\TimeSheetController.cs" />
+    <Compile Include="Controllers\API\TurnosController.cs" />
+    <Compile Include="Controllers\API\UtilController.cs" />
+    <Compile Include="Controllers\API\VacacionesController.cs" />
+    <Compile Include="Controllers\ExcelController.cs" />
+    <Compile Include="Controllers\GenerarCertlaboralController.cs" />
+    <Compile Include="Controllers\SSOController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PdfController.cs" />
+    <Compile Include="Filters\Auth\JulianaGenericAuthFilter.cs" />
+    <Compile Include="Helpers\AuditoriaHelper.cs" />
+    <Compile Include="Helpers\BlocLeaveHelper.cs" />
+    <Compile Include="Helpers\CorsFilter.cs" />
+    <Compile Include="Helpers\CryptoHelper.cs" />
+    <Compile Include="Helpers\ErrorHelper.cs" />
+    <Compile Include="Helpers\MailHelper.cs" />
+    <Compile Include="Helpers\PdfHelper.cs" />
+    <Compile Include="Helpers\SqlHelper.cs" />
+    <Compile Include="Helpers\UtilHelper.cs" />
+    <Compile Include="Helpers\VacacionesHelper.cs" />
+    <Compile Include="Interfaces\Aspects\ILoggerService.cs" />
+    <Compile Include="Interfaces\Business\WebServices\ElectronicPayroll\IElectronicPayrollDelete.cs" />
+    <Compile Include="Interfaces\Business\WebServices\ElectronicPayroll\IElectronicPayrollSave.cs" />
+    <Compile Include="Interfaces\Business\WebServices\ElectronicPayroll\IElectronicPayrollUpdate.cs" />
+    <Compile Include="Migrations\201604261602083_InitialData.cs" />
+    <Compile Include="Migrations\201604261602083_InitialData.Designer.cs">
+      <DependentUpon>201604261602083_InitialData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Juliana\AUDITORIA.cs" />
+    <Compile Include="Models\IdentyModels.cs" />
+    <Compile Include="Models\Juliana\APROBACIONES.cs" />
+    <Compile Include="Models\Juliana\BIOSEGURIDAD_PREGUNTAS.cs" />
+    <Compile Include="Models\Juliana\CLIENTES.cs" />
+    <Compile Include="Models\Juliana\CUMPLEANOS.cs" />
+    <Compile Include="Models\Juliana\DIAGNOSTICOS.cs" />
+    <Compile Include="Models\Juliana\ACCESODATOS.cs" />
+    <Compile Include="Models\Juliana\APROBACION_PAGOS.cs" />
+    <Compile Include="Models\Juliana\APROBADORES.cs" />
+    <Compile Include="Models\Juliana\ESPECIALIDADES.cs" />
+    <Compile Include="Models\Juliana\AspNetUsers.cs" />
+    <Compile Include="Models\Juliana\FERIADOS.cs" />
+    <Compile Include="Models\Juliana\IDIOMAS_HOJAVIDA.cs" />
+    <Compile Include="Models\Juliana\IDIOMAS.cs" />
+    <Compile Include="Models\Juliana\CANDIDATOS.cs" />
+    <Compile Include="Models\Juliana\COMPETENCIAS.cs" />
+    <Compile Include="Models\Juliana\COMPETENCIASHOJAVIDA.cs" />
+    <Compile Include="Models\Juliana\DOCUMENTOS.cs" />
+    <Compile Include="Models\Juliana\EXPLABORAL.cs" />
+    <Compile Include="Models\Juliana\FAMILIARES.cs" />
+    <Compile Include="Models\Juliana\FORMACADEMICA.cs" />
+    <Compile Include="Models\Juliana\HOJAVIDA.cs" />
+    <Compile Include="Models\Juliana\INSTEDUCATIVAS.cs" />
+    <Compile Include="Models\Juliana\EMPLEADOS.cs" />
+    <Compile Include="Models\Juliana\CESANTIAS.cs" />
+    <Compile Include="Models\Juliana\CIUDADES.cs" />
+    <Compile Include="Models\Juliana\DEPARTAMENTOS.cs" />
+    <Compile Include="Models\Juliana\DEPTOS.cs" />
+    <Compile Include="Models\Juliana\MAPEO_NOM_ELEC.cs" />
+    <Compile Include="Models\Juliana\Generals\ParametroGeneral.cs" />
+    <Compile Include="Models\Juliana\NominaElectronica\TipoComprobante.cs" />
+    <Compile Include="Models\Juliana\RANGOSSOLPENSION.cs" />
+    <Compile Include="Models\Juliana\HISTORICO_AUTOLIQUIDACIONES.cs" />
+    <Compile Include="Models\Juliana\BANCOS.cs" />
+    <Compile Include="Models\Juliana\AFP.cs" />
+    <Compile Include="Models\Juliana\ARP.cs" />
+    <Compile Include="Models\Juliana\CAJASCOMP.cs" />
+    <Compile Include="Models\Juliana\CARGOS.cs" />
+    <Compile Include="Models\Juliana\CCOSTOS.cs" />
+    <Compile Include="Models\Juliana\EPS.cs" />
+    <Compile Include="Models\Juliana\CONCEPTOS.cs" />
+    <Compile Include="Models\Juliana\HISTORICO.cs" />
+    <Compile Include="Models\Juliana\PAISES.cs" />
+    <Compile Include="Models\Juliana\RELACIONSOLVAC.cs" />
+    <Compile Include="Models\Juliana\SUCURSALES.cs" />
+    <Compile Include="Models\Juliana\THS_AREA.cs" />
+    <Compile Include="Models\Juliana\THS_AREA_CONCEPTOS.cs" />
+    <Compile Include="Models\Juliana\TIME_CONTROL.cs" />
+    <Compile Include="Models\Juliana\TURNOS.cs" />
+    <Compile Include="Models\Juliana\THS_HORAS.cs" />
+    <Compile Include="Models\Juliana\THS_PARAMETRO_GENERAL.cs" />
+    <Compile Include="Models\Juliana\VACACIONES.cs" />
+    <Compile Include="Models\Juliana\SOLICITUD_VACACIONES.cs" />
+    <Compile Include="Models\Juliana\SOLICITUDES.cs" />
+    <Compile Include="Models\Juliana\SALARIOS.cs" />
+    <Compile Include="Models\Juliana\MOTIVOS_RECHAZO.cs" />
+    <Compile Include="Models\Juliana\PARAMETROS_CERTLAB.cs" />
+    <Compile Include="Models\Juliana\PARAMETROS_WEB.cs" />
+    <Compile Include="Models\Juliana\OTRASNOV.cs" />
+    <Compile Include="Models\Juliana\REFERENCIAS_PERSONALES.cs" />
+    <Compile Include="Models\Juliana\PROFESIONES.cs" />
+    <Compile Include="Models\Juliana\USUARIOS.cs" />
+    <Compile Include="Models\Juliana\TERCEROS.cs" />
+    <Compile Include="Models\Juliana\NOVAUT.cs" />
+    <Compile Include="Models\Juliana\NOVEDADES.cs" />
+    <Compile Include="Models\Juliana\VARIABLES_VACACIONES.cs" />
+    <Compile Include="Models\Juliana\VARIABLES.cs" />
+    <Compile Include="Models\Juliana\REQUERIMIENTOS.cs" />
+    <Compile Include="Models\Juliana\PLANTILLAS_CERTIFICADOS.cs" />
+    <Compile Include="Models\Juliana\STATUS_NOM_ELEC.cs" />
+    <Compile Include="Models\Model1.cs" />
+    <Compile Include="Models\USUARIOS_WEB.cs" />
+    <Compile Include="Models\ViewModels\AdminViewModel.cs" />
+    <Compile Include="Models\ViewModels\AseoViewModel.cs" />
+    <Compile Include="Models\ViewModels\BioseguridadViewModel.cs" />
+    <Compile Include="Models\ViewModels\CesantiasViewModels.cs" />
+    <Compile Include="Models\ViewModels\ElectronicPayrollModels.cs" />
+    <Compile Include="Models\ViewModels\GetReporteAprobadoresResponse.cs" />
+    <Compile Include="Models\ViewModels\IncapacidadesViewModel.cs" />
+    <Compile Include="Models\ViewModels\OtrasnovsViewModel.cs" />
+    <Compile Include="Models\ViewModels\FacturacionViewModel.cs" />
+    <Compile Include="Models\ViewModels\TimeControlFilterViewModel.cs" />
+    <Compile Include="Models\ViewModels\TurnosViewModel.cs" />
+    <Compile Include="Models\ViewModels\TimeSheetViewModel.cs" />
+    <Compile Include="Models\ViewModels\VacacionesViewModels.cs" />
+    <Compile Include="Models\ViewModels\CertificadosViewModels.cs" />
+    <Compile Include="Models\Juliana\EMPRESAS.cs" />
+    <Compile Include="Models\Contexts\AuthContext.cs" />
+    <Compile Include="Models\Contexts\JulianaContext.cs" />
+    <Compile Include="Models\ViewModels\AccountViewModel.cs" />
+    <Compile Include="Models\Juliana\WEB_USERS.cs" />
+    <Compile Include="Models\Juliana\PARAMETROS.cs" />
+    <Compile Include="Models\Juliana\ZONAS.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Providers\SystemWebCookieManager.cs" />
+    <Compile Include="Providers\JavaScriptResourceHandler.cs" />
+    <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
+    <Compile Include="Providers\UnhandledExceptionFilter.cs" />
+    <Compile Include="Repositories\AuthManager.cs" />
+    <Compile Include="Repositories\AuthRepository.cs" />
+    <Compile Include="Resources\Parameters.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Parameters.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Logging\LoggerServiceFactory.cs" />
+    <Compile Include="Services\Logging\NLogLoggerService.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Client\vendor\fonts\Glyphter.eot" />
+    <Content Include="Client\vendor\fonts\Glyphter.ttf" />
+    <Content Include="Client\vendor\fonts\Glyphter.woff" />
+    <Content Include="Client\vendor\fonts\material\MaterialIcons-Regular.eot" />
+    <Content Include="Client\vendor\fonts\material\MaterialIcons-Regular.ttf" />
+    <Content Include="Client\vendor\fonts\material\MaterialIcons-Regular.woff" />
+    <Content Include="Client\vendor\fonts\material\MaterialIcons-Regular.woff2" />
+    <Content Include="Client\vendor\ng-notify.min.js.map" />
+    <Content Include="FormatoDeducibles.docx" />
+    <Content Include="connectionStrings.config" />
+    <None Include="Properties\PublishProfiles\ADInterno.pubxml" />
+    <None Include="Properties\PublishProfiles\airfrance.pubxml" />
+    <None Include="Properties\PublishProfiles\Ariadna.pubxml" />
+    <None Include="Properties\PublishProfiles\DDB.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\Demo.pubxml" />
+    <None Include="Properties\PublishProfiles\ferro.pubxml" />
+    <None Include="Properties\PublishProfiles\FERROBUENOS.pubxml" />
+    <None Include="Properties\PublishProfiles\FerroTest.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\Gaes.pubxml" />
+    <None Include="Properties\PublishProfiles\ipg.pubxml" />
+    <None Include="Properties\PublishProfiles\JulianWeb.pubxml" />
+    <None Include="Properties\PublishProfiles\RsCORP.pubxml" />
+    <None Include="Properties\PublishProfiles\systems.pubxml" />
+    <None Include="Properties\PublishProfiles\systemsPru.pubxml" />
+    <None Include="Properties\PublishProfiles\UTEcolog.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Static\favicons\manifest.json" />
+    <Content Include="Static\templates\certificados\certlab_template.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Static\templates\certificados\compropago.cshtml" />
+    <Content Include="Views\SSO\Index.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Client\ng-app\candidatos\" />
+    <Folder Include="Logs\" />
+    <Folder Include="Test\" />
+    <Folder Include="Views\Excel\" />
+    <Folder Include="Views\GenerarCertlaboral\" />
+    <Folder Include="Views\Pdf\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201604261602083_InitialData.resx">
+      <DependentUpon>201604261602083_InitialData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Parameters.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Parameters.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51104</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44300/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

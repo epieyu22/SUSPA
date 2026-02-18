@@ -1,0 +1,35 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item"><a ui-sref="dashboard"><i class="material-icons">home</i></a></li>
+  <li class="breadcrumb-item"><a ui-sref="dashboard">Comprobantes y Certificados</a></li>
+  <li class="breadcrumb-item active">SRI - Formulario 107</li>
+</ol>
+
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    <i class="icon-certfretefuente"></i> Formulario 107
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <p>Seleccione el año gravable del cual generar el comprobante:</p>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Año:</label>
+          <select class="form-control" ng-model="vm.model.ano" ng-options="i as i for i in vm.years"></select>
+        </div>
+      </div>
+      <div class="col-md-12" ng-if="!vm.years.length > 0">
+        <div class="alert alert-danger" role="alert">
+          <p>Su fecha de ingreso es superior al ultimo año aprobado para generar los certificados de retenciones en la fuente del impuesto ala renta por ingresos del trabajo en relación de dependencia .</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="button" class="btn btn-primary float-right" ng-click="vm.Generate_SRI_Retefuente()" ng-disabled="!vm.years.length > 0">Generar</button>
+  </div>
+</div>
+
+

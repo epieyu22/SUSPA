@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Certificado laboral</title>
+  <style>
+    body{
+      font-family: "Arial";
+      margin: 0;
+      padding: 50px;
+      font-size: 16px;
+      padding-bottom: 0;
+      text-rendering: geometricPrecision;
+    }
+    .row .row{
+      display: table;
+    }
+
+    .row {
+      display: table;
+      width: 100%;
+    }
+    .row div{
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .row.padding{
+      padding: 10px 0;
+    }
+    .text-center{
+      text-align: center;
+    }
+    .text-left{
+      text-align: left;
+    }
+    .text-right{
+      text-align: right;
+    }
+    .text-justify{
+      text-align: justify;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="row">
+    <div style="width: 25%;text-align: center;">
+      <img src="@LOGO" style="width:100%">
+    </div>
+    <div class="text-right">
+      <p><b>@NOM_EMPRESA</b></p>
+      <p><b>@NIT</b></p>
+    </div>
+  </div>
+  @PLANTILLA
+</body>
+</html>
+

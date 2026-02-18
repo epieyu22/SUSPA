@@ -1,0 +1,34 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item active">Procesos Especiales</li>
+  <li class="breadcrumb-item active">Novedades ocasionales o Permanentes</li>
+</ol>
+
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    Novedades Ocacaionales o Permanentes
+    <a href="#" ui-sref="otrasnov_upload" class="btn btn-sm btn-success float-right">Subir Novedades</a>
+  </div>
+  <div class="card-body">
+    <div class="spinner blue" ng-if="vm.loading">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+
+    <div class="blank" ng-if="vm.novedades.length === 0 && !vm.loading">
+      <p>No hay registros de Novedades Ocacaionales o Permanentes pendietes de pago.</p>
+      <a ui-sref="otrasnov_upload" class="btn btn-success">Subir Novedades</a>
+    </div>
+
+    <div class="alert alert-warning" ng-if="vm.novedades.length > 0 && !vm.loading">
+        Estos registros de Novedades Ocacionales o Permanentes han sido subidos a traves de <b>Jualiana Web</b> y aún no han sido <b>pagados</b>.
+    </div>
+  </div>
+  <jqx-grid jqx-settings="vm.grilla" ng-if="vm.novedades.length > 0 && !vm.loading"></jqx-grid>
+</div>

@@ -1,0 +1,60 @@
+<div id="aspirante">
+  <div>
+    <img src="{{ROOTURL + 'Static/images/juliana_logo_white_xs.png'}}" alt="logo juliana">
+  </div>
+  <div class="form-wrapper m-t-1 col-xs-10 col-lg-12" ui-view="login">
+    <div class="card shadow">
+      <form name="AccesoForm">
+        <div class="row pt-3 pl-3 pr-3 pb-1">
+          <div class="form-group col-md-4">
+            <label>Primer Nombre:</label>
+            <input type="text" class="form-control" name="username" ng-model="vm.viewmodel.PNombre" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Segundo  Nombre:</label>
+            <input type="text" class="form-control" name="username" ng-model="vm.viewmodel.SNombre" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Primer Apellido:</label>
+            <input type="text" class="form-control" name="password" ng-model="vm.viewmodel.PApellido" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Segundo Apellido:</label>
+            <input type="text" class="form-control" name="password" ng-model="vm.viewmodel.SApellido" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Correo Electrónico:</label>
+            <input type="email" class="form-control" name="password" ng-model="vm.viewmodel.Dir_Electronica" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Tipo de Documento de Identificación:</label>
+            <select class="form-control custom-select" ng-model="vm.viewmodel.Tipo_Documento" ng-options='i.id as i.name for i in vm.TIPO_DOCUMENTOS'
+              required>
+          </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Número Documento de Identificación</label>
+            <input class="form-control" ng-model="vm.viewmodel.Doc_Identidad" type="text" required>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="alert alert-success clearfix" ng-if="vm.success">
+            Su información ha sido enviada con éxito, llegara un correo confirmando su registro.
+          </div>
+          <div class="alert alert-danger" ng-if="vm.data.error">
+            {{vm.data.error}}
+          </div>
+          <button type="submit" class="btn btn-primary" ng-disabled="AccesoForm.$invalid" ng-if="!vm.loading && !vm.success" ng-click="vm.createAspirante()">Ingresar</button>
+          <div class="float-left" ng-if="vm.loading">
+            <div class="spinner blue">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </form>
+  </div>
+
+</div>

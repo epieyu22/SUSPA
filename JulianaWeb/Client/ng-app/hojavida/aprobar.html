@@ -1,0 +1,32 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item"><a ui-sref="dashboard"><i class="material-icons">home</i></a></li>
+  <li class="breadcrumb-item active">Hojas de vida</li>
+</ol>
+
+
+<div class="card primary-theme shadow" ng-init="vm.inithojavidaGrid()">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs float-left">
+      <li class="nav-item">
+        <a class="nav-link  " data-toggle="tab"  role="tab" href="#" data-target="#sol-pendientes" ng-if="vm.data.pendientes.length > 0">Nuevos Ingresos</a>
+      </li>
+      <li class="nav-item" ng-if="vm.data.aprobadas.length > 0">
+        <a class="nav-link" data-toggle="tab"  role="tab" href="#" data-target="#sol-aprobadas">Aspirantes</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link active" data-toggle="tab"  role="tab" href="#" data-target="#empleados">Actualizaciones Empleados</a>
+      </li>
+    </ul>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane " id="sol-pendientes" role="tabpanel" ng-if="vm.data.pendientes.length > 0">
+      <jqx-grid id="hojavidaPendGrid" jqx-settings="vm.hojavidaPendGrid"></jqx-grid>
+    </div>
+    <div class="tab-pane active" id="empleados" role="tabpanel">
+      <jqx-grid id="hojavidaGrid" jqx-settings="vm.hojavidaGrid"></jqx-grid>
+    </div>
+    <div class="tab-pane" id="sol-aprobadas" role="tabpanel" ng-if="vm.data.aprobadas.length > 0">
+      <jqx-grid id="hojavidaAproGrid" jqx-settings="vm.hojavidaAproGrid"></jqx-grid>
+    </div>
+  </div>
+</div>

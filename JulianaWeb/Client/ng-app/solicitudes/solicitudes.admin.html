@@ -1,0 +1,116 @@
+
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item"><a ui-sref="dashboard"><i class="material-icons">home</i></a></li>
+  <li class="breadcrumb-item active">Consultas y Solicitudes</li>
+  <li class="breadcrumb-item active">Reporte Vacaciones</li>
+</ol>
+
+
+<div class="card primary-theme shadow">
+  <div class="card-header">        
+      Reporte de Vacaciones
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="">Empresa:</label>
+          <select class="form-control" 
+            ng-model="vm.viewmodel.DBName" 
+            ng-change="vm.Load_Config_Compropago()"
+            ng-options="i.BaseDatos as i.Nombre_Empresa for i in vm.data.empresas"></select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4  form-group">
+        <label>Desde:</label>
+        <jqx-date-time-input class="d-none d-md-block" jqx-ng-model ng-model="vm.viewmodel.Desde" jqx-settings="vm.datetimeInput" >
+      </div>
+      <div class="col-md-4  form-group">
+        <label>Hasta:</label>
+        <jqx-date-time-input class="d-none d-md-block" jqx-ng-model ng-model="vm.viewmodel.Hasta" jqx-settings="vm.datetimeInput">
+      </div>
+      <div class="col-md-4 form-group">
+        <label >Filtro:</label>
+        <select ng-model="vm.viewmodel.Filtro" class="form-control">
+          <option value="Fec_Salida">Fecha Salida</option>
+          <option value="Fec_Llegada">Fecha Llegada</option>
+          <option value="Fec_Solicitud">Fecha Solicitud</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="button" 
+      class="btn btn-primary float-right" 
+      ng-disabled="certlaboralForm.$invalid || vm.viewmodel.empleados.length == 0" 
+      ng-click="vm.Generate_Admin_Compropago()">
+      Generar Reporte
+    </button>    
+  </div>
+</div>
+
+<div class="row m-t-2">
+  <div class="col-md-12">
+    <button class="btn float-right btn-success" ng-click="vm.Exportar_Excel()">
+      <i class="material-icons">get_app</i> Exportar a Excel
+    </button>
+  </div>
+</div>
+
+
+<div class="card primary-theme shadow">
+  <div class="cd-tabs">
+    <nav>
+      <ul class="cd-tabs-navigation nav">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab"  role="tab" href="#" data-target="#hola">
+            <i class="material-icons tab-icon">sort</i>
+            <span class="tab-text">Solicitudes</span>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab"  role="tab" href="#" data-target="#calendar">
+            <i class="material-icons tab-icon">date_range</i>
+            <span class="tab-text">Calendario</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </nav>    
+  </div>
+  <div class="tab-content">
+    <div class="m-t-1 tab-pane " id="calendar">
+      <div  id="calendar"></div>
+    </div>
+    <div class="tab-pane active" id="hola">
+      <div class="blank m-a-2" ng-if="!vm.data.vacaciones.length > 0">
+        <i class="icon-vacaciones m-y-1"></i>
+        <p>No existen solicitudes de vacaciones procesadas en el sistema.</p>
+      </div>
+      <div class="table-responsive" ng-if="vm.data.vacaciones.length > 0">
+        <table ng-table="vm.solVacacionesGrid" class="table table-sm table-bordered table-striped scroll" table-morphe>
+          <tr ng-repeat="v in $data">
+            <td class="text-xs-center" data-title="'Cod'" sortable="'empleado.Cod_Empleado'">{{v.empleado.Cod_Empleado}}</td>
+            <td class="text-xs-center" data-title="'Doc Identificación'" sortable="'empleado.Cedula'">{{v.empleado.Cedula}}</td>
+            <td class="text-xs-center" data-title="'Empleado'" sortable="'empleado.Empleado'">{{v.empleado.Empleado}}</td>
+            <td class="text-xs-center" data-title="'Aprobador'" sortable="'aprobador.Tercero'">{{v.aprobador.Tercero}}</td>
+            <td class="text-xs-center" data-title="'Fecha Salida'" sortable="'Fec_Solicitud'">{{v.Fec_Solicitud | date: 'yyyy/MM/dd'}}</td>
+            <td class="text-xs-center" data-title="'Fecha Salida'" sortable="'Fec_Salida'">{{v.Fec_Salida | date: 'yyyy/MM/dd'}}</td>
+            <td class="text-xs-center" data-title="'Fecha LLegada'" sortable="'Fec_Llegada'">{{v.Fec_Llegada | date: 'yyyy/MM/dd'}}</td>
+            <td class="solicitud__estado--{{v.Estado}}" data-title="'Dias'" sortable="'Cantidad'">{{v.Cantidad}}</td>
+            <td class="solicitud__estado--{{v.Estado}}" data-title="'Estado'" sortable="'Estado'">{{v.Estado}}</td>
+            <td class="text-sm-center" data-title="'Acciones'" >
+              <button class="btn btn-sm btn-success" ui-sref="solicitud({Cod_Solicitud: v.Cod_Solicitud})">
+                <i class="material-icons">sort</i> Detalles
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>  
+</div>
+

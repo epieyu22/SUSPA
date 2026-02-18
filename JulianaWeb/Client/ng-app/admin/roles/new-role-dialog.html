@@ -1,0 +1,19 @@
+<form name="NewRoleForm">
+  <div class="ngdialog-header">
+    <h5 class="modal-title">Crear nuevo rol</h5>
+  </div>
+  <div class="row ngdialog-body">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="">Nombre del nuevo rol:</label>
+        <input type="text" class="form-control" ng-model="NuevoRol" required>
+      </div>
+    </div>
+    <div class="col-md-12 text-right">
+      <button type="button" class="btn btn-outline-secondary" ng-click="Create_Role()">Cancelar</button>
+      <button type="button" class="btn btn-success" ng-click="Close_Dialog()">
+        Guardar Cambios
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,67 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">Comprobantes y Certificados</a>
+  </li>
+  <li class="breadcrumb-item active">Otros certificados</li>
+</ol>
+
+
+
+<!-- <div class="alert alert-info alert-dismissible show" role="alert" ng-if="vm.MostrarAlertaCertlaboral">
+  <i class="material-icons">info</i>
+  {{vm.AlertaCertlaboral}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div> -->
+
+
+
+<form name="certlaboralForm">
+  <div class="card primary-theme shadow">
+    <div class="card-header">
+      <i class="icon-certflaboral"></i> Otros certificados</div>
+    <div class="card-body">
+      <div class="row">
+        <!-- <div class="col-md-12">
+          <p>Seleccione los parámetros para generar el certificado laboral:</p>
+        </div> -->
+
+        <div class="col-12" ng-if="vm.loading">
+          <div class="p-3 mb-3 col-12 animated-background"></div>
+          <div class="p-3 mb-3 col-8 animated-background"></div>
+          <div class="p-3 mb-3 col-8 animated-background"></div>
+        </div>
+
+        <div ng-if="!vm.loading" class="col-12">
+          <div class="col-md-12 form-group">
+            <label for="">Plantilla</label>
+            <div class="input-group">
+              <select 
+                class="custom-select form-control" 
+                ng-model="vm.model.Cod_Plantilla" 
+                ng-change="vm.cambiarPlantilla()" 
+                ng-options="p.Autonum as p.Nomb_Plantilla for p in vm.data.plantillas">
+              </select>
+              <!-- <div class="input-group-append">
+                <button class="btn btn-secondary" type="button">Vista Previa</button>
+              </div> -->
+            </div>
+          </div>          
+         
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-primary float-right" ng-click="vm.generateCertlaboral()">
+        <span>
+          <i class="material-icons">get_app</i> Generar Documento</span>      
+      </button>
+    </div>
+  </div>
+</form>

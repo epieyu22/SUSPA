@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Certificado laboral</title>
+  <style>
+    body{
+      font-family: sans-serif;
+      margin: 0;
+      padding: 100px;
+      font-size: 18px;
+      line-height: 1.5em;
+      padding-bottom: 0;
+      text-rendering: geometricPrecision;
+    }
+    .row .row{
+      display: table;
+    }
+
+    .row {
+      display: table;
+      width: 100%;
+    }
+    .row div{
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .row.padding{
+      padding: 10px 0;
+    }
+    .text-center{
+      text-align: center;
+    }
+    .text-left{
+      text-align: left;
+    }
+    .text-right{
+      text-align: right;
+    }
+    .text-justify{
+      text-align: justify;
+    }
+
+  </style>
+</head>
+<body>
+    <div class="row text-center">
+      <b>@Model.empresa.Nombre_Empresa</b><br>
+      <b>NIT @Model.empresa.Num_Documento</b>
+    </div>
+    <div class="row text-center" style="margin: 40px auto">
+      <b>CERTIFICA</b>
+    </div>
+    <div class="row text-justify" style="margin: 40px auto">
+      <p>Que los siguientes datos han sido verificados en el Departamento de Talento Humano:</p>
+    </div>
+    <div class="row">
+      <div class="text-justify" style="width: 50%"><b>NOMBRE:</b></div>
+      <div class="text-justify">@(Model.empleado.PNombre.Trim()) @(Model.empleado.SNombre.Trim()) @(Model.empleado.PApellido.Trim())@if(Model.empleado.SApellido.Trim() != ""){@(" " + Model.empleado.SApellido.Trim())}</div>
+    </div>
+    <div class="row">
+      <div class="text-justify" style="width: 50%"><b>CEDULA DE CIUDADANÍA:</b></div>
+      <div class="text-justify">1.018.440.807 de Bogotá</div>
+    </div>
+    <div class="row">
+      <div class="text-justify" style="width: 50%"><b>FECHA DE INGRESO:</b></div>
+      <div class="text-justify">@Model.fechaIngreso.ToString("D")</div>
+    </div>
+    <div class="row">
+      <div class="text-justify" style="width: 50%"><b>ESTADO DEL CONTRATO:</b></div>
+      <div class="text-justify">Vigente</div>
+    </div>
+    <div class="row">
+      <div class="text-justify" style="width: 50%"><b>TIPO DE CONTRATO:</b></div>
+      <div class="text-justify">@Model.tipoContrato</div>
+    </div>
+    <div class="row">
+      <div class="text-justify" style="width: 50%"><b>ÚLTIMO CARGO DESEMPEÑADO:</b></div>
+      <div class="text-justify">@(Model.cargo.Trim())</div>
+    </div>
+    <div class="row">
+      <div class="text-justify" style="width: 50%"><b>ÚLTIMO SALARIO DEVENGADO:</b></div>
+      <div class="text-justify">$@Model.empleado.Salario.ToString("N0")</div>
+    </div>
+    <div class="row text-justify" style="margin-top: 40px">
+      <div class="text-justify" style="width: 50%"><b>SE EXPIDE A SOLICITUD DE:</b></div>
+      <div class="text-justify">@(Model.empleado.PNombre.Trim()) @(Model.empleado.SNombre.Trim()) @(Model.empleado.PApellido.Trim())@if(Model.empleado.SApellido.Trim() != ""){@(" " + Model.empleado.SApellido.Trim())}</div>
+    </div>
+    <div class="row">
+      <div class="text-justify" style="width: 50%"><b>CON DESTINO A:</b></div>
+      <div class="text-justify">@Model.dirigido</div>
+    </div>
+    <div class="row">
+      <div class="text-justify" style="width: 50%"><b>FECHA DE EXPEDICIÓN:</b></div>
+      <div class="text-justify">@Model.fecha.ToString("D")</div>
+    </div>
+    <div class="row text-justify" style="margin: 40px auto">
+      <p><b>Atentamente,</b></p>
+    </div>
+    <div class="row text-justify" style="margin-top: 70px">
+      <div class="text-justify" style="width: 50%"><b style="border-top: 1px solid #000; padding-top: 5px">Cindy Lorena Peña Páez :</b></div>      
+    </div>
+    <div class="row text-justify">
+      <div class="text-justify" style="width: 50%"><b>Senior Specialist Human Talent</b></div>
+    </div>
+    <div class="row text-justify">
+      <div class="text-justify" style="width: 50%"><b>@Model.empresa.Nombre_Empresa</b></div>
+    </div>
+</body>
+</html>
+

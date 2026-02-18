@@ -1,0 +1,255 @@
+<header class="cd-main-header">
+  <a class="cd-logo" ui-sref="dashboard">
+    <img src="{{ROOTURL + 'Static/images/juliana_logo_white_md.png'}}" alt="">
+  </a>
+
+  <a href="#0" class="cd-nav-trigger" ng-class="{'nav-is-visible': vm.sidenavOpen}" ng-click="vm.toggleSidenav()">
+    <span></span>
+  </a>
+
+  <nav class="cd-nav">
+    <ul class="cd-top-nav">
+      <li class="has-children" ng-class="{'selected': vm.accountMenuOpen}">
+        <a href="#0" ng-click="vm.toggleAccountMenu()" click-outside="vm.closeAccountMenu()">
+          {{vm.username || 'Admin'}}
+        </a>
+        <ul>
+          <li>
+            <a href="#0" ui-sref="password">
+              <i class="material-icons nav-icon">lock</i>
+              <span class="nav-text">Cambiar Contraseña</span>
+            </a>
+          </li>
+          <li>
+            <a ui-sref="admin" ng-if="hasPermission(['settings'])">
+              <i class="material-icons nav-icon">settings</i>
+              <span class="nav-text">Configuración</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:soporte@systemsltda.com">
+              <i class="material-icons nav-icon">help_outline</i>
+              <span class="nav-text">Ayuda</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:soporte@systemsltda.com">
+              <i class="material-icons nav-icon">bug_report</i>
+              <span class="nav-text">Reportar Error</span>
+            </a>
+          </li>
+          <li>
+            
+            <a href="#" ng-click="vm.logout()">
+              <form ng-if="vm.enableSSOLogin" action="{{ ROOTURL + 'SSO/Logout'}}" method="post" id="sso-logout-form"></form>
+              <i class="material-icons nav-icon">input</i>
+              <span class="nav-text">Cerrar Sesión</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+<!-- .cd-main-header -->
+
+<loader-indicator></loader-indicator>
+
+<div class="cd-main-content">
+
+  <nav class="cd-side-nav is-fixed" ng-class="{'nav-is-visible': vm.sidenavOpen}">
+    <ul>
+      <li>
+        <a ui-sref="dashboard" title="Inicio">
+          <i class="material-icons nav-icon">home</i>
+          <span class="nav-text">Inicio</span>
+        </a>
+      </li>
+    </ul>
+    <ul ng-if="vm.hasPermission(['certificados'])">
+      <li class="cd-label">Comprobantes y Certificados</li>
+      <li ng-repeat="option in vm.menu.comprobantesOptions" ng-if="vm.hasPermission(option.perimission)">
+        <a ui-sref="{{option.url}}" title="{{option.title}}">
+          <i class="material-icons nav-icon">{{option.icon}}</i>
+          <span class="nav-text">{{option.title}}</span>
+        </a>
+      </li>
+    </ul>
+
+    <ul ng-if="vm.hasPermission(['consultas'])">
+      <li class="cd-label">Consultas y Solicitudes</li>
+      <li ng-repeat="option in vm.menu.consultasOptions" ng-if="vm.hasPermission(option.perimission)">
+        <a ui-sref="{{option.url}}" title="{{option.title}}">
+          <i class="material-icons nav-icon">{{option.icon}}</i>
+          <span class="nav-text">{{option.title}}</span>
+        </a>
+      </li>
+    </ul>
+
+    <ul ng-if="vm.hasPermission(['dashboard.Bi'])">
+      <li class="cd-label">Analítica de Datos</li>
+      <li ng-repeat="option in vm.menu.dashboardOptions" ng-if="vm.hasPermission(option.perimission)">
+        <a ui-sref="{{option.url}}" title="{{option.title}}">
+          <i class="material-icons nav-icon">{{option.icon}}</i>
+          <span class="nav-text">{{option.title}}</span>
+        </a>
+      </li>
+    </ul>
+
+    <ul class="cd-top-nav">
+      <li class="has-children" ng-class="{'selected': vm.accountMenuOpen}">
+        <a href="#0" ng-click="vm.toggleAccountMenu()">
+          {{vm.username}}
+        </a>
+        <ul>
+          <li>
+            <a href="#0" ui-sref="password">
+              <i class="material-icons nav-icon">lock</i>
+              <span class="nav-text">Cambiar Contraseña</span>
+            </a>
+          </li>
+          <li>
+            <a href="#0">
+              <i class="material-icons nav-icon">settings</i>
+              <span class="nav-text">Configuración</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:soporte@systemsltda.com">
+              <i class="material-icons nav-icon">help_outline</i>
+              <span class="nav-text">Ayuda</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:soporte@systemsltda.com">
+              <i class="material-icons nav-icon">bug_report</i>
+              <span class="nav-text">Reportar Error</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" ng-click="vm.logout()">
+              <i class="material-icons nav-icon">input</i>
+              <span class="nav-text">Cerrar Sesión</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="content-wrapper">
+    <div ng-include="'Client/ng-app/layout/alertas.html'"></div>
+    <div class="container" ui-view="MainContent"></div>
+    <div class="bg-content">
+
+    </div>
+    <footer class="container mt-5 mb-5 main-footer">
+      <div class="row">
+        <div class="col-sm-6 mt-5 text-center text-md-left">
+          <div class="cliente_logo">
+            <img src="{{ROOTURL + 'Static/images/empresa_logo.png'}}" style="max-width: 200px;" alt="">
+          </div>
+        </div>
+        <div class="col-sm-6 text-center text-md-right mt-5 ">
+          <img src="{{ROOTURL + 'Static/images/systems_logo.png'}}" style="max-width: 200px;" alt="">
+          <p class="text-muted ">
+            <span>Systems S.A.S</span>
+          </p>
+          <p class="text-muted">
+            <a href="malito:soporte@systemaltda.com" class="ml-2">Ayuda</a>
+            <a href="{{ROOTURL + 'Static/POLITICA_DE_PRIVACIDAD.pdf'}}" target="_blank" class="ml-2">Política de
+              privacidad</a>
+            <a href="malito:soporte@systemaltda.com" class="ml-2">Reportar Error</a>
+          </p>
+          <p class="text-muted">Juliana Web {{vm.version}} - &copy; {{vm.currentYear | date : 'yyyy'}}</p>
+        </div>
+      </div>
+    </footer>
+
+
+
+  </div>
+
+
+
+
+
+  <!-- .content-wrapper -->
+</div>
+
+
+
+
+
+<div class="loading" ng-if="generating">
+  <h5 class="m-y-1">Generando documento, esto puede tomar unos segundos.</h5>
+  <p>Por favor espere...</p>
+  <div class="spinner blue">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</div>
+
+<div class="loading" ng-if="generatingPayroll">
+  <h5 class="m-y-1">Generando envío, esto puede tomar varios minutos.</h5>
+  <p>Por favor espere...</p>
+  <div class="spinner blue">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</div>
+
+<div class="loading" ng-if="sending">
+  <h5 class="m-y-1">Enviando Correos, esto puede tomar unos segundos.</h5>
+  <p>Por favor espere...</p>
+  <div class="spinner blue">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</div>
+
+<div class="loading" ng-if="uploading || $root.uploading">
+  <h5 class="m-y-1">Cargando información.</h5>
+  <p>Por favor espere...</p>
+  <div class="spinner blue">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</div>
+
+<div class="loading" ng-if="sendmails">
+  <h5 class="m-y-1">Enviando correos</h5>
+  <p>Por favor espere...</p>
+  <div class="spinner blue">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</div>
+
+<script>
+  var headertext = [];
+  var headers = document.querySelectorAll("thead");
+  var tablebody = document.querySelectorAll("tbody");
+
+  for (var i = 0; i < headers.length; i++) {
+    headertext[i] = [];
+    for (var j = 0,headrow; headrow = headers[i].rows[0].cells[j]; j++) {
+      var current = headrow;
+      headertext[i].push(current.textContent);
+    }
+  }
+
+  for (var h = 0,tbody; tbody = tablebody[h]; h++) {
+    for (var i = 0,row; row = tbody.rows[i]; i++) {
+      for (var j = 0,col; col = row.cells[j]; j++) {
+        col.setAttribute("data-th",headertext[h][j]);
+      }
+    }
+  }
+
+</script>

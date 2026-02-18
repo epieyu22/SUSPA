@@ -1,0 +1,127 @@
+<!DOCTYPE html "-//w3c//dtd xhtml 1.0 transitional //en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+    table {
+      background-color: #f1f1f1;
+      font-family: Arial, Helvetica, sans-serif;
+      border-spacing: 0;
+      border-collapse: collapse;
+      vertical-align: top;
+      height: 100%;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto
+    }
+
+    .content {
+      padding: 20px;
+      background-color: #fff;
+      color: #787878
+    }
+
+
+    h2 {
+      margin: 20px auto !important;
+      color: #555;
+      font-size: 24px;
+    }
+
+    a {
+      color: #0073cc;
+    }
+
+    .button {
+      color: #ffffff !important;
+      background-color: #0073cc;
+      padding: 10px 20px;
+      margin: 10px auto;
+      text-decoration: none;
+      display: inline-block;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+    }
+
+    .footer {
+      text-align: center;
+      color: #999;
+      margin-top: 30px;
+    }
+
+    .footer p {
+      margin: 5px auto;
+    }
+
+    img {
+      margin: 0 auto;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .container {
+        max-width: 100%;
+        margin: inherit 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <div class="container" style="margin: 10px auto">
+            <img src="cid:logo_empresa" alt="LogoEmpresa" width="150px">
+            <img src="cid:logo_juliana" alt="LogoEmpresa" style="display: none">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h2 class="container">Solicitud Certificación laboral</h2>
+          <div class=" container content">
+            <p>El empleado @empleado ha solicitado una certificación laboral desde Juliana Web que requiere de su aprobación.
+              Adjunto se encuentra una copia del documento que será generado.
+            </p>
+            <p>Cada certificado posee un código único de verificación, use este código para validar la información.</p>
+            <p>
+              <b>Código único de verificación:</b> @token</p>
+
+            <div style="text-align: center">
+              <a href="@callbackurl" class="button">Ver Solicitud en Juliana</a>
+            </div>
+
+            <p>
+              <i> Para abrir el documento adjunto ingrese su número de documento de identificación, cuando se le solicite
+                ingresar la contraseña.</i>
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+
+          <div class="contaier footer">
+            <div>
+              <img src="http://systemsltda.com/wp-content/themes/systemssas/images/logo_medium.png" alt="logo systems" width="200px">
+            </div>
+            <div>
+              <p>Este correo es generado automáticamente, no responder.</p>
+              <a href="http://systemsltda.com">Systems SAS</a>
+            </div>
+            <p>&copy; @ano</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

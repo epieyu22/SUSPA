@@ -1,0 +1,60 @@
+<style>
+  .hola {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  #top {
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    padding: 0 10px;
+    line-height: 40px;
+    font-size: 12px;
+  }
+
+  .main-content {
+    background-color: #fff;
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  #calendar {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 10px;
+  }
+
+  .fc-center h2 {
+    font-size: 24px;
+  }
+</style>
+
+<div class="hola">
+
+  <div id="top">
+    <span for="">Empresa:</span>
+    <select name="" id="" ng-model="vm.g.Empresa" ng-options="e.BaseDatos as e.Nombre_Empresa for e in vm.data.Empresas"></select>
+    <span class="flex"></span>
+  </div>
+  <div class="main-content">
+    <div class="col">
+      
+    </div>
+    <div id="calendar" class="col"></div>
+  </div>
+</div>
+
+<script>
+  $('#calendar').fullCalendar({
+    header: {
+      left: 'today prev,next',
+      center: 'title',
+      right: 'listYear,month,basicWeek '
+    },
+    validRange: {
+      start: '2017-02-01'
+    }
+  });
+</script>

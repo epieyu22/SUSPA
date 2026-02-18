@@ -1,0 +1,396 @@
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item"><a ui-sref="dashboard"><i class="material-icons">home</i></a></li>
+  <li class="breadcrumb-item"><a ui-sref="dashboard">Comprobantes y Certificados</a></li>
+  <li class="breadcrumb-item"><a ui-sref="certlaboral">Certificado Laboral</a></li>
+  <li class="breadcrumb-item active">Configuración</li>
+</ol>
+
+<!--
+<div class="card primary-theme shadow">
+  <div class="card-header">        
+      Lista de Configuraciones
+  </div>
+  <table class="table">
+    <thead >
+      <tr>
+        <th>Filtro:</th>
+        <th>Detalle:</th>
+        <th>Firma:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="p in vm.data.parametros">
+        <td>{{p.Filter}}</td>
+        <td>{{p.Cod_Filter}}</td>
+        <td>{{p.Cod_Empleado_Autoriza}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AddReferenciaForm">
+          <i class="material-icons">add_box</i>
+          Añadir
+        </button>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    Seleccione la Empresa
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="">Empresa:</label>
+        <select class="custom-select custom-select-sm" ng-model="vm.viewmodel.Empresa" ng-change="vm.loadEmpleados()" ng-options="i.BaseDatos as i.Nombre_Empresa for i in vm.data.empresas"></select>
+      </div>
+    </div>
+    <div class="row" ng-if="vm.viewmodel.Empresa">
+      <div class="form-group col-md-6">
+        <label for="">Filtro:</label>
+        <select class="custom-select custom-select-sm" name="" id="" ng-model="vm.viewmodel.Filter" ng-change="vm.viewmodel.Cod_filter = null">
+          <option value="999">General</option>
+          <option value="6">Zonas</option>
+          <option value="5">Sucursales</option>
+          <option value="4">Centros de Costos</option>
+          <option value="3">Departamentos</option>
+          <option value="2">Cargos</option>
+          <option value="1">Empleados</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6" ng-if="vm.viewmodel.Filter == '999'">
+        <input type="hidden" ng-init="vm.viewmodel.Cod_Filter = 999">
+      </div>
+      <div class="form-group col-md-6" ng-if="vm.viewmodel.Filter == '6'">
+        <label for="">Zona:</label>
+        <select class="form-control" ng-model="vm.viewmodel.Cod_Filter" ng-options="i.Cod_Zona as i.Nom_Zona for i in vm.data.zonas"></select>
+      </div>
+      <div class="form-group col-md-6" ng-if="vm.viewmodel.Filter == '5'">
+        <label for="">Sucursal:</label>
+        <select class="form-control" ng-model="vm.viewmodel.Cod_Filter" ng-options="i.Cod_Sucursal as i.Nom_Sucursal for i in vm.data.surcusales"></select>
+      </div>
+      <div class="form-group col-md-6" ng-if="vm.viewmodel.Filter == '4'">
+        <label for="">Centro de costo:</label>
+        <oi-select oi-options="i.Cod_Ccosto as i.Nom_Ccosto for i in vm.data.ccostos track by i.Cod_Ccostos" ng-model="vm.viewmodel.Cod_Filter"
+          placeholder="Buscar Centro de Costo"></oi-select>
+      </div>
+      <div class="form-group col-md-6" ng-if="vm.viewmodel.Filter == '3'">
+        <label for="">Departamento:</label>
+        <select class="form-control" ng-model="vm.viewmodel.Cod_Filter" ng-options="i.Cod_Depto as i.Nombre_Depto for i in vm.data.deptos"></select>
+      </div>
+      <div class="form-group col-md-6" ng-if="vm.viewmodel.Filter == '2'">
+        <label for="">Cargo:</label>
+        <oi-select oi-options="i.Cod_Cargo as i.Nom_Cargo for i in vm.data.cargos track by i.Cod_Cargo" ng-model="vm.viewmodel.Cod_Filter"
+          placeholder="Buscar Cargo"></oi-select>
+      </div>
+      <div class="form-group col-md-6" ng-if="vm.viewmodel.Filter == '1'">
+        <label for="">Empleado:</label>
+        <oi-select oi-options="i.Cod_Empleado as i.Empleado for i in vm.data.empleados track by i.Cod_Empleado"
+          ng-model="vm.viewmodel.Cod_Filter" placeholder="Buscar Empleado"></oi-select>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn  btn-sm btn-success float-right" ng-disabled="!vm.viewmodel.Cod_Filter" ng-click="vm.loadCertlabConfig()">Configurar</button>
+  </div>
+</div>
+
+
+
+
+<div class="card primary-theme shadow" ng-if="vm.data.config && vm.dataLoaded">
+  <div class="cd-tabs">
+    <nav class="cd-tabs-navigation ">
+      <ul class="nav">
+        <li class="nav-item">
+          <a  class="active" data-toggle="tab" role="tab" href="#" data-target="#Plantilla">
+            <span class="tab-text">Plantilla</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a  data-toggle="tab" role="tab" href="#" data-target="#Parametros">
+            <span class="tab-text">Parametros</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a data-toggle="tab" role="tab" href="#" data-target="#Firma">
+            <span class="tab-text">Firma</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane active" id="Plantilla" role="tabpanel">
+
+      <div class="certlab__plantilla">
+        <div class="certlab__plantilla__layout">
+          <textarea froala="vm.froalaOptions" ng-model="vm.data.config.Plantilla"></textarea>
+        </div>
+        <div class="certlab__plantilla__vars">
+          <div class="certlab__plantilla__vars__header">
+            Variables
+          </div>
+          <div class="certlab__plantilla__vars__body">
+            <div>
+              <div class="accordion_header" role="tab" id="headingOne">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+                  aria-controls="collapseOne">
+                  Información del Empleado
+                </a>
+              </div>
+              <table class="table table-sm table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th style="width: 30%">Variable</th>
+                    <th>Descripción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>[NOM_EMPLEADO]</td>
+                    <td>Nombre completo</td>
+                  </tr>
+                  <tr>
+                    <td>[DOC_EMPLEADO]</td>
+                    <td>Número de documento de identificación</td>
+                  </tr>
+                  <tr>
+                    <td>[LUG_DOC_EMPLEADO]</td>
+                    <td>Lugar de expedición del documento de identificación</td>
+                  </tr>
+                  <tr>
+                    <td>[CARGO_EMPLEADO]</td>
+                    <td>Ultimo cargo ocupado.</td>
+                  </tr>
+                  <tr>
+                    <td>[SALARIO]</td>
+                    <td>Ultimo salario devengado</td>
+                  </tr>
+                  <tr>
+                    <td>[SALARIO_LETRAS]</td>
+                    <td>Ultimo salario devengado en letras</td>
+                  </tr>
+                  <tr>
+                    <td>[TIPO_CONTRATO]</td>
+                    <td>Tipo de contrato del empleado</td>
+                  </tr>
+                  <tr>
+                    <td>[FEC_INGRESO]</td>
+                    <td>Fecha Ingreso a la empresa</td>
+                  </tr>
+                  <tr>
+                    <td>[FEC_NACIMIENTO]</td>
+                    <td>Fecha nacimiento</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <div class="accordion_header" role="tab" id="headingTwo">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
+                  aria-controls="collapseTwo">
+                  Información General
+                </a>
+              </div>
+              <table class="table table-sm table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th style="width: 30%">Variable</th>
+                    <th>Descripción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>[FEC_ACTUAL]</td>
+                    <td>Fecha de expedición del Certificado</td>
+                  </tr>
+                  <tr>
+                    <td>[CIUDAD]</td>
+                    <td>Ciudad de expedición del Certificado</td>
+                  </tr>
+                  <tr>
+                    <td>[DIRIGIDO]</td>
+                    <td>A quien va dirigido el Certificado</td>
+                  </tr>
+                  <tr>
+                    <td>[NOM_EMPRESA]</td>
+                    <td>Razón social de la Empresa</td>
+                  </tr>
+                  <tr>
+                    <td>[DOC_EMPRESA]</td>
+                    <td>Número unico de documento de identificación de la Empresa</td>
+                  </tr>
+                  <tr>
+                    <td>[DIR_EMPRESA]</td>
+                    <td>Dirección Empresa</td>
+                  </tr>
+                  <tr>
+                    <td>[TEL_EMPRESA]</td>
+                    <td>Telefono Empresa</td>
+                  </tr>
+                  <tr>
+                    <td>[NOM_FIRMA]</td>
+                    <td>Nombre completo de la Persona que firma</td>
+                  </tr>
+                  <tr>
+                    <td>[CARGO_FIRMA]</td>
+                    <td>Cargo de la Persona que firma</td>
+                  </tr>
+                  <tr>
+                    <td>[IMAGEN_FIRMA]</td>
+                    <td>Firma Digital, en caso de usar una.</td>
+                  </tr>
+                  <tr>
+                    <td>[INFO_ADICIONAL]</td>
+                    <td>Información Adicional configurada en la pestaña de parametrización.</td>
+                  </tr>
+                  <tr>
+                    <td>[DIR_EMBAJADA]</td>
+                    <td>Texto especial para Embajadas</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="card-footer">
+        <button class="btn btn-success float-right" ng-click="vm.saveCertlabConfig()">Guardar Cambios</button>
+      </div>
+    </div>
+    <div class="tab-pane" id="Parametros" role="tabpanel">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <h5>Información Adicional</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" ng-model="vm.data.config.Otros_Devengos">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-label">Mostrar otros devengos aparte del salario base</span>
+            </label>
+          </div>
+        </div>
+        <div class="row" ng-if="vm.data.config.Otros_Devengos">
+          <div class="col-md-12 m-y-1">
+            <div class="col-md-4">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" ng-model="vm.data.config.Horas_Extras">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-label">Horas Extras</span>
+              </label>
+            </div>
+            <div class="col-md-4">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" ng-model="vm.data.config.Base_Salario">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-label">Beneficios Salario</span>
+              </label>
+            </div>
+            <div class="col-md-4">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" ng-model="vm.data.config.Otros_Ingresos">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-label">Otros Ingresos</span>
+              </label>
+            </div>
+            <div class="col-md-6 m-y-1">
+              <div class="form-group">
+                <label for="">Conceptos Especificos:</label>
+                <oi-select oi-options="i.Nom_Concepto for i in vm.data.conceptos track by i.Cod_Concepto" ng-model="vm.selectedConceptos"
+                  multiple placeholder="Buscar Concepto"></oi-select>
+              </div>
+            </div>
+            <div class="col-md-6 m-y-1">
+              <div class="form-group">
+                <label for="">Meses promedio de información:</label>
+                <input class="form-control" type="number" ng-model="vm.data.config.Meses_Promedio">
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="m-y-2">
+        <div class="row mb-1">
+          <div class="col-md-12">
+            <h5>Texto Embajada</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Vacaciones Empleado</label>
+              <textarea class="form-control" rows="5" ng-model="vm.data.config.Texto_Embajada"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Viaje Laboral</label>
+              <textarea class="form-control" rows="5" ng-model="vm.data.config.Texto_Viaje_Laboral"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-success float-right" ng-click="vm.saveCertlabConfig()">Guardar Cambios</button>
+      </div>
+    </div>
+    <div class="tab-pane" id="Firma" role="tabpanel">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Autoriza:</label>
+              <oi-select oi-options="i.Cod_Tercero as i.Tercero for i in vm.data.terceros track by i.Cod_Tercero"
+                ng-model="vm.data.config.Cod_Empleado_Autoriza" placeholder="Buscar"></oi-select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" ng-model="vm.data.config.Firma_Digital">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-label">Firma Digital</span>
+            </label>
+          </div>
+        </div>
+        <div class="row" ng-if="vm.data.config.Firma_Digital">
+          <div class="col-md-12 text-xs-center">
+            <div class="fileinput fileinput-new m-x-auto" data-provides="fileinput">
+              <div class="fileinput-new img-thumbnail mb-1">
+                <img alt="100%x100%" src="data:image/svg+xml;charset=UTF-8, @%3Csvg%20width%3D%22200%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20200%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1571f49029b%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1571f49029b%22%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2275.5%22%20y%3D%22104.5%22%3E200x200%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                  style="height: 100%; width: 100%; display: block;" ng-if="!vm.data.config.Firma_Filename">
+                <img ng-src="Static/images/Firmas/{{vm.data.config.Firma_Filename}}" alt="" ng-if="vm.data.config.Firma_Filename">
+              </div>
+              <div class="fileinput-preview fileinput-exists img-thumbnail mb-1" style="max-width: 200px; max-height: 150px;"></div>
+              <div class="">
+                <span class="btn btn-sm btn-secondary btn-file">
+                  <span class="fileinput-new">Seleccionar imagen</span>
+                  <span class="fileinput-exists">Cambiar</span>
+                  <input type="file" name="profileImg" accept="image/*" file-model="vm.firmaFile">
+                </span>
+                <a href="#" class="btn btn-sm btn-danger fileinput-exists" data-dismiss="fileinput">
+                  Quitar
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-success float-right" ng-click="vm.uploadFirmaConfig()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

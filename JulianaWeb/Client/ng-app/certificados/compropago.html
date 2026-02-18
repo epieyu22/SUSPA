@@ -1,0 +1,63 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">Comprobantes y Certificados</a>
+  </li>
+  <li class="breadcrumb-item active">Comprobante de pago</li>
+</ol>
+
+<div class="row m-t-1">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-success" ui-sref="compropago.admin" ng-if="hasPermission(['compropago.admin'])">
+      <i class="material-icons">launch</i>
+      <span>Opción</span>
+      <span class="hidden-xs-down">de Comprobantes</span>
+      <span>Masivos</span>
+    </button>
+    <button type="button" class="btn btn-primary float-right" ui-sref="compropago.config" ng-if="hasPermission(['compropago.config'])">
+      <i class="material-icons">settings</i>
+      <span class="hidden-xs-down">Configuración</span>
+    </button>
+  </div>
+</div>
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    <i class="icon-compropago"></i>
+    Opción de Comprobante de Pago Personal
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Año:</label>
+          <select class="custom-select" ng-model="vm.viewmodel.ano" ng-options="i as i for i in vm.years" ng-change="vm.checkMeses(vm.viewmodel.ano)"></select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Mes:</label>
+          <select class="custom-select" ng-model="vm.viewmodel.mes" ng-options="i.value as i.name for i in vm.mesesToShow"></select>
+        </div>
+      </div>
+      <div class="col-md-4" ng-if="vm.config.liqNomina == 15">
+        <div class="form-group">
+          <label>Quincena:</label>
+          <select class="form-control" ng-model="vm.viewmodel.quincena">
+            <option value="1">Primera</option>
+            <option value="2">Segunda</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="button" class="btn btn-primary float-right" ng-click="vm.generateCompropago()">
+      <i class="material-icons">get_app</i> Generar Documento
+    </button>
+  </div>
+</div>

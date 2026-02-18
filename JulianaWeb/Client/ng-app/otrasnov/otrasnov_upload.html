@@ -1,0 +1,146 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item active">
+    <a ui-sref="dashboard">Procesos Especiales</a>
+  </li>
+  <li class="breadcrumb-item active">
+    <a ui-sref="otrasnov">Novedades ocasionales o Permanentes</a>
+  </li>
+  <li class="breadcrumb-item active">Subir Novedades</li>
+</ol>
+
+<div class="alert alert-warning" role="alert">
+  <p>
+    <b>Existen registros de Novedades Ocacionales o Permanentes ingresados a traves de Jualiana Web</b> que aún no han sido
+    pagados en esta fecha de nómina, puedes agregar más registros de ser necesario sin embargo asegurate de revisar los registros
+    existentes para evitar redundacia.</p>
+  <hr>
+  <p>Pueder ver los registros subidos siguiendo
+    <a ui-sref="otrasnov">este enlace</a>
+  </p>
+</div>
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    Novedades Ocacioales o Permanentes
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="">Empresa:</label>
+          <select class="form-control form-control-sm" ng-model="vm.viewmodel.Empresa" ng-change="vm.Get_Conceptos_OtrasNov()" ng-options="e.BaseDatos as e.Nombre_Empresa for e in vm.Empresas"></select>
+        </div>
+      </div>
+
+      <form id="OtrasNovExcel" action="/Excel/Upload_OtrasNov/" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="Empresa" value="{{vm.viewmodel.Empresa}}">
+        <div class="form-group col-md-6">
+          <label for="">Importar Archivo de Novedades:</label>
+          <input class="form-control form-control-sm btn btn-outline-secondary" type="file" id="OtrasNov" name="OtrasNov" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="card primary-theme shadow" ng-if="vm.errors.length > 0">
+  <div class="card-header">
+    Errores Encontrados
+  </div>
+  <table class="table table-sm table-bordered ">
+    <thead>
+      <th>Línea</th>
+      <th>Error</th>
+    </thead>
+    <tr ng-repeat="e in vm.errors">
+      <td>{{e.line}}</td>
+      <td class="text-danger">{{e.msg}}</td>
+    </tr>
+  </table>
+</div>
+
+
+<div class="card primary-theme shadow  table-responsive" ng-if="vm.errors.length == 0">
+  <div class="card-header">
+    Ingreso Individual de Novedades
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="">Empleado:</label>
+        <input type="hidden" ng-model="vm.viewmodel.Cod_Empleado">
+        <input type="text" class="form-control form-control-sm" placeholder="Seleccionar Empleado" ng-model="vm.viewmodel.Empleado"
+          ng-click="vm.Buscar_Empleado($event)" readonly>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>Concepto:</label>
+        <select ng-model="vm.viewmodel.Cod_Concepto" class="form-control form-control-sm" ng-options="i.Cod_Concepto as i.Nom_Concepto for i in vm.data.conceptos"></select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Desde:</label>
+        <select class="form-control form-control-sm" ng-model="vm.viewmodel.Desde" ng-change="vm.onDesdeChange()">
+          <option ng-repeat="f in vm.data.Fecs_Nomina" value="{{$index}}">{{f | date: 'yyyy/MM/dd'}}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Hasta:</label>
+        <select class="form-control form-control-sm" ng-model="vm.viewmodel.Hasta" ng-change="vm.onHastaChange()">
+          <option ng-repeat="f in vm.data.Fecs_Nomina" ng-if="$index >= vm.viewmodel.Desde" value="{{$index}}">{{f | date: 'yyyy/MM/dd'}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3 col-sm-6">
+        <label>Tipo Novedad:</label>
+        <select class="form-control form-control-sm" ng-model="vm.viewmodel.Prioridad" ng-change="vm.Change_Coutas()">
+          <option value="O" selected>Ocasional</option>
+          <option value="P">Permanente</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3 col-sm-6">
+        <label for="">Coutas:</label>
+        <input type="number" ng-model="vm.viewmodel.Coutas" value="1" min="2" max="{{vm.data.Fecs_Nomina.length - vm.viewmodel.Desde - 1}}"
+          ng-readonly="vm.viewmodel.Prioridad != 'P'" ng-change="vm.onCoutasChange()" class="form-control form-control-sm">
+      </div>
+      <div class="form-group col-md-3 col-sm-6" class="form-group col-md-3 col-sm-6">
+        <label>Prioridad:</label>
+        <select class="form-control form-control-sm" ng-model="vm.viewmodel.Tipo">
+          <option value="P" selected>Procentaje</option>
+          <option value="V">Valor</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3 col-sm-6" ng-if="vm.data.liqNomina === 15">
+        <label for="">Aplica:</label>
+        <select class="form-control form-control-sm" ng-model="vm.viewmodel.Aplica">
+          <option value="1">Primera Quincena</option>
+          <option value="2">Segunda Quincena</option>
+          <option value="3">Ambas Quincenas</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3 col-sm-6" ng-if="vm.viewmodel.Tipo === 'P'">
+        <label for="">Porc. %</label>
+        <input type="numsser" class="form-control form-control-sm">
+      </div>
+      <div class="form-group col-md-3 col-sm-6" ng-if="vm.viewmodel.Tipo === 'V'">
+        <label for="">Valor:</label>
+        <input type="number" class="form-control form-control-sm">
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <button type="button" class="btn btn-primary float-right" ng-click="vm.newNovedades()">Generar</button>
+  </div>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.12.0/xlsx.full.min.js"></script>

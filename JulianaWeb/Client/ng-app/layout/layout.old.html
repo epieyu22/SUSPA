@@ -1,0 +1,161 @@
+<!-- <nav id="sidenav" class="wrapper-sidenav navmenu navmenu-default navmenu-fixed-left offcanvas-sm shadow" role="navigation">
+  <div class="logo">
+    <img src="Static/images/juliana_logo_white_xs.png" alt="">
+  </div>
+  <div class="divider"></div>
+  <div class="sidebar-nav-wrapper">
+    <ul class="sidebar-nav">
+      <li>
+        <a ui-sref="dashboard">
+        <i class="material-icons">home</i>
+        <span class="icon-text">Inicio</span>
+        </a>
+      </li>
+      <div class="divider"></div>
+      <li class="nav-header" ng-if="vm.hasPermission(['certificados'])">
+        Comprobantes y Certificados
+      </li>
+      <li ng-repeat="option in vm.menu.comprobantesOptions" ng-if="vm.hasPermission(option.perimission)">
+        <a ui-sref="{{option.url}}">
+          <i class="icon-{{option.icon}}"></i>
+          <span class="icon-text">{{option.title}}</span>
+        </a>
+      </li>
+      <div class="divider"></div>
+      <li class="nav-header" ng-if="vm.hasPermission(['consultas'])">
+        Consulta y solicitudes
+      </li>
+      <li ng-repeat="option in vm.menu.consultasOptions" ng-if="vm.hasPermission(option.perimission)">
+        <a ui-sref="{{option.url}}">
+          <i class="icon-{{option.icon}}"></i>
+          <span class="icon-text">{{option.title}}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav> -->
+
+
+<div id="sidenav" class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
+  <div class="logo">
+    <img src="Static/images/juliana_logo_white_xs.png" alt="">
+  </div>
+  <div class="sidebar-nav-wrapper">
+    <div class="divider"></div>
+    <ul class="sidebar-nav">
+      <li>
+        <a ui-sref="dashboard">
+        <i class="material-icons">home</i>
+        <span class="icon-text">Inicio</span>
+        </a>
+      </li>
+      <div class="divider"></div>
+      <li class="nav-header" ng-if="vm.hasPermission(['certificados'])">
+        Comprobantes y Certificados
+      </li>
+      <li ng-repeat="option in vm.menu.comprobantesOptions" ng-if="vm.hasPermission(option.perimission)">
+        <a ui-sref="{{option.url}}">
+          <i class="icon-{{option.icon}}"></i>
+          <span class="icon-text">{{option.title}}</span>
+        </a>
+      </li>
+      <div class="divider"></div>
+      <li class="nav-header" ng-if="vm.hasPermission(['consultas'])">
+        Consulta y solicitudes
+      </li>
+      <li ng-repeat="option in vm.menu.consultasOptions" ng-if="vm.hasPermission(option.perimission)">
+        <a ui-sref="{{option.url}}">
+          <i class="icon-{{option.icon}}"></i>
+          <span class="icon-text">{{option.title}}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<nav class="navbar navbar-full navbar-fixed-top  navbar-dark shadow" style="background-color: #0073cc">
+  <button type="button" class="navbar-toggle btn btn-primary btn-sm hidden-lg-up float-left m-r-2" data-toggle="offcanvas" data-target="#sidenav">
+    <i class="material-icons">menu</i>
+  </button>
+  <div class="float-left hidden-xs-down" ng-if="loadingView">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+  <div class="dropdown float-right">
+    <button class="btn btn-primary dropdown-toggle" id="dropdownMenuLink" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{vm.username}}
+    </button>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+      <a class="dropdown-item" href="#">
+        <i class="icon-hojavida"></i>
+        <span class="icon-text">Hoja de vida</span>
+      </a>
+      <a class="dropdown-item" href="#">
+        <i class="icon-fondos"></i>
+        <span class="icon-text">Seguridad Social</span>
+      </a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" ui-sref="password">
+        <i class="material-icons">lock</i>
+        <span class="icon-text">Cambiar contraseña</span>
+      </a>
+      <a class="dropdown-item" href="#">
+        <i class="material-icons">settings</i>
+        <span class="icon-text">Configuración</span>
+      </a>
+      <a class="dropdown-item" href="mailto:soporte@systemsltda.com">
+        <i class="material-icons">bug_report</i>
+        <span class="icon-text">Reportar Error</span>
+      </a>
+      <a class="dropdown-item" href="#">
+        <i class="material-icons">help</i>
+        <span class="icon-text">Ayuda</span>
+      </a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#" ng-click="vm.logout()">
+        <i class="material-icons">input</i>
+        <span class="icon-text">Cerrar Sesión</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="container main-content" ui-view="MainContent">
+</div>
+
+
+
+
+
+<div class="modal fade" id="LoadingDialog" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-xs-center">
+        <h5>Generando... Por favor espere.</h5>
+        <div class="spinner blue m-y-3 m-x-auto">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="ErrorDialog" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-xs-center">
+        <h5>Ha ocurrido un error inesperado.</h5>
+        <p>Intente de nuevo más tarde, si el error persiste comuníquese con <a href='mailto:soporte@systemsltda.com'>nosotros</a></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

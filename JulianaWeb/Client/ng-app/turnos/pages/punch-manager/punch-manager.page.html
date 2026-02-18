@@ -1,0 +1,44 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item active">Consultas y solicitudes</li>
+  <li class="breadcrumb-item active">Asignación de turnos</li>
+  <li class="breadcrumb-item active">Registro de Tiempos</li>
+</ol>
+
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    Registro de Tiempo
+  </div>
+
+  <div class="card-body">
+    <section>
+      <form>
+        <div class="row">
+          <div class="col-md-12">
+            
+            <punch-trigger disabled="vm.flags.hasPunchIn || vm.flags.processing"
+                           type="'punch-in'"
+                           on-click="vm.registerPunch('punch-in')">Punch In</punch-trigger>
+            <punch-trigger disabled="!vm.flags.hasPunchIn || vm.flags.hasPunchOut || vm.flags.processing"
+                           type="'punch-out'"
+                           on-click="vm.registerPunch('punch-out')">Punch Out</punch-trigger>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section>
+      <punch-schedule events="vm.events"></punch-schedule>
+    </section>
+  </div>
+  <div class="card-footer">
+    <div class="btn-toolbar float-right">
+      <button type="button" class="btn btn-primary btn-lg btn-space">Aplicar</button>
+    </div>
+  </div>
+</div>

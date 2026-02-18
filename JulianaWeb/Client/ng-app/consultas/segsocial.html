@@ -1,0 +1,103 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard"> <i class="material-icons">home</i> </a>
+  </li>
+  <li class="breadcrumb-item active"><a ui-sref="dashboard"> Consultas y Solicitudes </a></li>
+  <li class="breadcrumb-item active">Seguridad Social</li>
+</ol>
+
+<div class="tile-container tile-row tile-sm-col shadow">
+  <div class="tile-child tile-big tile-row tile-sm-col">
+    <div class="tile-child">
+      <div class="tile tile--small">
+        <i class="tile__icon icon-fondosalud"></i>
+        <div class="tile__content">
+          <div class="tile__title">EPS:</div>
+          <div class="tile__info">{{ vm.data.eps.Nom_Eps }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="tile-child tile-col tile-sm-row">
+      <div class="tile-child" ng-if="vm.data.cajascomp">
+        <div class="tile tile--small">
+          <i class="tile__icon icon-fondos"></i>
+          <div class="tile__content">
+            <div class="tile__title">Caja de compensación:</div>
+            <div class="tile__info">{{ vm.data.cajascomp.Nom_Caja }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="tile-child">
+        <div class="tile tile--small">
+          <i class="tile__icon icon-fondoriesgo"></i>
+          <div class="tile__content">
+            <div class="tile__title">Fondo de riesgo profesional:</div>
+            <div class="tile__info">{{ vm.data.arp.Nom_Arp }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tile-child tile-col tile-sm-row">
+    <div class="tile-child" ng-if="vm.data.afc">
+      <div class="tile tile--small">
+        <i class="tile__icon icon-cesantias"></i>
+        <div class="tile__content">
+          <div class="tile__title">Fondo de cesantias:</div>
+          <div class="tile__info">{{ vm.data.afc.Nom_Afp }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="tile-child" ng-if="vm.data.afp">
+      <div class="tile tile--small">
+        <i class="tile__icon icon-fondopension"></i>
+        <div class="tile__content">
+          <div class="tile__title">Fondo de pensiones:</div>
+          <div class="tile__info">{{ vm.data.afp.Nom_Afp }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <p>
+    <a class="btn btn-info" href="https://www.aportesenlinea.com/Autoservicio/CertificadoAportes.aspx" target="_blank">
+      <i class="material-icons nav-icon">launch_app</i> <span>Descargar Certificados de Aportes</span>
+    </a>
+  </p>
+</div>
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    <hgroup>
+      <h5>Ultimos Aportes Descontados Para Pagos De Seguridad Social</h5>
+      <h6>Ley 1393 Julio 12 de 2010, articulo 32</h6>
+    </hgroup>
+  </div>
+  <div class="p-3" ng-if="vm.data.aportes.length > 0"><b>Fecha Nomina:</b> {{ vm.data.fecPago | beautydate }}</div>
+  <table
+    class="table table-sm table-bordered table-striped"
+    style="margin-bottom:0"
+    table-morphe
+    ng-if="vm.data.aportes.length > 0"
+  >
+    <thead>
+      <tr>
+        <th>Concepto</th>
+        <th class="text-right">Días</th>
+        <th class="text-right currency">Valor IBC</th>
+        <th class="text-right currency">Valor Aporte</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="aporte in vm.data.aportes">
+        <td>{{ aporte.Nom_Concepto }}</td>
+        <td class="text-right">{{ aporte.Dias_Novedad }}</td>
+        <td class="text-right currency">{{ aporte.Val_IBC | currency: '$':0 }}</td>
+        <td class="text-right currency">{{ aporte.Val_Novedad | currency: '$':0 }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="blank" ng-if="vm.data.aportes.length === 0">No hay datos para mostrar</p>
+</div>

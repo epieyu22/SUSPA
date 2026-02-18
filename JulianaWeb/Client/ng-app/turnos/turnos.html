@@ -1,0 +1,112 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item active">Consultas y solicitudes</li>
+  <li class="breadcrumb-item active">Asignación de turnos</li>
+</ol>
+
+<form name="chiftForm">
+
+  <div class="card primary-theme shadow">
+    <div class="card-header">
+      Asignación de turnos
+    </div>
+    <div class="card-body">
+      <h3>Selección</h3>
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <label for="">Tipo de turno:</label>
+            <select placeholder="Seleccionar tipo.." ng-if="vm.data.tipoGuardado == 2011" ng-model="vm.viewmodel.Cod_Tipo" class="form-control form-control-sm custom-select custom-select-sm">
+              <option value="1">Por Departamento</option>
+            </select>
+            <select ng-if="vm.data.tipoGuardado == 1011" ng-model="vm.viewmodel.Cod_Tipo" class="form-control form-control-sm custom-select custom-select-sm">
+              <option value="2">Por Empleado</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="">Busqueda por:</label>
+            <oi-select ng-if="vm.viewmodel.Cod_Tipo == 1" oi-options="i.Cod_Depto as i.Nombre_Depto for i in vm.data.departamentos track by i.Cod_Depto"
+                       ng-model="vm.viewmodel.Cod_Depto"
+                       ng-change="GetDataPorDepartamento()"
+                       placeholder="Buscar Por Departamento" required></oi-select>
+            <oi-select ng-if="vm.viewmodel.Cod_Tipo == 2" oi-options="i.Cod_Empleado as i.Empleado for i in  vm.data.empleados track by i.Cod_Empleado"
+                       ng-model="vm.viewmodel.Cod_Empleados"
+                       placeholder="Seleccionar Empleados" multiple required></oi-select>
+            <oi-select ng-if="vm.viewmodel.Cod_Tipo == null" oi-options=""
+                       ng-model="vm.viewmodel.Cod_Empleado"
+                       placeholder="Seleccione un tipo primero.." multiple required></oi-select>
+          </div>
+        </div>
+        <!--<div ng-if="DptosEmpleado.empleadosDepto.length" class="col-4">
+      <div class="form-group">
+        <label for="">Seleccione empleados:</label>
+        <oi-select ng-model="vm.viewmodel.Cod_Empleados"
+                   oi-options="i.Cod_Empleado as i.Empleado for i in DptosEmpleado.empleadosDepto track by i.Cod_Empleado"
+                   placeholder="Seleccionar Empleados" multiple required></oi-select>
+      </div>
+    </div>-->
+      </div>
+      <hr />
+      <div ng-if="vm.viewmodel.validador == 1" class="alert alert-warning" role="alert">
+        La fecha fin no puede ser menor que la fecha inicio.
+      </div>
+      <h3>Periodo</h3>
+
+      <div class="form-group row">
+        <div class="col-4">
+          <div class="form-group">
+            <label for="">Plantilla de turno:</label>
+            <select class="form-control" ng-model="vm.viewmodel.Turno_Real" ng-options="i.Cod_Turno as i.Nom_Turno for i in vm.data.turnos"
+                    ng-disabled="(vm.viewmodel.Manual)"></select>
+          </div>
+        </div>
+
+        <div class="col-4">
+
+          <div class="form-group">
+            <label>Fecha Inicio: </label>
+            <input placeholder="Seleccione fecha" ng-model="vm.viewmodel.Fecha_Turno" ng-change="ValidateDate()" class="form-control" type="date" id="initial-date" required>
+          </div>
+        </div>
+        <div class="col-4">
+          <label>Fecha Fin: </label>
+          <input placeholder="Seleccione fecha" ng-model="vm.viewmodel.Fecha_Turno_Hasta" ng-change="ValidateDate()" class="form-control" type="date" id="final-date" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group custom-control custom-checkbox">
+            <input type="checkbox" ng-model="vm.viewmodel.Manual" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1" ng-click="limpiarFiltros()">Turno Manual</label>
+          </div>
+        </div>
+      </div>
+      <hr ng-if="vm.viewmodel.Manual == true" />
+      <div class="form-group row" ng-if="vm.viewmodel.Manual == true">
+        <label for="example-date-input" class="col-2 col-form-label">Hora Desde</label>
+        <div class="col-4">
+          <input placeholder="Seleccione hora" ng-model="vm.viewmodel.Hora_Ent" class="form-control" type="time" id="example-time-input">
+        </div>
+        <label for="example-date-input" class="col-2 col-form-label">Hora Hasta</label>
+        <div class="col-4">
+          <input placeholder="Seleccione hora" ng-model="vm.viewmodel.Hora_Sal" class="form-control" type="time" id="example-time-input">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card-footer">
+      <div class="btn-toolbar float-right">
+        <button type="button" class="btn btn-primary btn-lg btn-space" ng-disabled="chiftForm.$invalid"   ng-click="vm.Add_Data_Turnos();ValidateDate()"> Aplicar</button>
+
+        <button type="button" class="btn btn-danger btn-lg btn-space">Salir</button>
+      </div>
+    </div>
+  </div>
+</form>

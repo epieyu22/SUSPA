@@ -1,0 +1,61 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item"><a ui-sref="dashboard"><i class="material-icons">home</i></a></li>
+  <li class="breadcrumb-item"><a ui-sref="dashboard">Comprobantes y Certificados</a></li>
+  <li class="breadcrumb-item"><a ui-sref="certlaboral2">Certificado Laboral</a></li>
+  <li class="breadcrumb-item active">Masivos</li>
+</ol>
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    Seleccione la Empresa
+  </div>
+  <div class="card-body">
+    <div class="col-md-12 form-group">
+      <label for="">Empresa:</label>
+      <select class="custom-select custom-select-sm" ng-model="vm.viewmodel.Empresa" ng-change="vm.loadEmpleados()" ng-options="i.BaseDatos as i.Nombre_Empresa for i in vm.data.empresas"></select>
+    </div>
+    <div class="col-md-12 form-group" ng-if="vm.plantillas">
+      <label for="">Plantilla</label>
+      <div class="input-group">
+        <select class="custom-select custom-select-sm" ng-model="vm.viewmodel.Cod_Plantilla" ng-options="p.Autonum as p.Nomb_Plantilla for p in vm.plantillas">
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card primary-theme shadow" ng-if="vm.data.empleados.length > 0 && vm.data.config.Cod_Empleado_Autoriza">
+  <div>
+    <form name="certlaboralForm">
+      <div class="card-header">
+        Seleccione los parámetros para generar el certificado laboral
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="">Seleccionar Empleado:</label>
+              <oi-select oi-options="i.Empleado for i in vm.data.empleados track by i.Cod_Empleado" ng-model="vm.viewmodel.empleado"
+                placeholder="Buscar Empleado"></oi-select>
+            </div>
+          </div>
+          <div class="col-md-12" ng-if="vm.UseDirigidoCertificado">
+            <div class="form-group">
+              <label>A quien va dirigido:</label>
+              <input class="form-control" type="text" ng-model="vm.viewmodel.dirigido" required>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-right">
+        <button type="button" class="btn btn-primary " ng-disabled="certlaboralForm.$invalid || !vm.viewmodel.Cod_Plantilla"
+          ng-click="vm.generateCertlaboral()">Generar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="alert alert-danger" role="alert" ng-if="vm.viewmodel.DBName && vm.data.empleados.length > 0 && !vm.data.config.Cod_Empleado_Autoriza">
+  <p>No se a configurado un aprobador por defecto para esta empresa, para configurar haga click en este <a ui-sref="certlaboral_config">enlace</a></p>
+</div>
+

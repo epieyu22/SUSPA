@@ -1,0 +1,22 @@
+<div class="card shadow">
+  <form>
+    <div class="alert alert-danger" ng-if="vm.data.error" role="alert">
+      {{vm.data.error}}
+    </div>
+    <div class="alert alert-danger" ng-if="vm.data.success" role="alert">
+      {{vm.data.success}}
+    </div>
+    <div class="form-group">
+      <label>Documento de identificación:</label>
+      <input type="text" class="form-control" name="Cedula" ng-model="vm.viewmodel.cedula">
+    </div>
+    <div class="form-group">
+      <label>Fecha Nacimiento:</label>
+      <jqx-date-time-input  ng-model="date" jqx-settings="vm.inputSettings"></jqx-date-time-input>
+    </div>
+  </form>
+  <div class="card-footer">
+    <button class="btn btn-primary" ng-click="vm.noMailValidation()">verificar datos</button>
+    <button class="btn float-right" ui-sref="login">Ya tengo una clave</button>
+  </div>
+</div>

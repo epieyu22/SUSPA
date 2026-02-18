@@ -1,0 +1,97 @@
+<div class="container-fluid">
+  <div class="row mb-2">
+    <div class="clearfix col-md-6 m-b-3" ng-if="vm.hasPermission(['certificados'])">
+      <div class="row">
+        <div class="col-12">
+          <h3 class="bg-title">Comprobantes y Certificados</h3>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 my-3" ng-repeat="option in vm.menu.comprobantesOptions" ng-if="vm.hasPermission(option.perimission)">
+          <button class="btn big-button " ui-sref="{{option.url}}">
+            <i class="material-icons big-button__icon" flex>{{option.icon}}</i>
+            <span class="big-button__text">{{option.title}}</span>
+          </button>
+        </div>
+      </div>
+      <!--INICIO DASHBOARD-->
+      <div class="clearfix m-b-3" ng-if="vm.hasPermission(['dashboard.Bi'])">
+        <div class="row">
+          <div class="col-12">
+            <h3 class="bg-title">Analítica de Datos</h3>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 my-3" ng-repeat="option in vm.menu.dashboardOptions" ng-if="vm.hasPermission(option.perimission)">
+            <button class="btn big-button " ui-sref="{{option.url}}">
+              <i class="material-icons big-button__icon" flex>{{option.icon}}</i>
+              <span class="big-button__text">{{option.title}}</span>
+            </button>
+          </div>
+        </div>
+        </div>
+      <!--FIN DASHBOARD-->
+    </div>
+    <div class="clearfix col-md-6 m-b-3" ng-if="vm.hasPermission(['consultas'])">
+      <div class="row">
+        <div class="col-12">
+          <h3 class="bg-title">Consultas y Solicitudes</h3>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 my-3" ng-repeat="option in vm.menu.consultasOptions" ng-if="vm.hasPermission(option.perimission)">
+          <button class="btn big-button" ui-sref="{{option.url}}">
+            <i class="material-icons big-button__icon" flex>{{option.icon}}</i>
+            <span class="big-button__text">{{option.title}}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="row" ng-if="hasPermission(['aprobar'])">
+    <h3 class="bg-title col">Procesos Especiales</h3>
+  </div>
+
+
+  <div class="row">
+    <!-- <button class="btn btn-secondary m-1" ui-sref="otrasnov" ng-if="hasPermission(['settings'])">
+    <i class="material-icons">queue</i>
+    <span>Ingreso de Novedades</span>
+  </button> -->
+
+    <a href="https://systemssas.com/Outsourcing/" class="btn btn-secondary m-1" ng-if="hasPermission(['admin'])">
+      <i class="material-icons">queue</i>
+      <span>Ingreso de Novedades</span>
+    </a>
+
+
+    <button class="btn btn-secondary green m-1" ui-sref="solpersonal" ng-if="hasPermission(['aprobar'])">
+      <i class="material-icons">person_add</i>
+      <span>Solicitud de Personal</span>
+    </button>
+
+    <button class="btn btn-secondary green m-1" ui-sref="planilla_nomina2" ng-if="hasPermission(['admin'])">
+      <i class="material-icons">attach_money</i>
+      <span>Planilla de Nómina</span>
+    </button>
+
+    <button class="btn btn-secondary green m-1" ui-sref="solicitudes.aprobador" ng-if="hasPermission(['aprobar'])">
+      <i class="material-icons">done_all</i>
+      <span>Aprobar Solicitudes</span>
+    </button>
+
+    <button class="btn btn-secondary green m-1" ui-sref="admin" ng-if="hasPermission(['settings'])">
+      <i class="material-icons">settings</i>
+      <span>Configuración</span>
+    </button>
+    <button class="btn btn-secondary green m-1" ui-sref="facElectronica" ng-if="hasPermission(['nom_electronica'])">
+      <i class="material-icons">assignment</i>
+      <span>Nómina electrónica</span>
+    </button>
+
+<button class="btn btn-secondary green m-1" ui-sref="facElectronica" ng-if="hasPermission(['settings'])">
+      <i class="material-icons">blur_linear</i>
+      <span>Nómina electrónica</span>
+    </button>
+  </div>
+
+</div>

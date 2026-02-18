@@ -1,0 +1,73 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item"><a ui-sref="dashboard">Consultas y Solicitudes</a></li>
+  <li class="breadcrumb-item active">
+    <a ui-sref="bioseguridad">Bioseguridad</a>
+  </li>
+</ol>
+
+
+<div class="card shadow primary-theme">
+  <div class="cd-tabs">
+    
+  </div>
+  <div class="tab-content">
+
+    <div class="cd-tabs">
+      <nav class="cd-tabs-navigation ">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="active" data-toggle="tab" role="tab" href="#" data-target="#Bioseguridad">
+              <i class="far fa-address-card"></i>
+              <span class="tab-text">Reporte de Bioseguridad</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+        <br>
+        <br>
+
+        <table class="table table-bordered table-striped" table-morphe>
+          <thead>
+              <th scope="col">Empleado</th>
+              <th scope="col">Pregunta #1</th>
+              <th scope="col">Pregunta #2</th>
+              <th scope="col">Pregunta #3</th>
+              <th scope="col">Pregunta #4</th>
+              <th scope="col">Pregunta #5</th>
+              <th scope="col">Pregunta #6</th>
+              <th scope="col">Pregunta #7</th>
+              <th scope="col">Pregunta #8</th>
+              <th scope="col">Pregunta #9</th>
+              <th scope="col">Pregunta #10</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="i in vm.data.Respuestas">
+              <th scope="row">{{i.Cod_Empleado}}</th>
+              <td><input type="radio" ng-checked="i.pregunta_1 == 1" ng-disabled="vm.disabled"></td>
+              <td><input type="radio" ng-checked="i.pregunta_2 == 1"></td>
+              <td><input type="radio" ng-checked="i.pregunta_3 == 1"></td>
+              <td><input type="radio" ng-checked="i.pregunta_4 == 1"></td>
+              <td><input type="radio" ng-checked="i.pregunta_5 == 1"></td>
+              <td><input type="radio" ng-checked="i.pregunta_6 == 1"></td>
+              <td><input type="radio" ng-checked="i.pregunta_7 == 1"></td>
+              <td><input type="radio" ng-checked="i.pregunta_8 == 1"></td>
+              <td><input type="radio" ng-checked="i.pregunta_9 == 1"></td>
+              <td><input type="radio" ng-checked="i.pregunta_10 == 1"></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      
+    </div>
+
+    <br>
+    <br>
+
+</div>
+ 

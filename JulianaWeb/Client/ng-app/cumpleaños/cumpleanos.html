@@ -1,0 +1,60 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard">
+      <i class="material-icons">home</i>
+    </a>
+  </li>
+  <li class="breadcrumb-item"><a ui-sref="dashboard">Consultas y Solicitudes</a></li>
+  <li class="breadcrumb-item active">
+    <a ui-sref="cumpleanos">Cumpleaños</a>
+  </li>
+</ol>
+
+
+<!--<div class="card primary-theme shadow">
+  <div class="card-header">
+    Seleccione la Empresa
+  </div>
+  <div class="card-body">
+    <div class="col-md-12 form-group">
+      <label for="">Empresa:</label>
+      <select class="custom-select custom-select-sm" ng-model="vm.empresas.BaseDatos" ng-change="vm.loadEmpleados()" ng-options="i.BaseDatos as i.Nombre_Empresa for i in vm.data.empresas"></select>
+    </div>
+   
+  </div>
+</div>-->
+<div class="card shadow primary-theme">
+  <h4 class="bg-title">MODULO DE CUMPLEAÑOS DE LOS EMPLEADOS</h4>
+  <div class="cd-tabs">
+    <nav>
+
+      <ul class="cd-tabs-navigation nav">
+        <li class="nav-item">
+          <a href="#" class="nav-link active" data-toggle="tab" role="tab" data-target="#CumpleanosMes">
+            <span class="tab-text">Cumpleaños de este mes</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="tab-pane active" id="CumpleanosMes" role="tabpanel">
+    <table class="table table-bordered table-striped" table-morphe ng-if="vm.data.items">
+      <thead>
+      <th>Empleado</th>
+      <th>Fecha de cumpleaños</th>
+      </thead>
+      <tbody>
+
+        <tr ng-repeat="i in vm.data.items">
+          <td>{{i.Empleado}}</td>
+          <td ng-bind="formatDate(i.Cumpleanos) |  date:'MMMM  dd'"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="CumpleanosHoy" class="tab-pane active">
+    <table class="table table-bordered table-striped" table-morphe ng-if="vm.data.items">
+    </table>
+  </div>
+</div>

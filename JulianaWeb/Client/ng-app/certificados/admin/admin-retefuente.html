@@ -1,0 +1,137 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item">
+    <a ui-sref="dashboard"><i class="material-icons">home</i></a>
+  </li>
+  <li class="breadcrumb-item"><a ui-sref="dashboard">Comprobantes y Certificados</a></li>
+  <li class="breadcrumb-item"><a ui-sref="retefuente">Ingresos y Retenciones</a></li>
+  <li class="breadcrumb-item active">Masivos</li>
+</ol>
+
+<div class="card primary-theme shadow">
+  <div class="card-header">
+    Seleccione la Empresa
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="">Empresa:</label>
+        <select
+          class="form-control"
+          ng-model="vm.viewmodel.DBName"
+          ng-change="vm.Get_Config_Retefuente()"
+          ng-options="i.BaseDatos as i.Nombre_Empresa for i in vm.data.empresas"
+        ></select>
+      </div>
+    </div>
+    <div class="row" ng-if="vm.viewmodel.DBName && !vm.loading">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="">Año Contable</label>
+          <select
+            class="form-control"
+            ng-model="vm.viewmodel.anoContable"
+            ng-options="i as i for i in vm.years"
+            ng-change="vm.Get_Empleados_Retefuente_Ano()"
+          ></select>
+        </div>
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" ng-model="vm.viewmodel.ByCedula" />
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-label">Unificar Contratos</span>
+        </label>
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" ng-model="vm.viewmodel.redondear" />
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-label">Redondear Renglones</span>
+        </label>
+        <!-- <div class="custom-controls-stacked m-t-1">
+          <label class="custom-control custom-radio">
+            <input id="radioStacked1" name="radio-stacked" type="radio" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-label">Generar un solo archivo</span>
+          </label>
+          <label class="custom-control custom-radio">
+            <input id="radioStacked2" name="radio-stacked" type="radio" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-label">Generar multiples archivos</span>
+          </label>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card  card-body mt-3" ng-if="vm.loadingEmpleados">
+  <div class="col-md-12 text-xs-center">
+    <div class="spinner blue">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+</div>
+
+<div class="card primary-theme shadow" ng-if="vm.data.empleados.length > 0 && !vm.loading  && !vm.loadingEmpleados">
+  <div class="card-header">
+    Seleccionar Empleados:
+  </div>
+  <table ng-table="vm.empleadosGird " class="not-transform table table-sm table-bordered table-striped text-xs-center">
+    <tr
+      ng-repeat="e in $data"
+      selection-model
+      selection-model-type="'checkbox'"
+      selection-model-mode="'multiple-additive'"
+      selection-model-selected-class="'bg-info'"
+      selection-model-selected-items="vm.viewmodel.empleados"
+      selection-model-on-change="vm.selectedChange($data)"
+    >
+      <td header="'headerCheckbox.html'">
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" />
+          <span class="custom-control-indicator"></span>
+        </label>
+      </td>
+      <td class="text-xs-left" data-title="'Cod'" sortable="'Cod_Empleado'">{{ e.Cod_Empleado }}</td>
+      <td class="text-xs-left" data-title="'Empleado'" filter="{Empleado: 'text'}" sortable="'Empleado'">
+        {{ e.Empleado }}
+      </td>
+      <td class="text-xs-left" data-title="'Doc. Identificación'" filter="{Cedula: 'text'}" sortable="'Cedula'">
+        {{ e.Cedula }}
+      </td>
+      <td class="text-xs-left" data-title="'Estado'" sortable="'Estado'">{{ e.Estado }}</td>
+      <td
+        class="text-xs-left"
+        data-title="'Sucursal'"
+        sortable="'Cod_Sucursal'"
+        filter="{Cod_Sucursal: 'select'}"
+        filter-data="vm.sucursales"
+      >
+        {{ e.Cod_Sucursal }}
+      </td>
+    </tr>
+  </table>
+
+  <div class="card-footer">
+    <span class="d-none d-md-inline" ng-if="vm.viewmodel.empleados.length > 0">
+      <button class="btn btn-sm btn-secondary" ng-click="vm.Deselect_Items(vm.viewmodel.empleados)">
+        <i class="material-icons">clear_all</i>
+      </button>
+      {{ vm.viewmodel.empleados.length }} Empleados Seleccionados
+    </span>
+    <button
+      type="button"
+      class="btn btn-primary float-right"
+      ng-disabled="vm.viewmodel.empleados.length == 0"
+      ng-click="vm.Generate_Retefuente()"
+    >
+      Generar Seleccionados
+    </button>
+  </div>
+</div>
+
+<script type="text/ng-template" id="headerCheckbox.html">
+  <label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input select-all" ng-model="vm.tableSelectAll" ng-click="vm.log($data)" >
+    <span class="custom-control-indicator" ></span>
+  </label>
+</script>

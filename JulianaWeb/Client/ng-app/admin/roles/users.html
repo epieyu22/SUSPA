@@ -1,0 +1,69 @@
+<ol class="breadcrumb d-none d-md-flex">
+  <li class="breadcrumb-item"><a ui-sref="dashboard"><i class="material-icons">home</i></a></li>
+  <li class="breadcrumb-item active"><a ui-sref="admin">Configuración</a></li>
+  <li class="breadcrumb-item active">Usuarios</li>
+</ol>
+
+
+
+<div class="card shadow primary-theme">
+  <div class="card-header clearfix text-right">
+    <button class="btn btn-success" ng-click="vm.Open_Roles_Dialog()">
+        <i class="material-icons">group_add</i> Asignar Roles
+      </button>
+  </div>
+  <div class="text-xs-center card-body" ng-if="vm.loading">
+    <div class="spinner blue m-x-a">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+  <div ng-if="!vm.loading">
+    <table ng-table="vm.grid" class="table table-sm table-bordered table-striped" table-morphe>
+      <tr ng-repeat="r in $data" 
+        selection-model
+        selection-model-type="'checkbox'"
+        selection-model-mode="'multiple-additive'"
+        selection-model-selected-class="'bg-info'"
+        selection-model-selected-items="vm.viewmodel.users"
+        selection-model-on-change="vm.selectedChange($data)">
+        <td class="text-xs-center" header="'headerCheckbox.html'">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+          </label>
+        </td>
+        <td class="text-xs-center" data-title="'Usuario'" sortable="'Empleado'" filter="{Empleado: 'text'}">{{r.Empleado}}</td>      
+        <td class="text-xs-center" data-title="'Doc. Identificación'" sortable="'UserName'" filter="{UserName: 'text'}">{{r.UserName}}</td>      
+        <td class="text-xs-center" data-title="'Rol'" sortable="'Role'" filter="{Role: 'RolesSelectFilter'}">{{r.Role}}</td>      
+        <td class="text-xs-center" data-title="'Empresa'" sortable="'DBName'" filter="{DBName: 'selectFilter'}"  filter-data="vm.data.empresas">{{r.DBName}}</td>      
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+<script type="text/ng-template" id="ng-table/filters/selectFilter.html">
+  <select class="form-control" ng-model="params.filter()[name]">
+    <option value="">Sin Filtro</option>
+    <option  ng-repeat="i in vm.data.empresas" value="{{i}}">{{i}}</option>
+  </select>
+</script>
+
+
+<script type="text/ng-template" id="ng-table/filters/RolesSelectFilter.html">
+  <select class="form-control" ng-model="params.filter()[name]">
+    <option value="">Sin Filtro</option>
+    <option  ng-repeat="i in vm.data.roles" value="{{i.Name}}">{{i.Name}}</option>
+  </select>
+</script>
+
+
+
+<script type="text/ng-template" id="headerCheckbox.html">
+  <label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input select-all" ng-model="vm.tableSelectAll" ng-click="vm.log($data)" >
+    <span class="custom-control-indicator" ></span>
+  </label>
+</script>

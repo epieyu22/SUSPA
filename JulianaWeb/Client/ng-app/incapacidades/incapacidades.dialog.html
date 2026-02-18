@@ -1,0 +1,101 @@
+<form name="SolicitudVacacionesForm">
+  <div class="ngdialog-header"><h5 class="modal-title">Reportar Incapacidad</h5></div>
+  <div class="row ngdialog-body">
+    <div class="col-md-10 form-group">
+      <label for="">Concepto:</label>
+      <select class="form-control custom-select"
+              ng-model="viewmodel.Concepto"
+              ng-options="i as i.Nom_Concepto for i in data.conceptos"
+              ng-change="changeConcepto()"
+              required></select>
+    </div>
+    <div class="col-md-2 form-group">
+      <label for="">Días:</label>
+      <input type="number"
+             class="form-control"
+             ng-model="viewmodel.Dias"
+             min="1"
+             ng-disabled="disableDiasInput"
+             ng-change="calcularFechaLlegada()"
+             required />
+    </div>
+
+    <div class="col-md-12 form-group">
+      <label for="">Diagnostico:</label>
+      <oi-select oi-options="(i.Cod_Alterno + ' - ' +i.Descripcion) for i in data.diagnosticos track by i.Codigo" ng-model="viewmodel.Diagnostico"
+                 placeholder="Buscar Diagnostico"></oi-select>
+    </div>
+
+    <div class="col-md-6 form-group">
+      <label>
+        <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Fecha de inicio de la incapacidad.">
+          help
+        </i>
+        <span>Fecha Inicial:</span>
+      </label>
+      <input type="date" class="form-control d-md-none" ng-model="viewmodel.Desde" ng-change="checkDate()" required />
+      <jqx-date-time-input class="d-none d-md-block"
+                           jqx-ng-model
+                           ng-model="viewmodel.Desde"
+                           jqx-settings="datetimeInput"
+                           ng-change="calcularFechaLlegada()">
+      </jqx-date-time-input>
+    </div>
+
+    <div class="col-md-6  form-group">
+      <label for="">
+        <i class="material-icons"
+           data-toggle="tooltip"
+           data-placement="top"
+           title="Fecha final de la incapacidad. Las incapacidades se cuentan en días calendario">
+          help
+        </i>
+        <span>Fecha Final:</span>
+      </label>
+      <jqx-date-time-input class="d-none d-md-block"
+                           jqx-ng-model
+                           jqx-disabled="true"
+                           ng-model="viewmodel.Hasta"
+                           jqx-settings="datetimeInput"
+                           ng-change="calcularFechaLlegada()">
+      </jqx-date-time-input>
+    </div>
+
+    <!--
+    <div class="col-md-12 alert alert-warning">
+      <small>Los días de las incapacidades se cuentan en <b>días calenadrio</b><small></small>
+    </div>
+  -->
+
+    <div class="col-md-12 form-group"
+         ng-if="viewmodel.Concepto.Tipo_Concepto == 'L' || viewmodel.Concepto.Tipo_Concepto == 'H'">
+      <label>Aprobador:</label>
+      <select name=""
+              id=""
+              class="custom-select"
+              ng-model="viewmodel.Cod_Aprobador"
+              ng-options="t.Cod_Tercero as t.Tercero for t in data.aprobadores"></select>
+    </div>
+
+    <div class="col-md-12 form-group"
+         ng-if="viewmodel.Concepto.Cod_Concepto === 24 || viewmodel.Concepto.Cod_Concepto === 25">
+      <label>Motivo:</label> <textarea class="form-control"></textarea>
+    </div>
+
+    <div class="col-md-12 form-group">
+      <label for="">Adjuntos:</label> <input type="file" class="form-control" file-model="adjunto" required="true" accept="application/pdf" />
+    </div>
+
+    <div class="alert alert-danger col-md-12 " ng-if="showerror">{{ showerror }}</div>
+
+    <div class="col-md-12">
+      <button type="button" class="btn btn-outline-secondary" ng-click="closeDialog()">Cancelar</button>
+      <button type="button"
+              class="btn btn-success float-right"
+              ng-disabled="SolicitudVacacionesForm.$invalid || loading"
+              ng-click="New_Incapacidad()">
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
