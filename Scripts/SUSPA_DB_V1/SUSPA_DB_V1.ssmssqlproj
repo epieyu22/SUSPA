@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="SUSPA_DB_V1">
+  <Items>
+    <LogicalFolder Name="Conexiones" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="LAPTOP-UMQKF70R\DEVELOP_2022:sa">
+          <Created>2026-02-18T07:00:32.7911379-05:00</Created>
+          <Type>SQL</Type>
+          <Server>LAPTOP-UMQKF70R\DEVELOP_2022</Server>
+          <UserName>sa</UserName>
+          <Authentication>SQL</Authentication>
+          <InitialDB />
+          <LoginTimeout>15</LoginTimeout>
+          <TrustServerCertificate>True</TrustServerCertificate>
+          <EncryptionOption>False</EncryptionOption>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>SQL Server Management Studio</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Consultas" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="1. SCRIPT INICIAL_SUSPA.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>1. SCRIPT INICIAL_SUSPA.sql</FullPath>
+        </FileNode>
+        <FileNode Name="2. SUSPA_TABLAS_V1.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-UMQKF70R\DEVELOP_2022:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LAPTOP-UMQKF70R\DEVELOP_2022</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>2. SUSPA_TABLAS_V1.sql</FullPath>
+        </FileNode>
+        <FileNode Name="2.1. SUSPA_DATOS-DEFAULT_V1.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-UMQKF70R\DEVELOP_2022:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LAPTOP-UMQKF70R\DEVELOP_2022</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>2.1. SUSPA_DATOS-DEFAULT_V1.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Varios" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>
